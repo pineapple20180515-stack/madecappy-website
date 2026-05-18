@@ -1,0 +1,18 @@
+---
+import { getCollection, render } from 'astro:content';
+import TimelineEntryLayout from '../../layouts/TimelineEntryLayout.astro';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('timeline', ({ data }) => !data.draft);
+  return entries.map(entry => ({
+    params: { slug: entry.id.replace(/\.mdx?$/, '') },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<TimelineEntryLayout entry={entry}>
+  <Content />
+</TimelineEntryLayout>

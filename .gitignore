@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build output
+dist/
+.vercel/
+.astro/
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# Editor
+.DS_Store
+.vscode/*
+!.vscode/settings.json
+.idea/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Local drafts (Dino 个人草稿不进仓库)
+website_drafts/

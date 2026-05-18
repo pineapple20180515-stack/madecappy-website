@@ -1,0 +1,48 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import TagBadge from '../components/TagBadge.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  entry: CollectionEntry<'timeline'>;
+}
+
+const { entry } = Astro.props;
+const dateStr = entry.data.date.toLocaleDateString('zh-CN', {
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+});
+---
+<BaseLayout
+  title={`${entry.data.title} · Cappy`}
+  description={entry.data.summary}
+>
+  <article class="max-w-[var(--width-reading)] mx-auto px-6 py-16">
+    <a href="/timeline" class="inline-flex items-center text-sm text-ink-500 hover:text-ios-blue mb-8">
+      ← 回到建造日记
+    </a>
+
+    <header class="mb-12 border-b border-ink-100 pb-8">
+      <div class="flex items-center gap-3 mb-4 text-sm text-ink-500">
+        <time datetime={entry.data.date.toISOString()}>{dateStr}</time>
+        <TagBadge tag={entry.data.tag} />
+      </div>
+      <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
+        {entry.data.emoji && <span class="mr-2">{entry.data.emoji}</span>}
+        {entry.data.title}
+      </h1>
+      <p class="mt-4 text-lg text-ink-500 leading-relaxed">{entry.data.summary}</p>
+    </header>
+
+    <div class="prose prose-lg prose-cappy max-w-none">
+      <slot />
+    </div>
+
+    <footer class="mt-16 pt-8 border-t border-ink-100 text-sm text-ink-500">
+      <p>这是 Dino 用 AI 给 8 岁儿子做英语陪练 app 的真实记录。
+        <a href="/about" class="text-ios-blue hover:underline">了解我做这个的原因 →</a>
+      </p>
+    </footer>
+  </article>
+</BaseLayout>

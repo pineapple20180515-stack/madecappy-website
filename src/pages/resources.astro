@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="资源 · Cappy"
+  description="工程任务书、PRD、Prompt 设计选段（持续整理中）。"
+>
+  <main class="max-w-[var(--width-reading)] mx-auto px-6 py-16">
+    <h1 class="text-4xl md:text-5xl font-extrabold mb-4">资源</h1>
+    <p class="text-ink-500 mb-12 leading-relaxed">
+      Cappy 项目过程中产出的公开素材。脱敏后慢慢放出来。
+    </p>
+
+    <section class="space-y-4">
+      <div class="p-6 rounded-[var(--radius-card)] border border-ink-100 bg-white">
+        <h2 class="text-lg font-bold mb-1">📄 工程任务书索引</h2>
+        <p class="text-sm text-ink-500">v1 – v2.5 共 6 份，覆盖架构 / Prompt / 教学法。整理中。</p>
+      </div>
+      <div class="p-6 rounded-[var(--radius-card)] border border-ink-100 bg-white">
+        <h2 class="text-lg font-bold mb-1">🧪 原型 HTML</h2>
+        <p class="text-sm text-ink-500">v1 / v2 的可点击交互原型。整理中。</p>
+      </div>
+      <div class="p-6 rounded-[var(--radius-card)] border border-ink-100 bg-white">
+        <h2 class="text-lg font-bold mb-1">💬 Prompt 设计精选</h2>
+        <p class="text-sm text-ink-500">真实使用过的 prompt（脱敏版）。整理中。</p>
+      </div>
+    </section>
+
+    <p class="mt-12 text-sm text-ink-500">
+      暂时先看 <a href="/timeline" class="text-ios-blue hover:underline">建造日记</a> 里的实战记录。
+    </p>
+  </main>
+</BaseLayout>

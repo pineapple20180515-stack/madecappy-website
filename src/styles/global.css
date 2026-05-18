@@ -1,0 +1,76 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  /* === Brand Colors === */
+  --color-pineapple-50: #FFF8E1;
+  --color-pineapple-100: #FFE9A8;
+  --color-pineapple-300: #FFD55C;
+  --color-pineapple-500: #FFC93C;
+  --color-pineapple-700: #B0700A;
+
+  --color-ink-900: #1F2A3D;
+  --color-ink-500: #6B7B91;
+  --color-ink-100: #F4F1EA;
+
+  --color-paper: #FFFCF5;
+  --color-ios-blue: #007AFF;
+  --color-alarm: #E94B4B;
+
+  /* === Typography === */
+  --font-sans: "MiSans", "PingFang SC", -apple-system, BlinkMacSystemFont, "Helvetica Neue", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+
+  /* === Radius === */
+  --radius-card: 16px;
+
+  /* === Container max widths === */
+  --width-reading: 720px;
+  --width-wide: 1024px;
+}
+
+/* === Global Resets === */
+html,
+body {
+  background-color: var(--color-paper);
+  color: var(--color-ink-900);
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv01";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  text-underline-offset: 3px;
+}
+
+code,
+pre {
+  font-family: var(--font-mono);
+}
+
+.prose-cappy {
+  --tw-prose-body: var(--color-ink-900);
+  --tw-prose-headings: var(--color-ink-900);
+  --tw-prose-links: var(--color-ios-blue);
+  --tw-prose-bold: var(--color-ink-900);
+  --tw-prose-quotes: var(--color-ink-500);
+  --tw-prose-code: var(--color-pineapple-700);
+}
+
+.prose-cappy p {
+  line-height: 1.85;
+}
+
+.prose-cappy pre {
+  background-color: var(--color-ink-100) !important;
+}
+
+.prose-cappy table {
+  width: 100%;
+}
+
+.prose-cappy th,
+.prose-cappy td {
+  border-bottom: 1px solid var(--color-ink-100);
+}

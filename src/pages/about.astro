@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="关于 · Cappy"
+  description="我是 Dino，一个普通家长，不写代码但做了个 app。"
+>
+  <main class="max-w-[var(--width-reading)] mx-auto px-6 py-16 prose prose-lg prose-cappy">
+    <h1>关于我</h1>
+
+    <p>我是 Dino，一个普通家长。不是程序员。</p>
+
+    <p>Cappy 是我为 8 岁儿子做的英语陪练 app。他英语阅读还行（大猫 3 级），但听力和开口能力远弱。市面产品要么太课程化（孩子不爱用），要么太成人对话化（孩子听不懂）。没找到合适的，就决定自己做一个。</p>
+
+    <h2>我用什么工具</h2>
+    <ul>
+      <li><strong>Claude</strong> — 产品经理 + 技术顾问。跟我对齐需求、起草工程任务书、做架构判断。</li>
+      <li><strong>Codex</strong> — 实际写代码的 agent。按任务书产出 Swift / TS。</li>
+      <li><strong>豆包 Realtime + DeepSeek</strong> — app 的语音 STT/TTS + LLM 后端。</li>
+    </ul>
+
+    <h2>我的工作流</h2>
+    <p>有想法 → 跟 Claude 讨论 + 输出工程任务书 → Codex 按任务书写代码 → 我真机测试 → 反馈给 Claude → 下一轮。</p>
+
+    <h2>为什么公开</h2>
+    <p>第一是给自己一个不糊弄的压力。第二是想让其他想用 AI 做事但不会写代码的人，看到一个真实样本。</p>
+
+    <h2>联系我</h2>
+    <ul>
+      <li>Email：<a href="mailto:hello@madecappy.com">hello@madecappy.com</a></li>
+      <li>X / Twitter：<a href="#">@xxx（占位）</a></li>
+      <li>即刻：<a href="#">@xxx（占位）</a></li>
+    </ul>
+  </main>
+</BaseLayout>

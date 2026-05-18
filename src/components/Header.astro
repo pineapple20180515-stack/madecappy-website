@@ -1,0 +1,31 @@
+---
+const path = Astro.url.pathname;
+const navItem = (href: string, label: string) => ({
+  href,
+  label,
+  active: path === href || (href !== '/' && path.startsWith(href)),
+});
+const items = [
+  navItem('/timeline', '建造日记'),
+  navItem('/resources', '资源'),
+  navItem('/about', '关于'),
+];
+---
+<header class="sticky top-0 z-50 backdrop-blur-md bg-paper/80 border-b border-ink-100">
+  <nav class="max-w-[var(--width-wide)] mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-2 font-bold text-lg">
+      <span class="text-2xl">🎩</span>
+      <span>Cappy</span>
+    </a>
+    <div class="flex items-center gap-6 text-sm font-medium">
+      {items.map(item => (
+        <a
+          href={item.href}
+          class={`transition hover:text-ios-blue ${item.active ? 'text-ios-blue' : 'text-ink-900'}`}
+        >
+          {item.label}
+        </a>
+      ))}
+    </div>
+  </nav>
+</header>

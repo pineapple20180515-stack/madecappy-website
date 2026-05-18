@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Stat from '../components/Stat.astro';
+import TimelineCard from '../components/TimelineCard.astro';
+import { getCollection } from 'astro:content';
+
+const all = await getCollection('timeline', ({ data }) => !data.draft);
+const recent = all
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 5);
+---
+<BaseLayout
+  title="Cappy — 一个父亲用 AI 给 8 岁儿子做的英语陪练 app"
+  description="不会写代码，5 个版本迭代，Building in Public 日记。"
+>
+  <!-- 关键数字 -->
+  <Hero />
+
+  <section class="px-6 py-16 bg-ink-100/50">
+    <div class="max-w-[var(--width-wide)] mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
+      <Stat label="当前版本" value="v2.5" />
+      <Stat label="工程任务书" value="6 份" />
+      <Stat label="自己写代码" value="0%" />
+      <Stat label="儿子用了" value="数十次" />
+    </div>
+  </section>
+
+  <!-- 最近条目 -->
+  <section class="max-w-[var(--width-reading)] mx-auto px-6 py-16">
+    <div class="flex items-baseline justify-between mb-8">
+      <h2 class="text-3xl font-bold">最近的建造日记</h2>
+      <a href="/timeline" class="text-ios-blue hover:underline text-sm">全部 →</a>
+    </div>
+    {recent.length === 0 ? (
+      <p class="text-ink-500">还没有条目，第一篇正在打字。</p>
+    ) : (
+      <div class="space-y-6">
+        {recent.map(entry => <TimelineCard entry={entry} />)}
+      </div>
+    )}
+  </section>
+</BaseLayout>
