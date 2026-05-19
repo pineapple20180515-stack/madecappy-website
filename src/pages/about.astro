@@ -3,33 +3,67 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 <BaseLayout
   title="关于 · Cappy"
-  description="我是 Dino，一个普通家长，不写代码但做了个 app。"
+  description="我是 Dino，一个父亲，一个互联网产品人。Cappy 是我用 AI 工具给 8 岁儿子做的英语陪练。"
 >
   <main class="max-w-[var(--width-reading)] mx-auto px-6 py-16 prose prose-lg prose-cappy">
     <h1>关于我</h1>
 
-    <p>我是 Dino，一个普通家长。不是程序员。</p>
+    <p><strong>首先，我是一个父亲。</strong></p>
 
-    <p>Cappy 是我为 8 岁儿子做的英语陪练 app。他英语阅读还行（大猫 3 级），但听力和开口能力远弱。市面产品要么太课程化（孩子不爱用），要么太成人对话化（孩子听不懂）。没找到合适的，就决定自己做一个。</p>
+    <p>其次，我是一个互联网产品人，公司也在做 AI 相关的产品。我有开发背景，但已经很多年没写代码了 —— 现在的 coding 水平可以认为是 0。</p>
+
+    <p>最近我在深度使用 Claude Code，亲身体验之后觉得：<strong>完全可以从身边出发，给自己的小朋友写一些适合他的工具，为他高度定制一些产品</strong>，帮他学习、娱乐。Cappy 就是这个想法落地的第一个产品。</p>
+
+    <h2>为什么是英语</h2>
+
+    <p>小菠萝（我儿子，8 岁）英语最近学得还不错 —— 阅读能力在班里排前面，自己也有信心。</p>
+
+    <p>但 <strong>"开口难"</strong> 是中国小朋友的通用问题，包括我们这一代也是。我虽然过了大学英语 4、6 级，但口语水平依旧很差 —— 给不了他一个真实的英语环境。家里没有人能日常跟他用英语对话。</p>
+
+    <p>所以我想做的，是一个像他英语老师一样的 AI 助手：</p>
+
+    <ul>
+      <li><strong>知道他的能力</strong> —— 词汇量、句式范围、当前在读什么书</li>
+      <li><strong>知道他的兴趣爱好</strong> —— 在玩什么游戏、最近看了什么动画</li>
+      <li><strong>能跟他对话</strong> —— 实时语音，不是文字游戏</li>
+      <li><strong>磨练他的口语</strong> —— 引导他主动张嘴，而不只是听</li>
+    </ul>
+
+    <h2>为什么叫 Cappy</h2>
+
+    <p>小菠萝很喜欢《超级马里奥奥德赛》。游戏里 Cappy 是马里奥的搭档 —— 一顶会飞的帽子，帮马里奥研究地图、找攻略、变身各种东西。</p>
+
+    <p>"知道你、陪你、帮你想办法" —— 跟我想做的这个 AI 助手的形象很契合。所以名字就暂定为 <strong>Cappy</strong>。</p>
+
+    <h2>这个产品现在是什么状态</h2>
+
+    <p>目前只给小菠萝一个人用，<strong>没有上架计划</strong>。</p>
+
+    <p>这个网站就是把整个 build 过程记录下来 —— 一个不会写代码的家长，用 AI 工具能把这件事推进到什么程度。</p>
+
+    <p>产品会慢慢迭代，看最终能不能真的帮小菠萝把口语练起来。如果到了那个目标，我会写一篇复盘。如果没到，我也会写一篇复盘。</p>
 
     <h2>我用什么工具</h2>
+
     <ul>
-      <li><strong>Claude</strong> — 产品经理 + 技术顾问。跟我对齐需求、起草工程任务书、做架构判断。</li>
-      <li><strong>Codex</strong> — 实际写代码的 agent。按任务书产出 Swift / TS。</li>
-      <li><strong>豆包 Realtime + DeepSeek</strong> — app 的语音 STT/TTS + LLM 后端。</li>
+      <li><strong>Claude</strong> —— 产品经理 + 技术顾问。跟我对齐需求、起草工程任务书、做架构判断。</li>
+      <li><strong>Claude Code / Codex</strong> —— 实际写代码的 agent。按工程任务书产出 Swift（app 端）和 TypeScript（这个网站）。</li>
+      <li><strong>豆包 Realtime + DeepSeek</strong> —— Cappy app 的语音 STT/TTS + LLM 后端。</li>
     </ul>
 
     <h2>我的工作流</h2>
-    <p>有想法 → 跟 Claude 讨论 + 输出工程任务书 → Codex 按任务书写代码 → 我真机测试 → 反馈给 Claude → 下一轮。</p>
 
-    <h2>为什么公开</h2>
-    <p>第一是给自己一个不糊弄的压力。第二是想让其他想用 AI 做事但不会写代码的人，看到一个真实样本。</p>
+    <p>有想法 → 跟 Claude 讨论 + 输出工程任务书 → Claude Code / Codex 按任务书写代码 → 我真机测试 → 反馈给 Claude → 下一轮。</p>
+
+    <p>这是一个我作为<strong>不会写代码但懂产品</strong>的人，能跑通的工作流。后面会有专门一篇博客拆解。</p>
 
     <h2>联系我</h2>
+
+    <p>想聊聊的可以走以下渠道（占位，慢慢补）：</p>
     <ul>
-      <li>Email：<a href="mailto:hello@madecappy.com">hello@madecappy.com</a></li>
-      <li>X / Twitter：<a href="#">@xxx（占位）</a></li>
-      <li>即刻：<a href="#">@xxx（占位）</a></li>
+      <li>X / Twitter：<a href="#">@xxx</a></li>
+      <li>即刻：<a href="#">@xxx</a></li>
+      <li>Email：<a href="#">暂未公开</a></li>
     </ul>
   </main>
 </BaseLayout>
