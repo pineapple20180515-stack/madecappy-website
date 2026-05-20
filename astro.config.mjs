@@ -11,7 +11,11 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   output: 'static',
-  adapter: vercel(),
+  adapter: vercel({
+    webAnalytics: {
+      enabled: true,
+    },
+  }),
   markdown: {
     shikiConfig: {
       theme: 'github-light',
