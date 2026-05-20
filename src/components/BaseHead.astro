@@ -1,4 +1,6 @@
 ---
+import { inject } from '@vercel/analytics';
+
 interface Props {
   title: string;
   description: string;
@@ -8,6 +10,8 @@ interface Props {
 const { title, description, ogImage = '/og-default.png' } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogURL = new URL(ogImage, Astro.site);
+
+inject();
 ---
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
