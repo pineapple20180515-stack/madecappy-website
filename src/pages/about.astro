@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import CommunityCard from '../components/CommunityCard.astro';
 ---
 <BaseLayout
   title="关于 · Cappy"
@@ -59,7 +60,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     <h2>联系我</h2>
 
-    <p>想聊聊的可以走以下渠道（占位，慢慢补）：</p>
+    <p>最直接的方式是<strong>加入小红书群聊「Cappy 英语口语伙伴」</strong>，我和群里其他爸妈会聊给小朋友做 AI 工具的事：</p>
+  </main>
+
+  <section class="max-w-[var(--width-reading)] mx-auto px-6 pb-16">
+    <CommunityCard variant="compact" />
+  </section>
+
+  <main class="max-w-[var(--width-reading)] mx-auto px-6 pb-16 prose prose-lg prose-cappy">
+    <p>其他渠道（占位，慢慢补）：</p>
     <ul>
       <li>X / Twitter：<a href="#">@xxx</a></li>
       <li>即刻：<a href="#">@xxx</a></li>

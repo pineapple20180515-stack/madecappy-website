@@ -10,6 +10,7 @@ const items = [
   navItem('/resources', '资源'),
   navItem('/about', '关于'),
 ];
+const communityActive = path.startsWith('/community');
 ---
 <header class="sticky top-0 z-50 backdrop-blur-md bg-paper/80 border-b border-ink-100">
   <nav class="max-w-[var(--width-wide)] mx-auto px-6 py-4 flex items-center justify-between">
@@ -17,7 +18,7 @@ const items = [
       <span class="text-2xl">🎩</span>
       <span>Cappy</span>
     </a>
-    <div class="flex items-center gap-6 text-sm font-medium">
+    <div class="flex items-center gap-4 md:gap-6 text-sm font-medium">
       {items.map(item => (
         <a
           href={item.href}
@@ -26,6 +27,19 @@ const items = [
           {item.label}
         </a>
       ))}
+      <a
+        href="/community"
+        class={`
+          inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full
+          border transition
+          ${communityActive
+            ? 'bg-pineapple-500 border-pineapple-500 text-ink-900'
+            : 'bg-pineapple-50 border-pineapple-300 text-ink-900 hover:bg-pineapple-100'}
+        `}
+      >
+        <span aria-hidden="true">💬</span>
+        <span>加入社群</span>
+      </a>
     </div>
   </nav>
 </header>

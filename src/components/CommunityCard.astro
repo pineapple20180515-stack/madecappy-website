@@ -1,0 +1,69 @@
+---
+// 二维码会过期，每次换二维码图片时把下面这个日期改成新的有效期截止日
+// 当前二维码：2026 年 6 月 18 日前有效（28 天）
+const expiresAt = '2026-06-18';
+
+const expiresAtDate = new Date(expiresAt);
+// 用截止日的当地午夜 23:59:59 作为过期边界
+expiresAtDate.setHours(23, 59, 59);
+const today = new Date();
+const msLeft = expiresAtDate.getTime() - today.getTime();
+const daysLeft = Math.ceil(msLeft / 86400000);
+const isExpired = msLeft <= 0;
+
+interface Props {
+  /** 卡片样式："full" 完整大卡（社群页用），"compact" 紧凑版（about/首页用） */
+  variant?: 'full' | 'compact';
+}
+const { variant = 'full' } = Astro.props;
+---
+<div class={`
+  rounded-[var(--radius-card)] border border-ink-100 bg-paper
+  ${variant === 'full' ? 'p-8 md:p-10' : 'p-6'}
+  shadow-sm
+`}>
+  <div class="flex flex-col md:flex-row gap-6 md:gap-10 items-center md:items-start">
+    <div class={`
+      flex-shrink-0 rounded-2xl overflow-hidden border border-ink-100
+      ${variant === 'full' ? 'w-64 md:w-72' : 'w-48'}
+    `}>
+      <img
+        src="/images/community/xhs-group.jpg"
+        alt="Cappy 英语口语伙伴 小红书群聊二维码"
+        class="w-full h-auto block"
+        loading="lazy"
+      />
+    </div>
+
+    <div class="flex-1 min-w-0">
+      <h3 class={`font-bold text-ink-900 ${variant === 'full' ? 'text-2xl' : 'text-xl'} mb-3`}>
+        加入「Cappy 英语口语伙伴」群聊
+      </h3>
+
+      <p class="text-ink-500 leading-relaxed mb-4">
+        如果你也在给小朋友想英语学习的办法、或者对 AI 工具给孩子做产品感兴趣，欢迎进群一起聊。
+        我（Dino）也在群里，做了什么新东西、踩了什么坑都会在群里同步。
+      </p>
+
+      <ol class="text-sm text-ink-900 space-y-1.5 mb-5 list-decimal list-inside">
+        <li>用手机打开小红书 App</li>
+        <li>扫描左边的二维码</li>
+        <li>加入「Cappy 英语口语伙伴」群聊</li>
+      </ol>
+
+      {isExpired ? (
+        <div class="rounded-lg bg-alarm/10 border border-alarm/30 px-4 py-3 text-sm">
+          <p class="text-alarm font-medium mb-1">二维码已过期</p>
+          <p class="text-ink-500">
+            小红书群聊二维码只有 28 天有效期。请等 Dino 更新新的二维码，或者从下面的备选渠道联系。
+          </p>
+        </div>
+      ) : (
+        <p class="text-xs text-ink-500">
+          二维码有效期至 <span class="font-medium">{expiresAt}</span>
+          （还有 {daysLeft} 天）
+        </p>
+      )}
+    </div>
+  </div>
+</div>

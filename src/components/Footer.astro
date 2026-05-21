@@ -4,6 +4,10 @@ const year = new Date().getFullYear();
 <footer class="border-t border-ink-100 mt-24 py-12">
   <div class="max-w-[var(--width-wide)] mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-ink-500">
     <span>© {year} madecappy.com — A father building in public.</span>
-    <span class="text-xs">Built with Astro + Tailwind. Hosted on Vercel.</span>
+    <div class="flex items-center gap-4 text-xs">
+      <a href="/community" class="hover:text-ios-blue transition">加入社群</a>
+      <span class="text-ink-100">·</span>
+      <span>Built with Astro + Tailwind. Hosted on Vercel.</span>
+    </div>
   </div>
 </footer>

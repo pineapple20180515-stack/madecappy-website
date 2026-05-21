@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CommunityCard from '../components/CommunityCard.astro';
+---
+<BaseLayout
+  title="加入社群 · Cappy"
+  description="加入「Cappy 英语口语伙伴」小红书群聊，跟 Dino 和其他爸妈一起聊聊给小朋友做 AI 工具的事。"
+>
+  <main class="max-w-[var(--width-reading)] mx-auto px-6 py-16">
+    <header class="mb-10">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">加入社群</h1>
+      <p class="text-lg text-ink-500 leading-relaxed">
+        Cappy 是一个 building in public 的项目。如果你在跟同样的事情打交道
+        ——给孩子想英语学习的办法、或者好奇不会写代码的家长怎么用 AI 工具搭产品
+        ——欢迎进群一起聊。
+      </p>
+    </header>
+
+    <CommunityCard variant="full" />
+
+    <section class="mt-16 prose prose-cappy max-w-none">
+      <h2>群里聊些什么</h2>
+      <ul>
+        <li>Cappy 的迭代日志（新功能、踩的坑、做的取舍）</li>
+        <li>小菠萝（我儿子）真实使用的反馈 —— 哪些有效、哪些没用</li>
+        <li>大家在给小朋友做工具时遇到的问题，互相借鉴</li>
+        <li>AI 工具最近的变化对家庭产品的影响</li>
+      </ul>
+
+      <h2>不会聊什么</h2>
+      <ul>
+        <li>不卖课、不推广、不带货</li>
+        <li>不讨论"鸡娃方法论"，只讨论具体的工具和做法</li>
+      </ul>
+
+      <h2>备选联系方式</h2>
+      <p>如果你不用小红书，或者群聊二维码过期了：</p>
+      <ul>
+        <li>X / Twitter：<a href="#">@xxx</a>（占位，慢慢补）</li>
+        <li>即刻：<a href="#">@xxx</a>（占位）</li>
+        <li>Email：<a href="#">暂未公开</a></li>
+      </ul>
+    </section>
+  </main>
+</BaseLayout>
