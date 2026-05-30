@@ -18,8 +18,15 @@ const scenes = [
   ['👫 合拍', '左右分屏各拍各的'],
   ['🙈 社恐友好', '面具 / 虚化解决露脸焦虑'],
 ];
-// 截图：把图片放到 public/dualcam/screenshots/ 命名 1.png…，再把下面数量改成实际张数
-const shots = [1, 2, 3, 4];
+// 截图：放在 public/dualcam/screenshots/，配上一句说明
+const shots = [
+  { n: 1, cap: '画中画' },
+  { n: 2, cap: '多布局' },
+  { n: 3, cap: '上下分屏' },
+  { n: 4, cap: '人入景' },
+  { n: 5, cap: '动物面具' },
+  { n: 6, cap: '换背景' },
+];
 ---
 <ProductLayout
   title="DualCam · 前后双摄 — 一条视频，两面记录"
@@ -44,10 +51,12 @@ const shots = [1, 2, 3, 4];
     .btn.primary:hover{transform:translateY(-2px)}
     .btn.ghost{border-color:var(--line);color:var(--fg)}
     .btn.ghost:hover{background:var(--card)}
-    .shots{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:36px}
-    @media(max-width:760px){.shots{grid-template-columns:repeat(2,1fr)}}
-    .phone{aspect-ratio:9/19.5;border-radius:24px;border:1px solid var(--line);background:linear-gradient(160deg,#17171c,#0e0e11);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px;overflow:hidden}
-    .phone img{width:100%;height:100%;object-fit:cover}
+    .shots{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:36px}
+    @media(max-width:760px){.shots{grid-template-columns:repeat(2,1fr);gap:16px}}
+    .shot{margin:0}
+    .shot figcaption{text-align:center;color:var(--muted);font-size:13px;margin-top:10px}
+    .phone{aspect-ratio:1242/2688;border-radius:22px;border:1px solid var(--line);background:linear-gradient(160deg,#17171c,#0e0e11);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px;overflow:hidden;box-shadow:0 14px 36px rgba(0,0,0,.45)}
+    .phone img{width:100%;height:100%;object-fit:cover;display:block}
     .video{margin-top:32px;aspect-ratio:16/9;border-radius:18px;border:1px solid var(--line);background:linear-gradient(160deg,#17171c,#0e0e11);display:flex;align-items:center;justify-content:center;color:var(--muted)}
     .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:36px}
     @media(max-width:880px){.grid{grid-template-columns:repeat(2,1fr)}}
@@ -81,14 +90,15 @@ const shots = [1, 2, 3, 4];
       <div class="eyebrow">产品截图</div>
       <h2>它长这样</h2>
       <div class="shots">
-        {shots.map((n) => (
-          <div class="phone">
-            <img src={`/dualcam/screenshots/${n}.png`} alt={`DualCam 截图 ${n}`} loading="lazy"
-                 onerror={`this.style.display='none'; this.parentElement.append('截图位 ${n}')`} />
-          </div>
+        {shots.map((s) => (
+          <figure class="shot">
+            <div class="phone">
+              <img src={`/dualcam/screenshots/${s.n}.png`} alt={`DualCam ${s.cap}`} loading="lazy" />
+            </div>
+            <figcaption>{s.cap}</figcaption>
+          </figure>
         ))}
       </div>
-      <p class="note">把截图放到 <code>public/dualcam/screenshots/</code>（命名 1.png、2.png…）即可自动显示。</p>
     </div>
   </section>
 
