@@ -1,0 +1,42 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const colorMap: Record<string, string> = {
+  pineapple: 'hover:border-pineapple-500',
+  blue: 'hover:border-ios-blue',
+  pink: 'hover:border-pink-400',
+  green: 'hover:border-green-500',
+};
+const ringColor = colorMap[project.data.color] || colorMap.pineapple;
+---
+
+<a
+  href={`/projects/${project.data.slug}`}
+  class={`block group p-6 rounded-[var(--radius-card)] border border-ink-100 hover:shadow-md transition bg-white ${ringColor}`}
+>
+  <div class="flex items-start gap-4">
+    <div class="text-4xl flex-shrink-0">{project.data.coverEmoji || '📦'}</div>
+    <div class="flex-1 min-w-0">
+      <h3 class="text-xl font-bold text-ink-900 mb-1 group-hover:text-ios-blue transition">
+        {project.data.title}
+      </h3>
+      <p class="text-sm text-ink-500 mb-3">{project.data.tagline}</p>
+      {project.data.forWhom && (
+        <p class="text-xs text-ink-500">👤 {project.data.forWhom}</p>
+      )}
+      {project.data.techStack.length > 0 && (
+        <div class="mt-2 flex flex-wrap gap-1.5">
+          {project.data.techStack.slice(0, 3).map(t => (
+            <span class="text-xs px-2 py-0.5 rounded-full bg-ink-100 text-ink-500">{t}</span>
+          ))}
+        </div>
+      )}
+    </div>
+    <span class="text-ios-blue text-xl group-hover:translate-x-1 transition flex-shrink-0">→</span>
+  </div>
+</a>

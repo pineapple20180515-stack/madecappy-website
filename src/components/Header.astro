@@ -6,6 +6,7 @@ const navItem = (href: string, label: string) => ({
   active: path === href || (href !== '/' && path.startsWith(href)),
 });
 const items = [
+  navItem('/projects', 'AI 实践'),
   navItem('/timeline', '建造日记'),
   navItem('/resources', '资源'),
   navItem('/about', '关于'),

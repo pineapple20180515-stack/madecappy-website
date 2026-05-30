@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+
+const all = await getCollection('projects', ({ data }) => !data.draft);
+const projects = all.sort((a, b) => a.data.order - b.data.order);
+
+const statusGroups = {
+  building: projects.filter(p => p.data.status === 'building'),
+  shipped: projects.filter(p => p.data.status === 'shipped'),
+  paused: projects.filter(p => p.data.status === 'paused'),
+};
+---
+<BaseLayout
+  title="菠萝爸爸的 AI 实践"
+  description="一个不会写代码的爸爸，用 AI 工具给身边的人做小工具。"
+>
+  <section class="max-w-[var(--width-reading)] mx-auto px-6 pt-16 pb-12">
+    <h1 class="text-4xl md:text-5xl font-black mb-4">
+      🍍 菠萝爸爸的 <span class="text-pineapple-700">AI 实践</span>
+    </h1>
+    <p class="text-lg text-ink-500 max-w-2xl leading-relaxed">
+      我是 Dino，一个父亲，一个互联网产品人。用 AI 工具给身边的人（主要是 8 岁的小菠萝）做一些
+      <strong class="text-ink-900">他实际能用上</strong>的东西。
+    </p>
+    <p class="text-sm text-ink-500 mt-3">
+      本站本身（<a href="/" class="text-ios-blue hover:underline">Cappy</a>）就是其中第一个项目，所以它不在下面的列表里。
+    </p>
+  </section>
+
+  {statusGroups.building.length > 0 && (
+    <section class="max-w-[var(--width-reading)] mx-auto px-6 pb-12">
+      <h2 class="text-2xl font-bold mb-6 text-ink-900">🟡 正在做</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {statusGroups.building.map(p => <ProjectCard project={p} />)}
+      </div>
+    </section>
+  )}
+
+  {statusGroups.shipped.length > 0 && (
+    <section class="max-w-[var(--width-reading)] mx-auto px-6 pb-12">
+      <h2 class="text-2xl font-bold mb-6 text-ink-900">✅ 上线了</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {statusGroups.shipped.map(p => <ProjectCard project={p} />)}
+      </div>
+    </section>
+  )}
+
+  {statusGroups.paused.length > 0 && (
+    <section class="max-w-[var(--width-reading)] mx-auto px-6 pb-16">
+      <h2 class="text-2xl font-bold mb-6 text-ink-500">⏸ 暂停中</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {statusGroups.paused.map(p => <ProjectCard project={p} />)}
+      </div>
+    </section>
+  )}
+
+  {projects.length === 0 && (
+    <section class="max-w-[var(--width-reading)] mx-auto px-6 pb-16">
+      <p class="text-ink-500">还没添加项目，第一个正在打字。</p>
+    </section>
+  )}
+</BaseLayout>

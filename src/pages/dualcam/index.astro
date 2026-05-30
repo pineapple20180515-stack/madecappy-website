@@ -1,0 +1,125 @@
+---
+import ProductLayout from '../../layouts/ProductLayout.astro';
+
+const features = [
+  { ico: '📹', t: '前后双摄合成', d: '两路画面按布局合成一条 mp4，含麦克风声音。' },
+  { ico: '🪟', t: '三种布局', d: '画中画 / 上下分屏 / 左右分屏，一键切换。' },
+  { ico: '🤏', t: '小窗自由摆', d: '拖动、双指缩放、磁吸对齐，所见即所得。' },
+  { ico: '✨', t: '美颜', d: '磨皮 + 提亮 + 暖调，自然 / 强两档。' },
+  { ico: '🐶', t: '人脸变动物', d: '动物面具盖住脸，不愿出镜也能拍。' },
+  { ico: '🌫️', t: '背景虚化 / 换背景', d: '人像分割，人清晰、背景糊或换图。' },
+  { ico: '🧑‍🎨', t: '人入景', d: '把"你"抠出来，站进后置拍的场景里。' },
+  { ico: '🔒', t: '纯本地', d: '全部端上处理，不联网、不收集数据。' },
+];
+const scenes = [
+  ['🧳 旅行 Vlog', '风景 + 你的反应'],
+  ['📦 开箱测评', '东西 + 你的表情'],
+  ['🎓 口播教学', '场景 + 讲解的你'],
+  ['👫 合拍', '左右分屏各拍各的'],
+  ['🙈 社恐友好', '面具 / 虚化解决露脸焦虑'],
+];
+// 截图：把图片放到 public/dualcam/screenshots/ 命名 1.png…，再把下面数量改成实际张数
+const shots = [1, 2, 3, 4];
+---
+<ProductLayout
+  title="DualCam · 前后双摄 — 一条视频，两面记录"
+  description="打开即前后摄像头同开，所见即所得地合成一条视频。美颜、动物面具、背景虚化、人入景，全部端上处理、不收集数据。"
+>
+  <style>
+    section{padding:84px 0}
+    .eyebrow{color:var(--muted);font-size:13px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:14px}
+    h2{font-size:clamp(26px,4.2vw,38px);font-weight:700;letter-spacing:-.02em;margin-bottom:16px}
+    .lead{color:var(--muted);font-size:clamp(15px,2.2vw,18px);max-width:640px}
+    .hero{position:relative;text-align:center;padding:96px 0 72px;overflow:hidden}
+    .hero::before{content:"";position:absolute;inset:0;background:
+      radial-gradient(680px 340px at 50% -10%, rgba(138,71,224,.28), transparent 70%),
+      radial-gradient(520px 300px at 82% 8%, rgba(60,114,255,.20), transparent 70%),
+      radial-gradient(520px 300px at 16% 14%, rgba(255,59,48,.14), transparent 70%);pointer-events:none}
+    .hero .icon{width:104px;height:104px;border-radius:24px;box-shadow:0 24px 60px rgba(0,0,0,.6),0 0 0 1px var(--line);margin-bottom:26px}
+    .hero h1{font-size:clamp(34px,6.5vw,60px);font-weight:800;letter-spacing:-.02em;line-height:1.12}
+    .hero p{color:var(--muted);font-size:clamp(16px,2.6vw,20px);margin:20px auto 0;max-width:560px}
+    .cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:34px}
+    .btn{padding:13px 26px;border-radius:999px;font-weight:600;font-size:15px;transition:.2s;border:1px solid transparent}
+    .btn.primary{background:#fff;color:#000}
+    .btn.primary:hover{transform:translateY(-2px)}
+    .btn.ghost{border-color:var(--line);color:var(--fg)}
+    .btn.ghost:hover{background:var(--card)}
+    .shots{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:36px}
+    @media(max-width:760px){.shots{grid-template-columns:repeat(2,1fr)}}
+    .phone{aspect-ratio:9/19.5;border-radius:24px;border:1px solid var(--line);background:linear-gradient(160deg,#17171c,#0e0e11);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px;overflow:hidden}
+    .phone img{width:100%;height:100%;object-fit:cover}
+    .video{margin-top:32px;aspect-ratio:16/9;border-radius:18px;border:1px solid var(--line);background:linear-gradient(160deg,#17171c,#0e0e11);display:flex;align-items:center;justify-content:center;color:var(--muted)}
+    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:36px}
+    @media(max-width:880px){.grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:520px){.grid{grid-template-columns:1fr}}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;transition:.2s}
+    .card:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.2)}
+    .card .ico{font-size:24px;margin-bottom:10px}
+    .card h3{font-size:16px;margin-bottom:5px}
+    .card p{color:var(--muted);font-size:13px}
+    .scenes{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+    .chip{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:13px 17px;font-size:15px}
+    .chip b{display:block;font-size:13px;color:var(--muted);font-weight:400;margin-top:3px}
+    .note{margin-top:14px;font-size:13px;color:var(--muted)}
+  </style>
+
+  <header class="hero">
+    <div class="wrap">
+      <img class="icon" src="/dualcam/icon.png" alt="DualCam 图标" />
+      <h1>后置拍世界，前置拍你<br><span class="grad">一条视频，两面记录</span></h1>
+      <p>打开即前后摄像头同开，所见即所得地合成一条视频，直接存进相册。</p>
+      <div class="cta">
+        <a class="btn primary" href="#">App Store 下载（即将上线）</a>
+        <a class="btn ghost" href="#features">看看能玩什么 →</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 截图 -->
+  <section>
+    <div class="wrap">
+      <div class="eyebrow">产品截图</div>
+      <h2>它长这样</h2>
+      <div class="shots">
+        {shots.map((n) => (
+          <div class="phone">
+            <img src={`/dualcam/screenshots/${n}.png`} alt={`DualCam 截图 ${n}`} loading="lazy"
+                 onerror={`this.style.display='none'; this.parentElement.append('截图位 ${n}')`} />
+          </div>
+        ))}
+      </div>
+      <p class="note">把截图放到 <code>public/dualcam/screenshots/</code>（命名 1.png、2.png…）即可自动显示。</p>
+    </div>
+  </section>
+
+  <!-- 视频 -->
+  <section style="background:var(--bg2)">
+    <div class="wrap">
+      <div class="eyebrow">演示视频</div>
+      <h2>动起来更直观</h2>
+      <div class="video">▶ 视频位 —— 放一段录屏 / Demo</div>
+      <p class="note">把视频放到 <code>public/dualcam/</code>，把这里换成 <code>&lt;video controls src="/dualcam/demo.mp4"&gt;</code> 即可。</p>
+    </div>
+  </section>
+
+  <!-- 功能 -->
+  <section id="features">
+    <div class="wrap">
+      <div class="eyebrow">功能与能力</div>
+      <h2>能拍，更能玩</h2>
+      <div class="grid">
+        {features.map((f) => (
+          <div class="card"><div class="ico">{f.ico}</div><h3>{f.t}</h3><p>{f.d}</p></div>
+        ))}
+      </div>
+
+      <div style="margin-top:56px" class="eyebrow">适用场景</div>
+      <h2>它适合这些时刻</h2>
+      <div class="scenes">
+        {scenes.map((s) => (
+          <div class="chip">{s[0]}<b>{s[1]}</b></div>
+        ))}
+      </div>
+    </div>
+  </section>
+</ProductLayout>

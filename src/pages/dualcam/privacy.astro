@@ -1,0 +1,51 @@
+---
+import ProductLayout from '../../layouts/ProductLayout.astro';
+const updated = '2026年5月30日';
+---
+<ProductLayout title="隐私协议 · DualCam" description="DualCam 隐私政策：不收集、不上传任何个人数据，全部处理在你的设备本地完成。">
+  <style>
+    .doc{padding:64px 0 0}
+    .doc h1{font-size:clamp(28px,5vw,40px);font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
+    .doc .upd{color:var(--muted);font-size:14px;margin-bottom:36px}
+    .doc h2{font-size:20px;font-weight:700;margin:32px 0 10px}
+    .doc p,.doc li{color:#d6d6da;font-size:16px;line-height:1.8}
+    .doc ul{margin:8px 0 8px 22px}
+    .doc strong{color:#fff}
+    .doc a{color:var(--blue)}
+  </style>
+  <div class="rwrap doc">
+    <h1>隐私协议</h1>
+    <div class="upd">最后更新：{updated}</div>
+
+    <p>DualCam（以下简称"本 App"）非常重视你的隐私。一句话总结：<strong>本 App 不收集、不上传、不存储任何个人数据，所有处理都在你的设备本地完成。</strong></p>
+
+    <h2>我们收集哪些信息</h2>
+    <p><strong>不收集任何信息。</strong>本 App 没有账号系统、不联网传输你的内容、不接入任何第三方分析或广告 SDK，因此我们既看不到、也不会保存你的任何数据。</p>
+
+    <h2>权限的用途</h2>
+    <p>本 App 会请求以下系统权限，仅用于实现功能，所有相关数据都只留在你的设备上：</p>
+    <ul>
+      <li><strong>相机</strong>：用于同时采集前置与后置摄像头画面以合成视频。画面仅在本地实时处理，不会上传。</li>
+      <li><strong>麦克风</strong>：用于在录制视频时采集声音。音频仅写入你录制的视频文件，不会上传。</li>
+      <li><strong>相册（仅添加）</strong>：用于将你录制好的视频保存到系统相册。本 App 不读取你相册里的其他内容。</li>
+    </ul>
+
+    <h2>设备端的 AI 处理</h2>
+    <p>美颜、人脸面具、背景虚化/换背景、人入景等功能用到的人脸检测与人物分割，全部由 Apple 系统框架（Vision / Core Image）在<strong>你的设备本地</strong>运行。相关图像<strong>不会离开你的设备</strong>，也不会被上传到任何服务器。</p>
+
+    <h2>你录制的内容</h2>
+    <p>你拍摄、合成的视频保存在你的设备与系统相册中，归你所有。本 App 不会访问、复制或上传这些内容。</p>
+
+    <h2>儿童隐私</h2>
+    <p>本 App 不面向 13 岁以下儿童收集任何信息（实际上不收集任何人的信息）。</p>
+
+    <h2>第三方</h2>
+    <p>本 App 本体不嵌入第三方追踪 SDK。视频保存到相册后如何被其他 App 使用，受你设备与对应 App 的隐私设置约束。</p>
+
+    <h2>政策变更</h2>
+    <p>若本政策有更新，我们会修改本页内容并更新顶部的"最后更新"日期。</p>
+
+    <h2>联系我们</h2>
+    <p>有任何隐私相关问题，请联系：<a href="mailto:dualcam@madecappy.com">dualcam@madecappy.com</a></p>
+  </div>
+</ProductLayout>

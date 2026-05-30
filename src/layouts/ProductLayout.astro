@@ -1,0 +1,84 @@
+---
+import Analytics from '@vercel/analytics/astro';
+
+interface Props {
+  title: string;
+  description: string;
+}
+const { title, description } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogURL = new URL('/dualcam/icon.png', Astro.site);
+const year = new Date().getFullYear();
+// ✏️ 联系邮箱占位，请改成你的真实地址
+const contactEmail = 'dualcam@madecappy.com';
+---
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonicalURL} />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={ogURL} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/dualcam/icon.png" />
+  <style is:global>
+    :root{
+      --bg:#0a0a0b; --bg2:#111114; --card:#16161a; --line:rgba(255,255,255,.08);
+      --fg:#f2f2f4; --muted:#9a9aa2; --red:#ff3b30; --blue:#3c72ff; --purple:#8a47e0;
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--fg);font-family:-apple-system,"SF Pro Text","PingFang SC",system-ui,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+    .rwrap{max-width:760px;margin:0 auto;padding:0 24px}
+    .grad{background:linear-gradient(100deg,#fff,#c9b6ff 45%,#7fa8ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .pnav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rgba(10,10,11,.7);border-bottom:1px solid var(--line)}
+    .pnav .wrap{display:flex;align-items:center;justify-content:space-between;height:58px}
+    .pnav .brand{display:flex;align-items:center;gap:10px;font-weight:600}
+    .pnav .brand img{width:28px;height:28px;border-radius:7px}
+    .pnav .back{font-size:13px;color:var(--muted)}
+    .pnav .back:hover{color:var(--fg)}
+    pfoot, .pfoot{display:block}
+    .pfoot{border-top:1px solid var(--line);margin-top:80px;padding:48px 0;color:var(--muted);font-size:14px}
+    .pfoot .row{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between}
+    .pfoot a{color:var(--muted)}
+    .pfoot a:hover{color:var(--fg)}
+    .pfoot .links{display:flex;gap:18px;flex-wrap:wrap}
+  </style>
+</head>
+<body>
+  <nav class="pnav">
+    <div class="wrap">
+      <a class="brand" href="/dualcam"><img src="/dualcam/icon.png" alt="DualCam" />DualCam</a>
+      <a class="back" href="/projects">← madecappy.com / AI 实践</a>
+    </div>
+  </nav>
+
+  <slot />
+
+  <footer class="pfoot">
+    <div class="wrap row">
+      <div>
+        <div style="color:var(--fg);font-weight:600;margin-bottom:6px">DualCam · 前后双摄</div>
+        <div>联系：<a href={`mailto:${contactEmail}`}>{contactEmail}</a></div>
+        <div style="margin-top:4px">© {year} · 原生 iOS App · 端上处理 · 不收集数据</div>
+      </div>
+      <div class="links">
+        <a href="/dualcam">产品介绍</a>
+        <a href="/dualcam/privacy">隐私协议</a>
+        <a href="/dualcam/terms">用户条款</a>
+        <a href="/projects">返回 madecappy.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <Analytics />
+</body>
+</html>

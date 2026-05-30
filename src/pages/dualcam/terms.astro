@@ -1,0 +1,46 @@
+---
+import ProductLayout from '../../layouts/ProductLayout.astro';
+const updated = '2026年5月30日';
+---
+<ProductLayout title="用户条款 · DualCam" description="DualCam 用户使用条款。">
+  <style>
+    .doc{padding:64px 0 0}
+    .doc h1{font-size:clamp(28px,5vw,40px);font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
+    .doc .upd{color:var(--muted);font-size:14px;margin-bottom:36px}
+    .doc h2{font-size:20px;font-weight:700;margin:32px 0 10px}
+    .doc p,.doc li{color:#d6d6da;font-size:16px;line-height:1.8}
+    .doc ul{margin:8px 0 8px 22px}
+    .doc strong{color:#fff}
+    .doc a{color:var(--blue)}
+  </style>
+  <div class="rwrap doc">
+    <h1>用户条款</h1>
+    <div class="upd">最后更新：{updated}</div>
+
+    <p>欢迎使用 DualCam（以下简称"本 App"）。下载、安装或使用本 App，即表示你同意本条款。如不同意，请勿使用。</p>
+
+    <h2>1. 使用许可</h2>
+    <p>我们授予你一项个人、非独占、不可转让的许可，用于在你拥有或控制的 Apple 设备上安装并使用本 App。你不得对本 App 进行反编译、逆向工程或再分发。</p>
+
+    <h2>2. 设备与系统要求</h2>
+    <p>本 App 需要支持多摄像头同时录制的设备（iPhone 11 及以后机型），系统 iOS 14 或更高版本；背景虚化/换背景、人入景等功能需要 iOS 15 或更高版本。设备发热与耗电为多摄同录的系统物理特性。</p>
+
+    <h2>3. 你的内容</h2>
+    <p>你使用本 App 拍摄、合成的视频<strong>完全归你所有</strong>。本 App 不会访问、收集或上传这些内容（详见<a href="/dualcam/privacy">隐私协议</a>）。你需对自己拍摄与分享的内容负责，并确保遵守所在地法律及他人的肖像与隐私权利。</p>
+
+    <h2>4. 可接受的使用</h2>
+    <p>你同意不将本 App 用于任何违法用途，包括但不限于未经他人同意的偷拍、骚扰、侵犯他人隐私或知识产权的行为。</p>
+
+    <h2>5. 知识产权</h2>
+    <p>本 App 本身及其界面、商标、代码等知识产权归开发者所有，受相关法律保护。</p>
+
+    <h2>6. 免责声明</h2>
+    <p>本 App 按"现状"提供，不作任何明示或默示的担保。在适用法律允许的最大范围内，开发者不对因使用或无法使用本 App 而导致的任何损失承担责任。</p>
+
+    <h2>7. 条款变更</h2>
+    <p>我们可能不时更新本条款，更新后将修改本页并更新顶部日期。继续使用本 App 即视为接受更新后的条款。</p>
+
+    <h2>8. 联系我们</h2>
+    <p>关于本条款的任何问题，请联系：<a href="mailto:dualcam@madecappy.com">dualcam@madecappy.com</a></p>
+  </div>
+</ProductLayout>
