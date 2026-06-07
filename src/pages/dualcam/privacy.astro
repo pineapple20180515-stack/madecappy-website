@@ -1,54 +1,314 @@
 ---
 import ProductLayout from '../../layouts/ProductLayout.astro';
-const updated = '2026年5月30日';
+
+const updated = '2026-05-30';
+
+// 多语言隐私政策内容。每种语言一组；权限部分用 bullets 列出。
+const docs = [
+  {
+    code: 'en', name: 'English', dir: 'ltr',
+    title: 'Privacy Policy', updatedLabel: 'Last updated',
+    intro: 'DualCam ("the App") takes your privacy seriously. In one line: the App does not collect, upload, or store any personal data — everything is processed locally on your device.',
+    sections: [
+      { h: 'What we collect', p: 'Nothing. The App has no account system, does not transmit your content over the network, and includes no third-party analytics or advertising SDKs, so we can neither see nor store any of your data.' },
+      { h: 'Permissions', p: 'The App requests the following system permissions solely to provide features; all related data stays on your device:', bullets: [
+        'Camera: to capture the front and back cameras at the same time and compose a video. Frames are processed locally in real time and never uploaded.',
+        'Microphone: to record sound while filming. Audio is written only into your recorded video file and never uploaded.',
+        'Photos (Add only): to save your recorded videos and photos to the system photo library. The App does not read other content in your library.' ] },
+      { h: 'On-device AI', p: 'Face detection and person segmentation used by beauty, face masks, background blur/replacement and Me-in-Scene run entirely on your device via Apple system frameworks (Vision / Core Image). The related images never leave your device and are not uploaded to any server.' },
+      { h: 'Face / biometric data', p: 'The App does not collect, process, store, or share any face data or biometric information. It only records video from the device cameras; all recordings stay on your device and are never uploaded to our servers or shared with any third party.' },
+      { h: 'Your content', p: 'The videos and photos you capture are stored on your device and in your photo library, and belong to you. The App does not access, copy, or upload them.' },
+      { h: "Children's privacy", p: 'The App does not collect any information from children under 13 (in fact, it collects no information from anyone).' },
+      { h: 'Third parties', p: 'The App itself embeds no third-party tracking SDKs. How your media is used by other apps after being saved to your library is governed by your device and those apps’ privacy settings.' },
+      { h: 'Changes', p: 'If this policy changes, we will update this page and the "Last updated" date at the top.' },
+      { h: 'Contact', p: 'For any privacy questions, contact: dualcam@madecappy.com' },
+    ],
+  },
+  {
+    code: 'zh-Hans', name: '简体中文', dir: 'ltr',
+    title: '隐私协议', updatedLabel: '最后更新',
+    intro: 'DualCam（以下简称"本 App"）非常重视你的隐私。一句话总结：本 App 不收集、不上传、不存储任何个人数据，所有处理都在你的设备本地完成。',
+    sections: [
+      { h: '我们收集哪些信息', p: '不收集任何信息。本 App 没有账号系统、不联网传输你的内容、不接入任何第三方分析或广告 SDK，因此我们既看不到、也不会保存你的任何数据。' },
+      { h: '权限的用途', p: '本 App 会请求以下系统权限，仅用于实现功能，所有相关数据都只留在你的设备上：', bullets: [
+        '相机：用于同时采集前置与后置摄像头画面以合成视频。画面仅在本地实时处理，不会上传。',
+        '麦克风：用于在录制视频时采集声音。音频仅写入你录制的视频文件，不会上传。',
+        '相册（仅添加）：用于将你录制好的视频和照片保存到系统相册。本 App 不读取你相册里的其他内容。' ] },
+      { h: '设备端的 AI 处理', p: '美颜、人脸面具、背景虚化/换背景、人入景等功能用到的人脸检测与人物分割，全部由 Apple 系统框架（Vision / Core Image）在你的设备本地实时运行。相关图像不会离开你的设备，也不会被上传到任何服务器。' },
+      { h: '人脸数据 / 生物特征数据', p: '本应用不收集、不处理、不存储、不分享任何人脸数据或生物特征信息。应用仅录制设备摄像头的视频画面，所有录制内容仅保存在用户设备本地，绝不上传至我们的服务器或分享给任何第三方。' },
+      { h: '你录制的内容', p: '你拍摄、合成的视频与照片保存在你的设备与系统相册中，归你所有。本 App 不会访问、复制或上传这些内容。' },
+      { h: '儿童隐私', p: '本 App 不面向 13 岁以下儿童收集任何信息（实际上不收集任何人的信息）。' },
+      { h: '第三方', p: '本 App 本体不嵌入第三方追踪 SDK。视频保存到相册后如何被其他 App 使用，受你设备与对应 App 的隐私设置约束。' },
+      { h: '政策变更', p: '若本政策有更新，我们会修改本页内容并更新顶部的"最后更新"日期。' },
+      { h: '联系我们', p: '有任何隐私相关问题，请联系：dualcam@madecappy.com' },
+    ],
+  },
+  {
+    code: 'zh-Hant', name: '繁體中文', dir: 'ltr',
+    title: '隱私權政策', updatedLabel: '最後更新',
+    intro: 'DualCam（以下簡稱「本 App」）非常重視你的隱私。一句話總結：本 App 不收集、不上傳、不儲存任何個人資料，所有處理都在你的裝置本機完成。',
+    sections: [
+      { h: '我們收集哪些資訊', p: '不收集任何資訊。本 App 沒有帳號系統、不連網傳輸你的內容、不接入任何第三方分析或廣告 SDK，因此我們既看不到、也不會保存你的任何資料。' },
+      { h: '權限的用途', p: '本 App 會請求以下系統權限，僅用於實現功能，所有相關資料都只留在你的裝置上：', bullets: [
+        '相機：用於同時擷取前置與後置鏡頭畫面以合成影片。畫面僅在本機即時處理，不會上傳。',
+        '麥克風：用於在錄製影片時收音。音訊僅寫入你錄製的影片檔，不會上傳。',
+        '照片（僅新增）：用於將你錄製好的影片與照片儲存到系統照片圖庫。本 App 不讀取你圖庫裡的其他內容。' ] },
+      { h: '裝置端的 AI 處理', p: '美顏、人臉面具、背景虛化/換背景、人物入景等功能用到的人臉偵測與人物分割，全部由 Apple 系統框架（Vision / Core Image）在你的裝置本機即時執行。相關影像不會離開你的裝置，也不會被上傳到任何伺服器。' },
+      { h: '人臉資料 / 生物特徵資料', p: '本應用不收集、不處理、不儲存、不分享任何人臉資料或生物特徵資訊。應用僅錄製裝置鏡頭的影片畫面，所有錄製內容僅保存在使用者裝置本機，絕不上傳至我們的伺服器或分享給任何第三方。' },
+      { h: '你錄製的內容', p: '你拍攝、合成的影片與照片保存在你的裝置與系統圖庫中，歸你所有。本 App 不會存取、複製或上傳這些內容。' },
+      { h: '兒童隱私', p: '本 App 不面向 13 歲以下兒童收集任何資訊（實際上不收集任何人的資訊）。' },
+      { h: '第三方', p: '本 App 本體不嵌入第三方追蹤 SDK。影片儲存到圖庫後如何被其他 App 使用，受你裝置與對應 App 的隱私設定約束。' },
+      { h: '政策變更', p: '若本政策有更新，我們會修改本頁內容並更新頂部的「最後更新」日期。' },
+      { h: '聯絡我們', p: '有任何隱私相關問題，請聯絡：dualcam@madecappy.com' },
+    ],
+  },
+  {
+    code: 'ja', name: '日本語', dir: 'ltr',
+    title: 'プライバシーポリシー', updatedLabel: '最終更新',
+    intro: 'DualCam（以下「本アプリ」）はあなたのプライバシーを重視します。一言でいえば、本アプリは個人データを一切収集・アップロード・保存せず、すべての処理は端末内でローカルに行われます。',
+    sections: [
+      { h: '収集する情報', p: '何も収集しません。本アプリにはアカウント機能がなく、コンテンツをネットワークに送信せず、第三者の解析や広告 SDK も組み込んでいません。そのため、あなたのデータを見ることも保存することもできません。' },
+      { h: '権限の用途', p: '本アプリは機能のためだけに以下のシステム権限を要求します。関連データはすべて端末内に留まります：', bullets: [
+        'カメラ：前面と背面のカメラを同時に取得して動画を合成するため。映像は端末内でリアルタイム処理され、アップロードされません。',
+        'マイク：動画の録画中に音声を収録するため。音声は録画した動画ファイルにのみ書き込まれ、アップロードされません。',
+        '写真（追加のみ）：録画した動画や写真を写真ライブラリに保存するため。ライブラリ内の他のコンテンツは読み取りません。' ] },
+      { h: '端末内での AI 処理', p: '美顔、フェイスマスク、背景ぼかし/差し替え、人物イン などで使う顔検出と人物セグメンテーションは、すべて Apple のシステムフレームワーク（Vision / Core Image）により端末内でリアルタイムに実行されます。対象の画像が端末から出ることはなく、サーバーにアップロードされることもありません。' },
+      { h: '顔データ / 生体データ', p: '本アプリは顔データや生体情報を一切収集・処理・保存・共有しません。端末のカメラ映像を録画するだけで、録画内容はすべて端末内に保存され、当社のサーバーへのアップロードや第三者への共有は一切行いません。' },
+      { h: 'あなたのコンテンツ', p: '撮影・合成した動画や写真は端末と写真ライブラリに保存され、あなたに帰属します。本アプリがそれらにアクセス・コピー・アップロードすることはありません。' },
+      { h: '子どものプライバシー', p: '本アプリは 13 歳未満の子どもから情報を収集しません（実際には誰からも情報を収集しません）。' },
+      { h: '第三者', p: '本アプリ自体に第三者のトラッキング SDK は組み込まれていません。ライブラリ保存後に他のアプリでどう使われるかは、端末と各アプリのプライバシー設定に従います。' },
+      { h: 'ポリシーの変更', p: '本ポリシーを更新する場合は、本ページの内容と上部の「最終更新」日を変更します。' },
+      { h: 'お問い合わせ', p: 'プライバシーに関するお問い合わせ：dualcam@madecappy.com' },
+    ],
+  },
+  {
+    code: 'de', name: 'Deutsch', dir: 'ltr',
+    title: 'Datenschutzrichtlinie', updatedLabel: 'Zuletzt aktualisiert',
+    intro: 'DualCam („die App") nimmt deinen Datenschutz ernst. Kurz gesagt: Die App erfasst, lädt und speichert keine personenbezogenen Daten — alles wird lokal auf deinem Gerät verarbeitet.',
+    sections: [
+      { h: 'Welche Daten wir erfassen', p: 'Keine. Die App hat kein Konto-System, überträgt deine Inhalte nicht über das Netzwerk und enthält keine Analyse- oder Werbe-SDKs von Drittanbietern. Wir können deine Daten daher weder sehen noch speichern.' },
+      { h: 'Berechtigungen', p: 'Die App fordert die folgenden Systemberechtigungen nur zur Bereitstellung von Funktionen an; alle zugehörigen Daten bleiben auf deinem Gerät:', bullets: [
+        'Kamera: um Front- und Rückkamera gleichzeitig aufzunehmen und ein Video zu erstellen. Die Bilder werden lokal in Echtzeit verarbeitet und nie hochgeladen.',
+        'Mikrofon: um beim Filmen Ton aufzunehmen. Der Ton wird nur in deine Videodatei geschrieben und nie hochgeladen.',
+        'Fotos (nur Hinzufügen): um deine Videos und Fotos in der Fotomediathek zu speichern. Die App liest keine anderen Inhalte deiner Mediathek.' ] },
+      { h: 'KI-Verarbeitung auf dem Gerät', p: 'Gesichtserkennung und Personensegmentierung für Beauty, Masken, Hintergrundunschärfe/-ersatz und Me-in-Scene laufen vollständig auf deinem Gerät über Apple-Frameworks (Vision / Core Image). Die Bilder verlassen dein Gerät nicht und werden auf keinen Server hochgeladen.' },
+      { h: 'Gesichts- / biometrische Daten', p: 'Die App erfasst, verarbeitet, speichert oder teilt keine Gesichts- oder biometrischen Daten. Sie nimmt nur Videos der Gerätekameras auf; alle Aufnahmen bleiben auf deinem Gerät und werden nie auf unsere Server hochgeladen oder an Dritte weitergegeben.' },
+      { h: 'Deine Inhalte', p: 'Die von dir aufgenommenen Videos und Fotos werden auf deinem Gerät und in deiner Mediathek gespeichert und gehören dir. Die App greift nicht darauf zu, kopiert oder lädt sie nicht hoch.' },
+      { h: 'Datenschutz von Kindern', p: 'Die App erfasst keine Informationen von Kindern unter 13 Jahren (tatsächlich von niemandem).' },
+      { h: 'Dritte', p: 'Die App selbst bindet keine Tracking-SDKs von Drittanbietern ein. Wie deine Medien nach dem Speichern von anderen Apps genutzt werden, richtet sich nach deinem Gerät und den Datenschutzeinstellungen jener Apps.' },
+      { h: 'Änderungen', p: 'Bei Änderungen dieser Richtlinie aktualisieren wir diese Seite und das Datum „Zuletzt aktualisiert" oben.' },
+      { h: 'Kontakt', p: 'Bei Datenschutzfragen: dualcam@madecappy.com' },
+    ],
+  },
+  {
+    code: 'fr', name: 'Français', dir: 'ltr',
+    title: 'Politique de confidentialité', updatedLabel: 'Dernière mise à jour',
+    intro: "DualCam (« l'App ») prend votre vie privée au sérieux. En une phrase : l'App ne collecte, ne téléverse ni ne stocke aucune donnée personnelle — tout est traité localement sur votre appareil.",
+    sections: [
+      { h: 'Ce que nous collectons', p: "Rien. L'App n'a pas de système de compte, ne transmet pas vos contenus sur le réseau et n'intègre aucun SDK d'analyse ou de publicité tiers. Nous ne pouvons donc ni voir ni conserver vos données." },
+      { h: 'Autorisations', p: "L'App demande les autorisations système suivantes uniquement pour fournir ses fonctionnalités ; toutes les données associées restent sur votre appareil :", bullets: [
+        "Caméra : pour capturer simultanément les caméras avant et arrière et composer une vidéo. Les images sont traitées localement en temps réel et jamais téléversées.",
+        "Microphone : pour capter le son pendant l'enregistrement. L'audio n'est écrit que dans votre fichier vidéo et jamais téléversé.",
+        "Photos (Ajout seulement) : pour enregistrer vos vidéos et photos dans la photothèque. L'App ne lit pas les autres contenus de votre photothèque." ] },
+      { h: "Traitement IA sur l'appareil", p: "La détection des visages et la segmentation des personnes utilisées par la retouche, les masques, le flou/remplacement d'arrière-plan et Moi-en-scène s'exécutent entièrement sur votre appareil via les frameworks Apple (Vision / Core Image). Les images ne quittent jamais votre appareil et ne sont téléversées sur aucun serveur." },
+      { h: 'Données de visage / biométriques', p: "L'App ne collecte, ne traite, ne stocke ni ne partage aucune donnée de visage ou biométrique. Elle enregistre uniquement la vidéo des caméras ; tous les enregistrements restent sur votre appareil et ne sont jamais téléversés sur nos serveurs ni partagés avec un tiers." },
+      { h: 'Vos contenus', p: "Les vidéos et photos que vous réalisez sont stockées sur votre appareil et dans votre photothèque, et vous appartiennent. L'App n'y accède pas, ne les copie ni ne les téléverse." },
+      { h: 'Vie privée des enfants', p: "L'App ne collecte aucune information auprès des enfants de moins de 13 ans (en réalité, auprès de personne)." },
+      { h: 'Tiers', p: "L'App elle-même n'intègre aucun SDK de suivi tiers. L'usage de vos médias par d'autres apps après leur enregistrement dépend de votre appareil et des réglages de confidentialité de ces apps." },
+      { h: 'Modifications', p: "En cas de modification de cette politique, nous mettrons à jour cette page et la date « Dernière mise à jour » en haut." },
+      { h: 'Contact', p: "Pour toute question relative à la confidentialité : dualcam@madecappy.com" },
+    ],
+  },
+  {
+    code: 'ar', name: 'العربية', dir: 'rtl',
+    title: 'سياسة الخصوصية', updatedLabel: 'آخر تحديث',
+    intro: 'يهتم تطبيق DualCam («التطبيق») بخصوصيتك. باختصار: لا يجمع التطبيق أي بيانات شخصية ولا يرفعها ولا يخزّنها — كل المعالجة تتم محليًا على جهازك.',
+    sections: [
+      { h: 'ما الذي نجمعه', p: 'لا شيء. لا يحتوي التطبيق على نظام حسابات، ولا يرسل محتواك عبر الشبكة، ولا يتضمن أي أدوات تحليلات أو إعلانات من جهات خارجية، لذا لا يمكننا رؤية بياناتك أو تخزينها.' },
+      { h: 'الأذونات', p: 'يطلب التطبيق أذونات النظام التالية لتوفير الميزات فقط؛ وتبقى جميع البيانات ذات الصلة على جهازك:', bullets: [
+        'الكاميرا: لالتقاط الكاميرتين الأمامية والخلفية في آنٍ واحد وتكوين الفيديو. تُعالج الصور محليًا في الوقت الفعلي ولا تُرفع أبدًا.',
+        'الميكروفون: لالتقاط الصوت أثناء التصوير. يُكتب الصوت في ملف الفيديو الخاص بك فقط ولا يُرفع أبدًا.',
+        'الصور (إضافة فقط): لحفظ مقاطعك وصورك في مكتبة الصور. لا يقرأ التطبيق المحتويات الأخرى في مكتبتك.' ] },
+      { h: 'المعالجة بالذكاء الاصطناعي على الجهاز', p: 'يعمل اكتشاف الوجه وفصل الأشخاص المستخدمان في التجميل والأقنعة وتمويه/استبدال الخلفية و«أنا داخل المشهد» بالكامل على جهازك عبر أطر عمل Apple (Vision / Core Image). لا تغادر الصور جهازك ولا تُرفع إلى أي خادم.' },
+      { h: 'بيانات الوجه / البيانات الحيوية', p: 'لا يجمع التطبيق أو يعالج أو يخزّن أو يشارك أي بيانات وجه أو معلومات حيوية. إنه يسجّل فيديو كاميرات الجهاز فقط؛ وتبقى جميع التسجيلات على جهازك ولا تُرفع أبدًا إلى خوادمنا ولا تُشارك مع أي طرف ثالث.' },
+      { h: 'محتواك', p: 'تُحفظ مقاطع الفيديو والصور التي تنشئها على جهازك وفي مكتبة صورك، وهي ملكك. لا يصل التطبيق إليها ولا ينسخها ولا يرفعها.' },
+      { h: 'خصوصية الأطفال', p: 'لا يجمع التطبيق أي معلومات من الأطفال دون سن 13 عامًا (في الواقع لا يجمع معلومات من أي أحد).' },
+      { h: 'الأطراف الخارجية', p: 'لا يتضمن التطبيق نفسه أي أدوات تتبّع من جهات خارجية. تخضع كيفية استخدام تطبيقات أخرى لوسائطك بعد حفظها في مكتبتك لإعدادات جهازك وإعدادات خصوصية تلك التطبيقات.' },
+      { h: 'التغييرات', p: 'في حال تغيّر هذه السياسة، سنحدّث هذه الصفحة وتاريخ «آخر تحديث» في الأعلى.' },
+      { h: 'تواصل معنا', p: 'لأي أسئلة تتعلق بالخصوصية: dualcam@madecappy.com' },
+    ],
+  },
+  {
+    code: 'pt-BR', name: 'Português (Brasil)', dir: 'ltr',
+    title: 'Política de Privacidade', updatedLabel: 'Última atualização',
+    intro: 'O DualCam ("o App") leva sua privacidade a sério. Em uma frase: o App não coleta, não envia nem armazena nenhum dado pessoal — tudo é processado localmente no seu dispositivo.',
+    sections: [
+      { h: 'O que coletamos', p: 'Nada. O App não tem sistema de contas, não transmite seu conteúdo pela rede e não inclui SDKs de análise ou publicidade de terceiros. Portanto, não conseguimos ver nem armazenar seus dados.' },
+      { h: 'Permissões', p: 'O App solicita as seguintes permissões do sistema apenas para oferecer recursos; todos os dados relacionados permanecem no seu dispositivo:', bullets: [
+        'Câmera: para capturar as câmeras frontal e traseira ao mesmo tempo e compor um vídeo. As imagens são processadas localmente em tempo real e nunca enviadas.',
+        'Microfone: para captar som durante a gravação. O áudio é gravado apenas no seu arquivo de vídeo e nunca enviado.',
+        'Fotos (somente adicionar): para salvar seus vídeos e fotos na fototeca do sistema. O App não lê outros conteúdos da sua fototeca.' ] },
+      { h: 'Processamento de IA no dispositivo', p: 'A detecção de rosto e a segmentação de pessoas usadas por beleza, máscaras, desfoque/troca de fundo e Eu-na-cena rodam inteiramente no seu dispositivo via frameworks da Apple (Vision / Core Image). As imagens nunca saem do seu dispositivo nem são enviadas a nenhum servidor.' },
+      { h: 'Dados faciais / biométricos', p: 'O App não coleta, processa, armazena nem compartilha dados faciais ou biométricos. Ele apenas grava vídeo das câmeras do dispositivo; todas as gravações permanecem no seu dispositivo e nunca são enviadas aos nossos servidores nem compartilhadas com terceiros.' },
+      { h: 'Seu conteúdo', p: 'Os vídeos e fotos que você cria são armazenados no seu dispositivo e na sua fototeca, e pertencem a você. O App não os acessa, copia nem envia.' },
+      { h: 'Privacidade infantil', p: 'O App não coleta informações de crianças menores de 13 anos (na verdade, não coleta informações de ninguém).' },
+      { h: 'Terceiros', p: 'O App em si não incorpora SDKs de rastreamento de terceiros. O uso da sua mídia por outros apps após o salvamento na fototeca é regido pelo seu dispositivo e pelas configurações de privacidade desses apps.' },
+      { h: 'Alterações', p: 'Se esta política mudar, atualizaremos esta página e a data de "Última atualização" no topo.' },
+      { h: 'Contato', p: 'Para questões de privacidade: dualcam@madecappy.com' },
+    ],
+  },
+  {
+    code: 'es', name: 'Español', dir: 'ltr',
+    title: 'Política de privacidad', updatedLabel: 'Última actualización',
+    intro: 'DualCam ("la App") se toma en serio tu privacidad. En una frase: la App no recopila, no sube ni almacena ningún dato personal; todo se procesa localmente en tu dispositivo.',
+    sections: [
+      { h: 'Qué recopilamos', p: 'Nada. La App no tiene sistema de cuentas, no transmite tu contenido por la red y no incluye SDK de análisis ni de publicidad de terceros. Por eso no podemos ver ni guardar tus datos.' },
+      { h: 'Permisos', p: 'La App solicita los siguientes permisos del sistema únicamente para ofrecer funciones; todos los datos relacionados permanecen en tu dispositivo:', bullets: [
+        'Cámara: para capturar las cámaras frontal y trasera a la vez y componer un vídeo. Las imágenes se procesan localmente en tiempo real y nunca se suben.',
+        'Micrófono: para captar sonido durante la grabación. El audio se escribe solo en tu archivo de vídeo y nunca se sube.',
+        'Fotos (solo añadir): para guardar tus vídeos y fotos en la fototeca del sistema. La App no lee otros contenidos de tu fototeca.' ] },
+      { h: 'Procesamiento de IA en el dispositivo', p: 'La detección de rostros y la segmentación de personas que usan belleza, máscaras, desenfoque/cambio de fondo y Yo-en-escena se ejecutan por completo en tu dispositivo mediante los frameworks de Apple (Vision / Core Image). Las imágenes nunca salen de tu dispositivo ni se suben a ningún servidor.' },
+      { h: 'Datos faciales / biométricos', p: 'La App no recopila, procesa, almacena ni comparte datos faciales ni información biométrica. Solo graba vídeo de las cámaras del dispositivo; todas las grabaciones permanecen en tu dispositivo y nunca se suben a nuestros servidores ni se comparten con terceros.' },
+      { h: 'Tu contenido', p: 'Los vídeos y fotos que creas se almacenan en tu dispositivo y en tu fototeca, y te pertenecen. La App no accede a ellos, no los copia ni los sube.' },
+      { h: 'Privacidad de los niños', p: 'La App no recopila información de menores de 13 años (de hecho, no recopila información de nadie).' },
+      { h: 'Terceros', p: 'La App en sí no incorpora SDK de seguimiento de terceros. El uso de tus archivos por otras apps tras guardarlos en tu fototeca se rige por tu dispositivo y la configuración de privacidad de esas apps.' },
+      { h: 'Cambios', p: 'Si esta política cambia, actualizaremos esta página y la fecha de "Última actualización" en la parte superior.' },
+      { h: 'Contacto', p: 'Para cualquier consulta de privacidad: dualcam@madecappy.com' },
+    ],
+  },
+  {
+    code: 'th', name: 'ไทย', dir: 'ltr',
+    title: 'นโยบายความเป็นส่วนตัว', updatedLabel: 'อัปเดตล่าสุด',
+    intro: 'DualCam («แอป») ให้ความสำคัญกับความเป็นส่วนตัวของคุณ สรุปสั้น ๆ: แอปไม่เก็บ ไม่อัปโหลด และไม่จัดเก็บข้อมูลส่วนบุคคลใด ๆ ทุกการประมวลผลเกิดขึ้นในเครื่องของคุณ',
+    sections: [
+      { h: 'เราเก็บข้อมูลอะไรบ้าง', p: 'ไม่เก็บเลย แอปไม่มีระบบบัญชี ไม่ส่งเนื้อหาของคุณผ่านเครือข่าย และไม่มี SDK วิเคราะห์หรือโฆษณาของบุคคลที่สาม เราจึงไม่สามารถเห็นหรือเก็บข้อมูลของคุณได้' },
+      { h: 'การใช้สิทธิ์', p: 'แอปขอสิทธิ์ระบบต่อไปนี้เพื่อให้ฟีเจอร์ทำงานเท่านั้น ข้อมูลที่เกี่ยวข้องทั้งหมดอยู่ในเครื่องของคุณ:', bullets: [
+        'กล้อง: เพื่อบันทึกกล้องหน้าและหลังพร้อมกันและประกอบเป็นวิดีโอ ภาพถูกประมวลผลในเครื่องแบบเรียลไทม์และไม่ถูกอัปโหลด',
+        'ไมโครโฟน: เพื่อบันทึกเสียงขณะถ่าย เสียงถูกเขียนลงในไฟล์วิดีโอของคุณเท่านั้นและไม่ถูกอัปโหลด',
+        'รูปภาพ (เพิ่มเท่านั้น): เพื่อบันทึกวิดีโอและรูปของคุณลงในคลังรูปภาพของระบบ แอปไม่อ่านเนื้อหาอื่นในคลังของคุณ' ] },
+      { h: 'การประมวลผล AI ในเครื่อง', p: 'การตรวจจับใบหน้าและการแยกบุคคลที่ใช้ในฟีเจอร์ปรับหน้า หน้ากาก เบลอ/เปลี่ยนพื้นหลัง และคนในฉาก ทำงานในเครื่องของคุณทั้งหมดผ่านเฟรมเวิร์กของ Apple (Vision / Core Image) ภาพที่เกี่ยวข้องจะไม่ออกจากเครื่องและไม่ถูกอัปโหลดไปยังเซิร์ฟเวอร์ใด ๆ' },
+      { h: 'ข้อมูลใบหน้า / ไบโอเมตริก', p: 'แอปไม่เก็บ ไม่ประมวลผล ไม่จัดเก็บ และไม่แชร์ข้อมูลใบหน้าหรือข้อมูลไบโอเมตริกใด ๆ แอปเพียงบันทึกวิดีโอจากกล้องของเครื่อง การบันทึกทั้งหมดอยู่ในเครื่องของคุณและไม่ถูกอัปโหลดไปยังเซิร์ฟเวอร์ของเราหรือแชร์กับบุคคลที่สาม' },
+      { h: 'เนื้อหาของคุณ', p: 'วิดีโอและรูปที่คุณสร้างถูกจัดเก็บในเครื่องและในคลังรูปภาพของคุณ และเป็นของคุณ แอปจะไม่เข้าถึง คัดลอก หรืออัปโหลดเนื้อหาเหล่านี้' },
+      { h: 'ความเป็นส่วนตัวของเด็ก', p: 'แอปไม่เก็บข้อมูลจากเด็กอายุต่ำกว่า 13 ปี (อันที่จริงไม่เก็บข้อมูลจากใครเลย)' },
+      { h: 'บุคคลที่สาม', p: 'ตัวแอปเองไม่ฝัง SDK ติดตามของบุคคลที่สาม การที่แอปอื่นใช้สื่อของคุณหลังบันทึกลงคลังเป็นไปตามการตั้งค่าความเป็นส่วนตัวของเครื่องและแอปเหล่านั้น' },
+      { h: 'การเปลี่ยนแปลง', p: 'หากนโยบายนี้มีการเปลี่ยนแปลง เราจะอัปเดตหน้านี้และวันที่ «อัปเดตล่าสุด» ด้านบน' },
+      { h: 'ติดต่อเรา', p: 'หากมีคำถามเกี่ยวกับความเป็นส่วนตัว: dualcam@madecappy.com' },
+    ],
+  },
+  {
+    code: 'id', name: 'Bahasa Indonesia', dir: 'ltr',
+    title: 'Kebijakan Privasi', updatedLabel: 'Terakhir diperbarui',
+    intro: 'DualCam ("Aplikasi") menghargai privasi Anda. Singkatnya: Aplikasi tidak mengumpulkan, mengunggah, atau menyimpan data pribadi apa pun — semua diproses secara lokal di perangkat Anda.',
+    sections: [
+      { h: 'Apa yang kami kumpulkan', p: 'Tidak ada. Aplikasi tidak memiliki sistem akun, tidak mengirimkan konten Anda melalui jaringan, dan tidak menyertakan SDK analitik atau iklan pihak ketiga. Karena itu kami tidak dapat melihat maupun menyimpan data Anda.' },
+      { h: 'Izin', p: 'Aplikasi meminta izin sistem berikut hanya untuk menyediakan fitur; semua data terkait tetap berada di perangkat Anda:', bullets: [
+        'Kamera: untuk merekam kamera depan dan belakang sekaligus dan menyusun video. Gambar diproses secara lokal secara real-time dan tidak pernah diunggah.',
+        'Mikrofon: untuk merekam suara saat merekam. Audio hanya ditulis ke file video Anda dan tidak pernah diunggah.',
+        'Foto (hanya tambah): untuk menyimpan video dan foto Anda ke pustaka foto sistem. Aplikasi tidak membaca konten lain di pustaka Anda.' ] },
+      { h: 'Pemrosesan AI di perangkat', p: 'Deteksi wajah dan segmentasi orang yang digunakan oleh beauty, masker, buram/ganti latar, dan Aku-di-Scene berjalan sepenuhnya di perangkat Anda melalui framework Apple (Vision / Core Image). Gambar terkait tidak pernah meninggalkan perangkat Anda dan tidak diunggah ke server mana pun.' },
+      { h: 'Data wajah / biometrik', p: 'Aplikasi tidak mengumpulkan, memproses, menyimpan, atau membagikan data wajah atau informasi biometrik apa pun. Aplikasi hanya merekam video dari kamera perangkat; semua rekaman tetap di perangkat Anda dan tidak pernah diunggah ke server kami atau dibagikan ke pihak ketiga.' },
+      { h: 'Konten Anda', p: 'Video dan foto yang Anda buat disimpan di perangkat dan pustaka foto Anda, dan menjadi milik Anda. Aplikasi tidak mengakses, menyalin, atau mengunggahnya.' },
+      { h: 'Privasi anak', p: 'Aplikasi tidak mengumpulkan informasi dari anak di bawah 13 tahun (sebenarnya tidak dari siapa pun).' },
+      { h: 'Pihak ketiga', p: 'Aplikasi sendiri tidak menyematkan SDK pelacakan pihak ketiga. Penggunaan media Anda oleh aplikasi lain setelah disimpan ke pustaka diatur oleh perangkat dan pengaturan privasi aplikasi tersebut.' },
+      { h: 'Perubahan', p: 'Jika kebijakan ini berubah, kami akan memperbarui halaman ini dan tanggal "Terakhir diperbarui" di atas.' },
+      { h: 'Hubungi kami', p: 'Untuk pertanyaan privasi: dualcam@madecappy.com' },
+    ],
+  },
+  {
+    code: 'ru', name: 'Русский', dir: 'ltr',
+    title: 'Политика конфиденциальности', updatedLabel: 'Последнее обновление',
+    intro: 'DualCam («Приложение») серьёзно относится к вашей конфиденциальности. Коротко: Приложение не собирает, не загружает и не хранит никакие персональные данные — вся обработка происходит локально на вашем устройстве.',
+    sections: [
+      { h: 'Какие данные мы собираем', p: 'Никакие. В Приложении нет системы аккаунтов, оно не передаёт ваш контент по сети и не содержит сторонних SDK аналитики или рекламы. Поэтому мы не можем ни видеть, ни хранить ваши данные.' },
+      { h: 'Разрешения', p: 'Приложение запрашивает следующие системные разрешения только для работы функций; все связанные данные остаются на вашем устройстве:', bullets: [
+        'Камера: чтобы одновременно снимать фронтальную и основную камеры и собирать видео. Кадры обрабатываются локально в реальном времени и никогда не загружаются.',
+        'Микрофон: чтобы записывать звук во время съёмки. Звук записывается только в ваш видеофайл и никогда не загружается.',
+        'Фото (только добавление): чтобы сохранять ваши видео и фото в медиатеку системы. Приложение не читает другое содержимое вашей медиатеки.' ] },
+      { h: 'Обработка ИИ на устройстве', p: 'Обнаружение лиц и сегментация людей, используемые в ретуши, масках, размытии/замене фона и «Я в кадре», полностью выполняются на вашем устройстве через системные фреймворки Apple (Vision / Core Image). Изображения никогда не покидают устройство и не загружаются на серверы.' },
+      { h: 'Данные лица / биометрия', p: 'Приложение не собирает, не обрабатывает, не хранит и не передаёт данные лица или биометрические данные. Оно лишь записывает видео с камер устройства; все записи остаются на вашем устройстве и никогда не загружаются на наши серверы и не передаются третьим лицам.' },
+      { h: 'Ваш контент', p: 'Снятые вами видео и фото хранятся на вашем устройстве и в медиатеке и принадлежат вам. Приложение не получает к ним доступ, не копирует и не загружает их.' },
+      { h: 'Конфиденциальность детей', p: 'Приложение не собирает информацию о детях младше 13 лет (фактически — ни о ком).' },
+      { h: 'Третьи стороны', p: 'Само Приложение не содержит сторонних SDK отслеживания. Использование ваших файлов другими приложениями после сохранения в медиатеку регулируется вашим устройством и настройками конфиденциальности этих приложений.' },
+      { h: 'Изменения', p: 'При изменении этой политики мы обновим эту страницу и дату «Последнее обновление» вверху.' },
+      { h: 'Контакты', p: 'По вопросам конфиденциальности: dualcam@madecappy.com' },
+    ],
+  },
+];
 ---
-<ProductLayout title="隐私协议 · DualCam" description="DualCam 隐私政策：不收集、不上传任何个人数据，全部处理在你的设备本地完成。">
+<ProductLayout title="Privacy Policy · DualCam" description="DualCam privacy: no personal data is collected or uploaded — everything is processed locally on your device.">
   <style>
     .doc{padding:64px 0 0}
     .doc h1{font-size:clamp(28px,5vw,40px);font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
-    .doc .upd{color:var(--muted);font-size:14px;margin-bottom:36px}
+    .doc .upd{color:var(--muted);font-size:14px;margin-bottom:24px}
     .doc h2{font-size:20px;font-weight:700;margin:32px 0 10px}
     .doc p,.doc li{color:#d6d6da;font-size:16px;line-height:1.8}
     .doc ul{margin:8px 0 8px 22px}
     .doc strong{color:#fff}
     .doc a{color:var(--blue)}
+    .langbar{display:flex;align-items:center;gap:10px;margin-bottom:28px;flex-wrap:wrap}
+    .langbar select{background:#16161a;color:#fff;border:1px solid #2c2c2e;border-radius:10px;padding:8px 12px;font-size:14px}
+    .doc-lang[hidden]{display:none}
+    .doc-lang[dir="rtl"]{text-align:right}
+    .doc-lang[dir="rtl"] ul{margin:8px 22px 8px 0}
   </style>
   <div class="rwrap doc">
-    <h1>隐私协议</h1>
-    <div class="upd">最后更新：{updated}</div>
+    <div class="langbar">
+      <span style="color:var(--muted);font-size:14px">🌐</span>
+      <select id="langSelect" aria-label="Language">
+        {docs.map((d) => <option value={d.code}>{d.name}</option>)}
+      </select>
+    </div>
 
-    <p>DualCam（以下简称"本 App"）非常重视你的隐私。一句话总结：<strong>本 App 不收集、不上传、不存储任何个人数据，所有处理都在你的设备本地完成。</strong></p>
-
-    <h2>我们收集哪些信息</h2>
-    <p><strong>不收集任何信息。</strong>本 App 没有账号系统、不联网传输你的内容、不接入任何第三方分析或广告 SDK，因此我们既看不到、也不会保存你的任何数据。</p>
-
-    <h2>权限的用途</h2>
-    <p>本 App 会请求以下系统权限，仅用于实现功能，所有相关数据都只留在你的设备上：</p>
-    <ul>
-      <li><strong>相机</strong>：用于同时采集前置与后置摄像头画面以合成视频。画面仅在本地实时处理，不会上传。</li>
-      <li><strong>麦克风</strong>：用于在录制视频时采集声音。音频仅写入你录制的视频文件，不会上传。</li>
-      <li><strong>相册（仅添加）</strong>：用于将你录制好的视频保存到系统相册。本 App 不读取你相册里的其他内容。</li>
-    </ul>
-
-    <h2>设备端的 AI 处理</h2>
-    <p>美颜、人脸面具、背景虚化/换背景、人入景等功能用到的人脸检测与人物分割，全部由 Apple 系统框架（Vision / Core Image）在<strong>你的设备本地</strong>实时运行。相关图像<strong>不会离开你的设备</strong>，也不会被上传到任何服务器。</p>
-
-    <h2>人脸数据 / 生物特征数据</h2>
-    <p>本应用不收集、不处理、不存储、不分享任何人脸数据或生物特征信息。应用仅录制设备摄像头的视频画面，所有录制内容仅保存在用户设备本地，绝不上传至我们的服务器或分享给任何第三方。</p>
-
-    <h2>你录制的内容</h2>
-    <p>你拍摄、合成的视频保存在你的设备与系统相册中，归你所有。本 App 不会访问、复制或上传这些内容。</p>
-
-    <h2>儿童隐私</h2>
-    <p>本 App 不面向 13 岁以下儿童收集任何信息（实际上不收集任何人的信息）。</p>
-
-    <h2>第三方</h2>
-    <p>本 App 本体不嵌入第三方追踪 SDK。视频保存到相册后如何被其他 App 使用，受你设备与对应 App 的隐私设置约束。</p>
-
-    <h2>政策变更</h2>
-    <p>若本政策有更新，我们会修改本页内容并更新顶部的"最后更新"日期。</p>
-
-    <h2>联系我们</h2>
-    <p>有任何隐私相关问题，请联系：<a href="mailto:dualcam@madecappy.com">dualcam@madecappy.com</a></p>
+    {docs.map((d) => (
+      <section class="doc-lang" data-lang={d.code} dir={d.dir} hidden>
+        <h1>{d.title}</h1>
+        <div class="upd">{d.updatedLabel}: {updated}</div>
+        <p>{d.intro}</p>
+        {d.sections.map((s) => (
+          <>
+            <h2>{s.h}</h2>
+            <p>{s.p}</p>
+            {s.bullets && (
+              <ul>{s.bullets.map((b) => <li>{b}</li>)}</ul>
+            )}
+          </>
+        ))}
+      </section>
+    ))}
   </div>
+
+  <script is:inline>
+    (function () {
+      var sel = document.getElementById('langSelect');
+      var secs = document.querySelectorAll('.doc-lang');
+      var codes = Array.prototype.map.call(secs, function (s) { return s.getAttribute('data-lang'); });
+      function pick() {
+        var saved = localStorage.getItem('dualcam_lang');
+        if (saved && codes.indexOf(saved) >= 0) return saved;
+        var navs = navigator.languages || [navigator.language || 'en'];
+        for (var i = 0; i < navs.length; i++) {
+          var l = navs[i];
+          if (codes.indexOf(l) >= 0) return l;
+          var base = l.split('-')[0];
+          if (base === 'zh') return (l.indexOf('TW') >= 0 || l.indexOf('HK') >= 0 || l.indexOf('Hant') >= 0) ? 'zh-Hant' : 'zh-Hans';
+          if (base === 'pt') return 'pt-BR';
+          for (var j = 0; j < codes.length; j++) { if (codes[j].split('-')[0] === base) return codes[j]; }
+        }
+        return 'en';
+      }
+      function show(code) {
+        Array.prototype.forEach.call(secs, function (s) {
+          s.hidden = (s.getAttribute('data-lang') !== code);
+        });
+        if (sel) sel.value = code;
+        document.documentElement.lang = code;
+      }
+      var initial = pick();
+      show(initial);
+      if (sel) sel.addEventListener('change', function () {
+        localStorage.setItem('dualcam_lang', sel.value);
+        show(sel.value);
+      });
+    })();
+  </script>
 </ProductLayout>
