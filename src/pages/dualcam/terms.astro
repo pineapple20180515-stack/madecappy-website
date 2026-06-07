@@ -1,46 +1,262 @@
 ---
 import ProductLayout from '../../layouts/ProductLayout.astro';
-const updated = '2026年5月30日';
+
+const updated = '2026-05-30';
+
+// 多语言用户条款内容。
+const docs = [
+  {
+    code: 'en', name: 'English', dir: 'ltr',
+    title: 'Terms of Use', updatedLabel: 'Last updated',
+    intro: 'Welcome to DualCam ("the App"). By downloading, installing, or using the App, you agree to these Terms. If you do not agree, please do not use the App.',
+    sections: [
+      { h: '1. License', p: 'We grant you a personal, non-exclusive, non-transferable license to install and use the App on Apple devices you own or control. You may not decompile, reverse-engineer, or redistribute the App.' },
+      { h: '2. Device & system requirements', p: 'The App requires a device that supports simultaneous multi-camera recording (iPhone 11 or later) running iOS 14 or later; background blur/replacement and Me-in-Scene require iOS 15 or later. Device heating and battery drain are inherent physical characteristics of dual-camera recording.' },
+      { h: '3. Your content', p: 'The videos and photos you capture with the App belong entirely to you. The App does not access, collect, or upload them (see our Privacy Policy). You are responsible for your own content and for complying with applicable laws and others’ likeness and privacy rights.' },
+      { h: '4. Acceptable use', p: 'You agree not to use the App for any unlawful purpose, including but not limited to covert filming without consent, harassment, or infringement of others’ privacy or intellectual property.' },
+      { h: '5. Intellectual property', p: 'The App itself and its interface, trademarks, and code are the intellectual property of the developer and are protected by law.' },
+      { h: '6. Disclaimer', p: 'The App is provided "as is" without warranties of any kind. To the maximum extent permitted by law, the developer is not liable for any loss arising from the use of or inability to use the App.' },
+      { h: '7. Changes to these Terms', p: 'We may update these Terms from time to time; updates will be reflected on this page with a new date at the top. Continued use of the App constitutes acceptance of the updated Terms.' },
+      { h: '8. Contact', p: 'For any questions about these Terms, contact: dualcam@madecappy.com' },
+    ],
+  },
+  {
+    code: 'zh-Hans', name: '简体中文', dir: 'ltr',
+    title: '用户条款', updatedLabel: '最后更新',
+    intro: '欢迎使用 DualCam（以下简称"本 App"）。下载、安装或使用本 App，即表示你同意本条款。如不同意，请勿使用。',
+    sections: [
+      { h: '1. 使用许可', p: '我们授予你一项个人、非独占、不可转让的许可，用于在你拥有或控制的 Apple 设备上安装并使用本 App。你不得对本 App 进行反编译、逆向工程或再分发。' },
+      { h: '2. 设备与系统要求', p: '本 App 需要支持多摄像头同时录制的设备（iPhone 11 及以后机型），系统 iOS 14 或更高版本；背景虚化/换背景、人入景等功能需要 iOS 15 或更高版本。设备发热与耗电为多摄同录的系统物理特性。' },
+      { h: '3. 你的内容', p: '你使用本 App 拍摄、合成的视频与照片完全归你所有。本 App 不会访问、收集或上传这些内容（详见隐私协议）。你需对自己拍摄与分享的内容负责，并确保遵守所在地法律及他人的肖像与隐私权利。' },
+      { h: '4. 可接受的使用', p: '你同意不将本 App 用于任何违法用途，包括但不限于未经他人同意的偷拍、骚扰、侵犯他人隐私或知识产权的行为。' },
+      { h: '5. 知识产权', p: '本 App 本身及其界面、商标、代码等知识产权归开发者所有，受相关法律保护。' },
+      { h: '6. 免责声明', p: '本 App 按"现状"提供，不作任何明示或默示的担保。在适用法律允许的最大范围内，开发者不对因使用或无法使用本 App 而导致的任何损失承担责任。' },
+      { h: '7. 条款变更', p: '我们可能不时更新本条款，更新后将修改本页并更新顶部日期。继续使用本 App 即视为接受更新后的条款。' },
+      { h: '8. 联系我们', p: '关于本条款的任何问题，请联系：dualcam@madecappy.com' },
+    ],
+  },
+  {
+    code: 'zh-Hant', name: '繁體中文', dir: 'ltr',
+    title: '使用條款', updatedLabel: '最後更新',
+    intro: '歡迎使用 DualCam（以下簡稱「本 App」）。下載、安裝或使用本 App，即表示你同意本條款。如不同意，請勿使用。',
+    sections: [
+      { h: '1. 使用授權', p: '我們授予你一項個人、非獨占、不可轉讓的授權，用於在你擁有或控制的 Apple 裝置上安裝並使用本 App。你不得對本 App 進行反編譯、逆向工程或再散布。' },
+      { h: '2. 裝置與系統需求', p: '本 App 需要支援多鏡頭同時錄製的裝置（iPhone 11 及以後機型），系統 iOS 14 或更新版本；背景虛化/換背景、人物入景等功能需要 iOS 15 或更新版本。裝置發熱與耗電為多鏡頭同錄的系統物理特性。' },
+      { h: '3. 你的內容', p: '你使用本 App 拍攝、合成的影片與照片完全歸你所有。本 App 不會存取、收集或上傳這些內容（詳見隱私權政策）。你需對自己拍攝與分享的內容負責，並確保遵守所在地法律及他人的肖像與隱私權利。' },
+      { h: '4. 可接受的使用', p: '你同意不將本 App 用於任何違法用途，包括但不限於未經他人同意的偷拍、騷擾、侵犯他人隱私或智慧財產權的行為。' },
+      { h: '5. 智慧財產權', p: '本 App 本身及其介面、商標、程式碼等智慧財產權歸開發者所有，受相關法律保護。' },
+      { h: '6. 免責聲明', p: '本 App 按「現狀」提供，不作任何明示或默示的擔保。在適用法律允許的最大範圍內，開發者不對因使用或無法使用本 App 而導致的任何損失承擔責任。' },
+      { h: '7. 條款變更', p: '我們可能不時更新本條款，更新後將修改本頁並更新頂部日期。繼續使用本 App 即視為接受更新後的條款。' },
+      { h: '8. 聯絡我們', p: '關於本條款的任何問題，請聯絡：dualcam@madecappy.com' },
+    ],
+  },
+  {
+    code: 'ja', name: '日本語', dir: 'ltr',
+    title: '利用規約', updatedLabel: '最終更新',
+    intro: 'DualCam（以下「本アプリ」）をご利用いただきありがとうございます。本アプリをダウンロード・インストール・使用した時点で、本規約に同意したものとみなされます。同意いただけない場合はご利用をお控えください。',
+    sections: [
+      { h: '1. 使用許諾', p: 'あなたが所有または管理する Apple デバイスに本アプリをインストールして使用するための、個人的・非独占的・譲渡不可のライセンスを付与します。本アプリの逆コンパイル、リバースエンジニアリング、再配布は禁止します。' },
+      { h: '2. デバイス・システム要件', p: '本アプリはマルチカメラ同時録画に対応したデバイス（iPhone 11 以降）と iOS 14 以降が必要です。背景ぼかし/差し替え、人物イン などは iOS 15 以降が必要です。デバイスの発熱やバッテリー消費はマルチカメラ同時録画の物理的特性です。' },
+      { h: '3. あなたのコンテンツ', p: '本アプリで撮影・合成した動画や写真はすべてあなたに帰属します。本アプリはそれらにアクセス・収集・アップロードしません（プライバシーポリシー参照）。撮影・共有する内容についてはあなたが責任を負い、各地の法律および他者の肖像権・プライバシー権を遵守してください。' },
+      { h: '4. 許容される利用', p: '本アプリを違法な目的（同意のない盗撮、嫌がらせ、他者のプライバシーや知的財産の侵害などを含むがこれらに限らない）に使用しないことに同意するものとします。' },
+      { h: '5. 知的財産権', p: '本アプリ自体およびそのインターフェース、商標、コード等の知的財産権は開発者に帰属し、法律により保護されています。' },
+      { h: '6. 免責事項', p: '本アプリは「現状有姿」で提供され、明示・黙示を問わずいかなる保証も行いません。法律で認められる最大限の範囲で、開発者は本アプリの使用または使用不能から生じる損害について責任を負いません。' },
+      { h: '7. 規約の変更', p: '本規約は随時更新されることがあります。更新時は本ページを修正し上部の日付を更新します。継続して利用した場合、更新後の規約に同意したものとみなされます。' },
+      { h: '8. お問い合わせ', p: '本規約に関するお問い合わせ：dualcam@madecappy.com' },
+    ],
+  },
+  {
+    code: 'de', name: 'Deutsch', dir: 'ltr',
+    title: 'Nutzungsbedingungen', updatedLabel: 'Zuletzt aktualisiert',
+    intro: 'Willkommen bei DualCam („die App"). Mit dem Herunterladen, Installieren oder Verwenden der App stimmst du diesen Bedingungen zu. Wenn du nicht zustimmst, nutze die App bitte nicht.',
+    sections: [
+      { h: '1. Lizenz', p: 'Wir gewähren dir eine persönliche, nicht-exklusive, nicht übertragbare Lizenz zur Installation und Nutzung der App auf Apple-Geräten, die du besitzt oder kontrollierst. Du darfst die App nicht dekompilieren, zurückentwickeln oder weiterverbreiten.' },
+      { h: '2. Geräte- & Systemanforderungen', p: 'Die App erfordert ein Gerät, das gleichzeitige Multikamera-Aufnahme unterstützt (iPhone 11 oder neuer) mit iOS 14 oder neuer; Hintergrundunschärfe/-ersatz und Me-in-Scene erfordern iOS 15 oder neuer. Erwärmung und Akkuverbrauch sind physikalische Eigenschaften der Multikamera-Aufnahme.' },
+      { h: '3. Deine Inhalte', p: 'Die mit der App aufgenommenen Videos und Fotos gehören vollständig dir. Die App greift nicht darauf zu, erfasst oder lädt sie nicht hoch (siehe Datenschutzrichtlinie). Du bist für deine Inhalte verantwortlich und musst geltende Gesetze sowie die Persönlichkeits- und Datenschutzrechte Dritter beachten.' },
+      { h: '4. Zulässige Nutzung', p: 'Du stimmst zu, die App nicht für rechtswidrige Zwecke zu nutzen, einschließlich, aber nicht beschränkt auf heimliches Filmen ohne Einwilligung, Belästigung oder Verletzung der Privatsphäre oder geistigen Eigentums anderer.' },
+      { h: '5. Geistiges Eigentum', p: 'Die App selbst sowie ihre Oberfläche, Marken und ihr Code sind geistiges Eigentum des Entwicklers und gesetzlich geschützt.' },
+      { h: '6. Haftungsausschluss', p: 'Die App wird „wie besehen" ohne jegliche Gewährleistung bereitgestellt. Soweit gesetzlich zulässig, haftet der Entwickler nicht für Schäden, die aus der Nutzung oder Nichtnutzbarkeit der App entstehen.' },
+      { h: '7. Änderungen', p: 'Wir können diese Bedingungen von Zeit zu Zeit aktualisieren; Änderungen werden auf dieser Seite mit neuem Datum oben angezeigt. Die fortgesetzte Nutzung gilt als Annahme der aktualisierten Bedingungen.' },
+      { h: '8. Kontakt', p: 'Bei Fragen zu diesen Bedingungen: dualcam@madecappy.com' },
+    ],
+  },
+  {
+    code: 'fr', name: 'Français', dir: 'ltr',
+    title: "Conditions d'utilisation", updatedLabel: 'Dernière mise à jour',
+    intro: "Bienvenue sur DualCam (« l'App »). En téléchargeant, installant ou utilisant l'App, vous acceptez ces Conditions. Si vous n'êtes pas d'accord, veuillez ne pas utiliser l'App.",
+    sections: [
+      { h: '1. Licence', p: "Nous vous accordons une licence personnelle, non exclusive et non transférable pour installer et utiliser l'App sur les appareils Apple que vous possédez ou contrôlez. Vous ne pouvez pas décompiler, faire de l'ingénierie inverse ni redistribuer l'App." },
+      { h: '2. Configuration requise', p: "L'App nécessite un appareil prenant en charge l'enregistrement multi-caméra simultané (iPhone 11 ou ultérieur) sous iOS 14 ou ultérieur ; le flou/remplacement d'arrière-plan et Moi-en-scène nécessitent iOS 15 ou ultérieur. L'échauffement et la consommation de batterie sont des caractéristiques physiques de l'enregistrement multi-caméra." },
+      { h: '3. Vos contenus', p: "Les vidéos et photos réalisées avec l'App vous appartiennent entièrement. L'App n'y accède pas, ne les collecte ni ne les téléverse (voir la Politique de confidentialité). Vous êtes responsable de vos contenus et du respect des lois applicables ainsi que des droits à l'image et à la vie privée d'autrui." },
+      { h: '4. Usage acceptable', p: "Vous acceptez de ne pas utiliser l'App à des fins illégales, y compris, sans s'y limiter, la captation à l'insu d'autrui sans consentement, le harcèlement ou l'atteinte à la vie privée ou à la propriété intellectuelle d'autrui." },
+      { h: '5. Propriété intellectuelle', p: "L'App elle-même ainsi que son interface, ses marques et son code sont la propriété intellectuelle du développeur et sont protégés par la loi." },
+      { h: '6. Avertissement', p: "L'App est fournie « telle quelle », sans garantie d'aucune sorte. Dans la mesure permise par la loi, le développeur n'est pas responsable des pertes résultant de l'utilisation ou de l'impossibilité d'utiliser l'App." },
+      { h: '7. Modifications', p: "Nous pouvons mettre à jour ces Conditions de temps à autre ; les mises à jour figureront sur cette page avec une nouvelle date en haut. La poursuite de l'utilisation vaut acceptation des Conditions mises à jour." },
+      { h: '8. Contact', p: "Pour toute question concernant ces Conditions : dualcam@madecappy.com" },
+    ],
+  },
+  {
+    code: 'ar', name: 'العربية', dir: 'rtl',
+    title: 'شروط الاستخدام', updatedLabel: 'آخر تحديث',
+    intro: 'مرحبًا بك في DualCam («التطبيق»). بتنزيل التطبيق أو تثبيته أو استخدامه، فإنك توافق على هذه الشروط. إذا كنت لا توافق، فيرجى عدم استخدام التطبيق.',
+    sections: [
+      { h: '1. الترخيص', p: 'نمنحك ترخيصًا شخصيًا غير حصري وغير قابل للتحويل لتثبيت التطبيق واستخدامه على أجهزة Apple التي تملكها أو تتحكم بها. لا يجوز لك فك ترجمة التطبيق أو إجراء هندسة عكسية له أو إعادة توزيعه.' },
+      { h: '2. متطلبات الجهاز والنظام', p: 'يتطلب التطبيق جهازًا يدعم التسجيل المتزامن بعدة كاميرات (iPhone 11 أو أحدث) بنظام iOS 14 أو أحدث؛ وتتطلب ميزات تمويه/استبدال الخلفية و«أنا داخل المشهد» نظام iOS 15 أو أحدث. تُعد سخونة الجهاز واستهلاك البطارية خصائص فيزيائية للتسجيل بعدة كاميرات.' },
+      { h: '3. محتواك', p: 'مقاطع الفيديو والصور التي تنشئها بالتطبيق ملك لك بالكامل. لا يصل التطبيق إليها ولا يجمعها ولا يرفعها (راجع سياسة الخصوصية). أنت مسؤول عن محتواك وعن الامتثال للقوانين المعمول بها وحقوق الصورة والخصوصية للآخرين.' },
+      { h: '4. الاستخدام المقبول', p: 'توافق على عدم استخدام التطبيق لأي غرض غير قانوني، بما في ذلك على سبيل المثال لا الحصر التصوير الخفي دون موافقة، أو المضايقة، أو انتهاك خصوصية الآخرين أو ملكيتهم الفكرية.' },
+      { h: '5. الملكية الفكرية', p: 'التطبيق نفسه وواجهته وعلاماته التجارية وشفرته هي ملكية فكرية للمطوّر ومحمية بموجب القانون.' },
+      { h: '6. إخلاء المسؤولية', p: 'يُقدَّم التطبيق «كما هو» دون أي ضمانات من أي نوع. وإلى أقصى حد يسمح به القانون، لا يتحمل المطوّر المسؤولية عن أي خسارة ناتجة عن استخدام التطبيق أو تعذّر استخدامه.' },
+      { h: '7. تغيير الشروط', p: 'قد نحدّث هذه الشروط من حين لآخر؛ وستظهر التحديثات في هذه الصفحة مع تاريخ جديد في الأعلى. ويُعدّ استمرارك في الاستخدام قبولًا للشروط المحدّثة.' },
+      { h: '8. تواصل معنا', p: 'لأي أسئلة بخصوص هذه الشروط: dualcam@madecappy.com' },
+    ],
+  },
+  {
+    code: 'pt-BR', name: 'Português (Brasil)', dir: 'ltr',
+    title: 'Termos de Uso', updatedLabel: 'Última atualização',
+    intro: 'Bem-vindo ao DualCam ("o App"). Ao baixar, instalar ou usar o App, você concorda com estes Termos. Se não concordar, não use o App.',
+    sections: [
+      { h: '1. Licença', p: 'Concedemos a você uma licença pessoal, não exclusiva e intransferível para instalar e usar o App em dispositivos Apple que você possui ou controla. Você não pode descompilar, fazer engenharia reversa ou redistribuir o App.' },
+      { h: '2. Requisitos de dispositivo e sistema', p: 'O App requer um dispositivo compatível com gravação simultânea de várias câmeras (iPhone 11 ou posterior) com iOS 14 ou posterior; desfoque/troca de fundo e Eu-na-cena exigem iOS 15 ou posterior. Aquecimento e consumo de bateria são características físicas da gravação com várias câmeras.' },
+      { h: '3. Seu conteúdo', p: 'Os vídeos e fotos que você cria com o App pertencem inteiramente a você. O App não os acessa, coleta nem envia (veja a Política de Privacidade). Você é responsável pelo seu conteúdo e por cumprir as leis aplicáveis e os direitos de imagem e privacidade de terceiros.' },
+      { h: '4. Uso aceitável', p: 'Você concorda em não usar o App para fins ilegais, incluindo, sem limitação, filmagem oculta sem consentimento, assédio ou violação da privacidade ou propriedade intelectual de terceiros.' },
+      { h: '5. Propriedade intelectual', p: 'O App em si e sua interface, marcas e código são propriedade intelectual do desenvolvedor e protegidos por lei.' },
+      { h: '6. Isenção de responsabilidade', p: 'O App é fornecido "no estado em que se encontra", sem garantias de qualquer tipo. Na máxima extensão permitida por lei, o desenvolvedor não se responsabiliza por perdas decorrentes do uso ou da impossibilidade de uso do App.' },
+      { h: '7. Alterações nos Termos', p: 'Podemos atualizar estes Termos periodicamente; as atualizações aparecerão nesta página com nova data no topo. O uso continuado constitui aceitação dos Termos atualizados.' },
+      { h: '8. Contato', p: 'Para qualquer dúvida sobre estes Termos: dualcam@madecappy.com' },
+    ],
+  },
+  {
+    code: 'es', name: 'Español', dir: 'ltr',
+    title: 'Términos de uso', updatedLabel: 'Última actualización',
+    intro: 'Bienvenido a DualCam ("la App"). Al descargar, instalar o usar la App, aceptas estos Términos. Si no estás de acuerdo, no uses la App.',
+    sections: [
+      { h: '1. Licencia', p: 'Te concedemos una licencia personal, no exclusiva e intransferible para instalar y usar la App en dispositivos Apple que poseas o controles. No puedes descompilar, aplicar ingeniería inversa ni redistribuir la App.' },
+      { h: '2. Requisitos de dispositivo y sistema', p: 'La App requiere un dispositivo compatible con la grabación simultánea de varias cámaras (iPhone 11 o posterior) con iOS 14 o posterior; el desenfoque/cambio de fondo y Yo-en-escena requieren iOS 15 o posterior. El calentamiento y el consumo de batería son características físicas de la grabación con varias cámaras.' },
+      { h: '3. Tu contenido', p: 'Los vídeos y fotos que creas con la App te pertenecen por completo. La App no accede a ellos, no los recopila ni los sube (consulta la Política de privacidad). Eres responsable de tu contenido y de cumplir las leyes aplicables y los derechos de imagen y privacidad de terceros.' },
+      { h: '4. Uso aceptable', p: 'Aceptas no usar la App con fines ilegales, incluidos, entre otros, la grabación encubierta sin consentimiento, el acoso o la vulneración de la privacidad o la propiedad intelectual de terceros.' },
+      { h: '5. Propiedad intelectual', p: 'La App en sí y su interfaz, marcas y código son propiedad intelectual del desarrollador y están protegidos por la ley.' },
+      { h: '6. Renuncia de responsabilidad', p: 'La App se ofrece "tal cual", sin garantías de ningún tipo. En la máxima medida permitida por la ley, el desarrollador no es responsable de las pérdidas derivadas del uso o la imposibilidad de uso de la App.' },
+      { h: '7. Cambios en los Términos', p: 'Podemos actualizar estos Términos de vez en cuando; las actualizaciones se reflejarán en esta página con una nueva fecha en la parte superior. El uso continuado constituye la aceptación de los Términos actualizados.' },
+      { h: '8. Contacto', p: 'Para cualquier consulta sobre estos Términos: dualcam@madecappy.com' },
+    ],
+  },
+  {
+    code: 'th', name: 'ไทย', dir: 'ltr',
+    title: 'ข้อกำหนดการใช้งาน', updatedLabel: 'อัปเดตล่าสุด',
+    intro: 'ยินดีต้อนรับสู่ DualCam («แอป») การดาวน์โหลด ติดตั้ง หรือใช้แอป ถือว่าคุณยอมรับข้อกำหนดเหล่านี้ หากไม่ยอมรับ โปรดอย่าใช้แอป',
+    sections: [
+      { h: '1. การอนุญาตให้ใช้งาน', p: 'เรามอบสิทธิ์การใช้งานส่วนบุคคล ไม่จำกัดเฉพาะ และโอนไม่ได้ ให้คุณติดตั้งและใช้แอปบนอุปกรณ์ Apple ที่คุณเป็นเจ้าของหรือควบคุม คุณต้องไม่แยกส่วน ทำวิศวกรรมย้อนกลับ หรือแจกจ่ายแอปต่อ' },
+      { h: '2. ข้อกำหนดอุปกรณ์และระบบ', p: 'แอปต้องใช้อุปกรณ์ที่รองรับการบันทึกหลายกล้องพร้อมกัน (iPhone 11 ขึ้นไป) ระบบ iOS 14 ขึ้นไป ฟีเจอร์เบลอ/เปลี่ยนพื้นหลัง และคนในฉาก ต้องใช้ iOS 15 ขึ้นไป ความร้อนและการใช้แบตเตอรี่เป็นคุณสมบัติทางกายภาพของการบันทึกหลายกล้องพร้อมกัน' },
+      { h: '3. เนื้อหาของคุณ', p: 'วิดีโอและรูปที่คุณสร้างด้วยแอปเป็นของคุณทั้งหมด แอปจะไม่เข้าถึง เก็บ หรืออัปโหลดเนื้อหาเหล่านี้ (ดูนโยบายความเป็นส่วนตัว) คุณรับผิดชอบเนื้อหาของคุณเองและต้องปฏิบัติตามกฎหมายที่บังคับใช้ รวมถึงสิทธิ์ในภาพและความเป็นส่วนตัวของผู้อื่น' },
+      { h: '4. การใช้งานที่ยอมรับได้', p: 'คุณตกลงจะไม่ใช้แอปเพื่อวัตถุประสงค์ที่ผิดกฎหมาย รวมถึงแต่ไม่จำกัดเพียงการแอบถ่ายโดยไม่ได้รับความยินยอม การคุกคาม หรือการละเมิดความเป็นส่วนตัวหรือทรัพย์สินทางปัญญาของผู้อื่น' },
+      { h: '5. ทรัพย์สินทางปัญญา', p: 'ตัวแอปเอง รวมถึงส่วนติดต่อผู้ใช้ เครื่องหมายการค้า และโค้ด เป็นทรัพย์สินทางปัญญาของผู้พัฒนาและได้รับการคุ้มครองตามกฎหมาย' },
+      { h: '6. ข้อจำกัดความรับผิด', p: 'แอปให้บริการ "ตามสภาพ" โดยไม่มีการรับประกันใด ๆ ภายใต้ขอบเขตสูงสุดที่กฎหมายอนุญาต ผู้พัฒนาไม่รับผิดต่อความเสียหายใด ๆ ที่เกิดจากการใช้หรือไม่สามารถใช้แอป' },
+      { h: '7. การเปลี่ยนแปลงข้อกำหนด', p: 'เราอาจปรับปรุงข้อกำหนดเป็นครั้งคราว การปรับปรุงจะแสดงในหน้านี้พร้อมวันที่ใหม่ด้านบน การใช้งานต่อถือเป็นการยอมรับข้อกำหนดที่ปรับปรุงแล้ว' },
+      { h: '8. ติดต่อเรา', p: 'หากมีคำถามเกี่ยวกับข้อกำหนดเหล่านี้: dualcam@madecappy.com' },
+    ],
+  },
+  {
+    code: 'id', name: 'Bahasa Indonesia', dir: 'ltr',
+    title: 'Ketentuan Penggunaan', updatedLabel: 'Terakhir diperbarui',
+    intro: 'Selamat datang di DualCam ("Aplikasi"). Dengan mengunduh, memasang, atau menggunakan Aplikasi, Anda menyetujui Ketentuan ini. Jika tidak setuju, jangan gunakan Aplikasi.',
+    sections: [
+      { h: '1. Lisensi', p: 'Kami memberi Anda lisensi pribadi, non-eksklusif, dan tidak dapat dipindahtangankan untuk memasang dan menggunakan Aplikasi pada perangkat Apple yang Anda miliki atau kendalikan. Anda tidak boleh mendekompilasi, merekayasa balik, atau mendistribusikan ulang Aplikasi.' },
+      { h: '2. Persyaratan perangkat & sistem', p: 'Aplikasi memerlukan perangkat yang mendukung perekaman multi-kamera serentak (iPhone 11 atau lebih baru) dengan iOS 14 atau lebih baru; buram/ganti latar dan Aku-di-Scene memerlukan iOS 15 atau lebih baru. Panas dan konsumsi baterai adalah karakteristik fisik dari perekaman multi-kamera.' },
+      { h: '3. Konten Anda', p: 'Video dan foto yang Anda buat dengan Aplikasi sepenuhnya milik Anda. Aplikasi tidak mengakses, mengumpulkan, atau mengunggahnya (lihat Kebijakan Privasi). Anda bertanggung jawab atas konten Anda dan mematuhi hukum yang berlaku serta hak citra dan privasi orang lain.' },
+      { h: '4. Penggunaan yang dapat diterima', p: 'Anda setuju untuk tidak menggunakan Aplikasi untuk tujuan melanggar hukum, termasuk namun tidak terbatas pada perekaman diam-diam tanpa persetujuan, pelecehan, atau pelanggaran privasi atau kekayaan intelektual orang lain.' },
+      { h: '5. Kekayaan intelektual', p: 'Aplikasi itu sendiri beserta antarmuka, merek dagang, dan kodenya adalah kekayaan intelektual pengembang dan dilindungi oleh hukum.' },
+      { h: '6. Penafian', p: 'Aplikasi disediakan "sebagaimana adanya" tanpa jaminan apa pun. Sejauh diizinkan oleh hukum, pengembang tidak bertanggung jawab atas kerugian yang timbul dari penggunaan atau ketidakmampuan menggunakan Aplikasi.' },
+      { h: '7. Perubahan Ketentuan', p: 'Kami dapat memperbarui Ketentuan ini dari waktu ke waktu; pembaruan akan ditampilkan di halaman ini dengan tanggal baru di atas. Penggunaan yang berkelanjutan berarti menerima Ketentuan yang diperbarui.' },
+      { h: '8. Hubungi kami', p: 'Untuk pertanyaan tentang Ketentuan ini: dualcam@madecappy.com' },
+    ],
+  },
+  {
+    code: 'ru', name: 'Русский', dir: 'ltr',
+    title: 'Условия использования', updatedLabel: 'Последнее обновление',
+    intro: 'Добро пожаловать в DualCam («Приложение»). Загружая, устанавливая или используя Приложение, вы соглашаетесь с настоящими Условиями. Если вы не согласны, не используйте Приложение.',
+    sections: [
+      { h: '1. Лицензия', p: 'Мы предоставляем вам личную, неисключительную, непередаваемую лицензию на установку и использование Приложения на устройствах Apple, которыми вы владеете или управляете. Запрещается декомпилировать, выполнять обратную разработку или распространять Приложение.' },
+      { h: '2. Требования к устройству и системе', p: 'Приложению требуется устройство с поддержкой одновременной съёмки несколькими камерами (iPhone 11 или новее) с iOS 14 или новее; размытие/замена фона и «Я в кадре» требуют iOS 15 или новее. Нагрев и расход батареи — физические особенности съёмки несколькими камерами.' },
+      { h: '3. Ваш контент', p: 'Видео и фото, созданные вами в Приложении, полностью принадлежат вам. Приложение не получает к ним доступ, не собирает и не загружает их (см. Политику конфиденциальности). Вы несёте ответственность за свой контент и за соблюдение применимых законов и прав третьих лиц на изображение и конфиденциальность.' },
+      { h: '4. Допустимое использование', p: 'Вы соглашаетесь не использовать Приложение в незаконных целях, включая, помимо прочего, скрытую съёмку без согласия, преследование или нарушение конфиденциальности либо интеллектуальной собственности других лиц.' },
+      { h: '5. Интеллектуальная собственность', p: 'Само Приложение, а также его интерфейс, товарные знаки и код являются интеллектуальной собственностью разработчика и защищены законом.' },
+      { h: '6. Отказ от ответственности', p: 'Приложение предоставляется «как есть», без каких-либо гарантий. В максимально допустимой законом степени разработчик не несёт ответственности за любые убытки, возникшие в результате использования или невозможности использования Приложения.' },
+      { h: '7. Изменение Условий', p: 'Мы можем время от времени обновлять настоящие Условия; обновления будут отражены на этой странице с новой датой вверху. Продолжение использования означает принятие обновлённых Условий.' },
+      { h: '8. Контакты', p: 'По вопросам, связанным с настоящими Условиями: dualcam@madecappy.com' },
+    ],
+  },
+];
 ---
-<ProductLayout title="用户条款 · DualCam" description="DualCam 用户使用条款。">
+<ProductLayout title="Terms of Use · DualCam" description="DualCam Terms of Use.">
   <style>
     .doc{padding:64px 0 0}
     .doc h1{font-size:clamp(28px,5vw,40px);font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
-    .doc .upd{color:var(--muted);font-size:14px;margin-bottom:36px}
+    .doc .upd{color:var(--muted);font-size:14px;margin-bottom:24px}
     .doc h2{font-size:20px;font-weight:700;margin:32px 0 10px}
     .doc p,.doc li{color:#d6d6da;font-size:16px;line-height:1.8}
     .doc ul{margin:8px 0 8px 22px}
     .doc strong{color:#fff}
     .doc a{color:var(--blue)}
+    .langbar{display:flex;align-items:center;gap:10px;margin-bottom:28px;flex-wrap:wrap}
+    .langbar select{background:#16161a;color:#fff;border:1px solid #2c2c2e;border-radius:10px;padding:8px 12px;font-size:14px}
+    .doc-lang[hidden]{display:none}
+    .doc-lang[dir="rtl"]{text-align:right}
   </style>
   <div class="rwrap doc">
-    <h1>用户条款</h1>
-    <div class="upd">最后更新：{updated}</div>
+    <div class="langbar">
+      <span style="color:var(--muted);font-size:14px">🌐</span>
+      <select id="langSelect" aria-label="Language">
+        {docs.map((d) => <option value={d.code}>{d.name}</option>)}
+      </select>
+    </div>
 
-    <p>欢迎使用 DualCam（以下简称"本 App"）。下载、安装或使用本 App，即表示你同意本条款。如不同意，请勿使用。</p>
-
-    <h2>1. 使用许可</h2>
-    <p>我们授予你一项个人、非独占、不可转让的许可，用于在你拥有或控制的 Apple 设备上安装并使用本 App。你不得对本 App 进行反编译、逆向工程或再分发。</p>
-
-    <h2>2. 设备与系统要求</h2>
-    <p>本 App 需要支持多摄像头同时录制的设备（iPhone 11 及以后机型），系统 iOS 14 或更高版本；背景虚化/换背景、人入景等功能需要 iOS 15 或更高版本。设备发热与耗电为多摄同录的系统物理特性。</p>
-
-    <h2>3. 你的内容</h2>
-    <p>你使用本 App 拍摄、合成的视频<strong>完全归你所有</strong>。本 App 不会访问、收集或上传这些内容（详见<a href="/dualcam/privacy">隐私协议</a>）。你需对自己拍摄与分享的内容负责，并确保遵守所在地法律及他人的肖像与隐私权利。</p>
-
-    <h2>4. 可接受的使用</h2>
-    <p>你同意不将本 App 用于任何违法用途，包括但不限于未经他人同意的偷拍、骚扰、侵犯他人隐私或知识产权的行为。</p>
-
-    <h2>5. 知识产权</h2>
-    <p>本 App 本身及其界面、商标、代码等知识产权归开发者所有，受相关法律保护。</p>
-
-    <h2>6. 免责声明</h2>
-    <p>本 App 按"现状"提供，不作任何明示或默示的担保。在适用法律允许的最大范围内，开发者不对因使用或无法使用本 App 而导致的任何损失承担责任。</p>
-
-    <h2>7. 条款变更</h2>
-    <p>我们可能不时更新本条款，更新后将修改本页并更新顶部日期。继续使用本 App 即视为接受更新后的条款。</p>
-
-    <h2>8. 联系我们</h2>
-    <p>关于本条款的任何问题，请联系：<a href="mailto:dualcam@madecappy.com">dualcam@madecappy.com</a></p>
+    {docs.map((d) => (
+      <section class="doc-lang" data-lang={d.code} dir={d.dir} hidden>
+        <h1>{d.title}</h1>
+        <div class="upd">{d.updatedLabel}: {updated}</div>
+        <p>{d.intro}</p>
+        {d.sections.map((s) => (
+          <>
+            <h2>{s.h}</h2>
+            <p>{s.p}</p>
+          </>
+        ))}
+      </section>
+    ))}
   </div>
+
+  <script is:inline>
+    (function () {
+      var sel = document.getElementById('langSelect');
+      var secs = document.querySelectorAll('.doc-lang');
+      var codes = Array.prototype.map.call(secs, function (s) { return s.getAttribute('data-lang'); });
+      function pick() {
+        var saved = localStorage.getItem('dualcam_lang');
+        if (saved && codes.indexOf(saved) >= 0) return saved;
+        var navs = navigator.languages || [navigator.language || 'en'];
+        for (var i = 0; i < navs.length; i++) {
+          var l = navs[i];
+          if (codes.indexOf(l) >= 0) return l;
+          var base = l.split('-')[0];
+          if (base === 'zh') return (l.indexOf('TW') >= 0 || l.indexOf('HK') >= 0 || l.indexOf('Hant') >= 0) ? 'zh-Hant' : 'zh-Hans';
+          if (base === 'pt') return 'pt-BR';
+          for (var j = 0; j < codes.length; j++) { if (codes[j].split('-')[0] === base) return codes[j]; }
+        }
+        return 'en';
+      }
+      function show(code) {
+        Array.prototype.forEach.call(secs, function (s) {
+          s.hidden = (s.getAttribute('data-lang') !== code);
+        });
+        if (sel) sel.value = code;
+        document.documentElement.lang = code;
+      }
+      var initial = pick();
+      show(initial);
+      if (sel) sel.addEventListener('change', function () {
+        localStorage.setItem('dualcam_lang', sel.value);
+        show(sel.value);
+      });
+    })();
+  </script>
 </ProductLayout>
