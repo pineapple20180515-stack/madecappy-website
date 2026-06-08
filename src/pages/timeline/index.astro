@@ -4,7 +4,7 @@ import TimelineCard from '../../components/TimelineCard.astro';
 import TagBadge from '../../components/TagBadge.astro';
 import { getCollection } from 'astro:content';
 
-const all = await getCollection('timeline', ({ data }) => !data.draft);
+const all = await getCollection('timeline', ({ data }) => !data.draft && data.project === 'cappy');
 const sorted = all.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 const tags = [...new Set(all.map(e => e.data.tag))];
 ---

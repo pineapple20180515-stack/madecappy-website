@@ -5,7 +5,7 @@ import Stat from '../components/Stat.astro';
 import TimelineCard from '../components/TimelineCard.astro';
 import { getCollection } from 'astro:content';
 
-const all = await getCollection('timeline', ({ data }) => !data.draft);
+const all = await getCollection('timeline', ({ data }) => !data.draft && data.project === 'cappy');
 const recent = all
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 5);

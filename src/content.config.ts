@@ -20,6 +20,8 @@ const timeline = defineCollection({
     summary: z.string(),
     cover: z.string().optional(),
     draft: z.boolean().default(false),
+    // 所属项目（把构建文章归到对应项目下）。默认 cappy（建造日记）。
+    project: z.string().default('cappy'),
   }),
 });
 
