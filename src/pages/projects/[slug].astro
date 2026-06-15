@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import TimelineCard from '../../components/TimelineCard.astro';
 import { getCollection, render } from 'astro:content';
+import dualcamStats from '../../data/stats/dualcam.json';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects', ({ data }) => !data.draft);
@@ -17,6 +18,32 @@ const { Content } = await render(project);
 // 归属本项目的构建文章（时间线条目里 project === 当前 slug）。
 const articles = (await getCollection('timeline', ({ data }) => !data.draft && data.project === project.data.slug))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+// 项目实时数据（由 App Store Connect 自动同步脚本写入 src/data/stats/<slug>.json）。
+const statsBySlug = { dualcam: dualcamStats };
+const stats = statsBySlug[project.data.slug] || null;
+
+function trimZero(s) { return s.endsWith('.0') ? s.slice(0, -2) : s; }
+function fmtNum(n) {
+  if (n >= 1000000) return trimZero((n / 1000000).toFixed(1)) + 'M';
+  if (n >= 10000) return trimZero((n / 1000).toFixed(1)) + 'k';
+  return n.toLocaleString('en-US');
+}
+const curSym = { USD: '$', CNY: '¥', EUR: '€' };
+function fmtMoney(n, cur) {
+  return (curSym[cur] || (cur + ' ')) + (n >= 10000 ? fmtNum(n) : n.toLocaleString('en-US'));
+}
+
+const metrics = [];
+if (stats) {
+  if (stats.downloads != null) metrics.push({ label: '下载量', value: fmtNum(stats.downloads) });
+  if (stats.paidUsers != null) metrics.push({ label: '付费用户', value: fmtNum(stats.paidUsers) });
+  if (stats.revenue != null) metrics.push({ label: '累计收入', value: fmtMoney(stats.revenue, stats.currency || 'USD') });
+  if (stats.rating != null) metrics.push({ label: '评分', value: '★ ' + Number(stats.rating).toFixed(1) });
+}
+const statsUpdated = stats && stats.updatedAt
+  ? new Date(stats.updatedAt).toLocaleDateString('zh-CN')
+  : null;
 
 const statusLabel: Record<string, { text: string; color: string }> = {
   building: { text: '🟡 正在做', color: 'text-pineapple-700' },
@@ -64,6 +91,30 @@ const status = statusLabel[project.data.status];
       </div>
     </div>
   </section>
+
+  {stats && (
+    <section class="max-w-[var(--width-reading)] mx-auto px-6 pb-4">
+      {metrics.length > 0 ? (
+        <div>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {metrics.map(m => (
+              <div class="text-center rounded-2xl border border-ink-100 bg-white py-5 px-2">
+                <div class="text-2xl md:text-3xl font-extrabold text-pineapple-700">{m.value}</div>
+                <div class="text-xs text-ink-500 mt-1">{m.label}</div>
+              </div>
+            ))}
+          </div>
+          <p class="text-xs text-ink-400 mt-3">
+            数据来自 {stats.source || 'App Store Connect'}{statsUpdated ? ` · 更新于 ${statsUpdated}` : ''}
+          </p>
+        </div>
+      ) : (
+        <p class="text-sm text-ink-400 rounded-2xl border border-dashed border-ink-200 py-5 text-center">
+          📊 实时数据接入中（App Store Connect 自动同步）
+        </p>
+      )}
+    </section>
+  )}
 
   <main class="max-w-[var(--width-reading)] mx-auto px-6 pb-16 prose prose-lg prose-cappy">
     <Content />
