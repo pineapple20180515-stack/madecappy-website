@@ -1,0 +1,125 @@
+{
+  "zh": {
+    "title":"DualCam 2.3 版本故事｜高棉语、iPhone Duo 与更顺手的拍摄",
+    "description":"DualCam 为什么加入高棉语、怎样适配 iPhone Duo，以及我们如何把双摄拍摄、调整构图和查看成片串起来。",
+    "label":"DualCam 2.3 · 版本故事",
+    "heading":"让双摄更容易拍，也更容易用",
+    "intro":"打开相机，先看清两个画面。该拍的时候马上拍，拍完能顺手回看。这是 DualCam 2.3 做取舍时一直用的标准。",
+    "availability":"本文介绍 2.3。你所在地区可下载的版本，以 App Store 页面为准。",
+    "back":"回到 DualCam",
+    "download":"在 App Store 查看",
+    "heroAlt":"在金边河畔用手机拍摄的情景示意",
+    "heroNote":"场景为 AI 演绎，操作画面来自 DualCam 界面。",
+    "language":{
+      "title":"为什么加入高棉语",
+      "lead":"看东南亚的使用情况时，我注意到，泰语、越南语和马来语之外，柬埔寨用户还少一个用自己的语言操作相机的入口。对拍摄工具来说，能马上看懂按钮，常常比多一个效果更重要。",
+      "body":"我们从实际会碰到的流程开始检查。打开相机、换布局、进照片设置，关键按钮都要看得懂。高棉语可以在应用的语言设置中选择。下面是高棉语界面检查时截下的两个页面。",
+      "left":"高棉语 · 双摄取景与布局",
+      "right":"高棉语 · 照片设置"
+    },
+    "duo":{
+      "title":"折起来时，按钮和画面应该去哪儿？",
+      "lead":"合着用外屏时，用户想快速拍一张。展开用内屏时，才有空间仔细安排两个视角。半折摆在桌上时，还要能避开折叠区域，方便碰到快门和常用工具。",
+      "body":"我们按外屏、内屏、半折三种姿态检查界面，把取景和控制放在各自好操作的位置。支持的配置可把提词送到外屏，让镜头前的人看稿。下面是实际应用的模拟器画面，Duo 真机长时间录制仍待验证。",
+      "left":"外屏 · 随手取景",
+      "right":"内屏 · 展开后的双摄构图",
+      "guide":"查看 iPhone Duo 操作指南"
+    },
+    "camera":{
+      "title":"把最常用的操作留给取景页",
+      "lead":"最影响体验的几个问题都发生在拍摄中。拖画中画会误切到视频，换画幅时画面会跳，拍实况后还会再闪一下。它们都让人分不清刚才那个动作有没有成功。",
+      "body":"现在，拖小窗只调整位置。拍照和录像共用所选画幅。常用选项按布局、拍摄、美化和玩法归在「更多」，照片清晰度和录像规格从设置进入。顶部的闪光灯和 Live 仍可快速切换。",
+      "result":"我们用 iPhone 试了横屏成片、连续切换照片和视频，也复查了闪光搭配实况的场景。测试中已确认，取景只闪一次，从后台回来能稳定恢复。",
+      "left":"布局 · 拍摄时调整两个画面",
+      "right":"取景 · 拍摄前打开实况"
+    },
+    "films":{
+      "title":"看一次怎么拍",
+      "front":"从取景、选布局到开始录像",
+      "duo":"iPhone Duo 从外屏到内屏",
+      "note":"AI 场景与应用画面组合演示。Duo 界面来自模拟器。"
+    }
+  },
+  "en": {
+    "title":"The DualCam 2.3 release story | Khmer, iPhone Duo and a smoother camera",
+    "description":"Why DualCam added Khmer, how we designed for iPhone Duo, and what changed in the flow from framing to reviewing your shot.",
+    "label":"DualCam 2.3 · Release story",
+    "heading":"A camera that makes two views easier to capture",
+    "intro":"Open the camera and see both views. Take the shot when it happens. Review it without losing your place. That was the test for every change in DualCam 2.3.",
+    "availability":"This story covers version 2.3. The App Store shows the version available in your region.",
+    "back":"Back to DualCam",
+    "download":"View on the App Store",
+    "heroAlt":"Illustrative scene of filming with a phone on the Phnom Penh riverside",
+    "heroNote":"AI-generated scene. The app controls shown in the demo come from DualCam.",
+    "language":{
+      "title":"Why we added Khmer",
+      "lead":"Looking at how people in Southeast Asia use DualCam made a gap clear. We already offered Thai, Vietnamese and Malay, but people in Cambodia still lacked a Khmer camera interface. When the moment is happening, making the controls easy to understand matters.",
+      "body":"We checked the screens people need to use right away, including the camera, dual-camera layouts and photo settings. You can choose Khmer in the app’s language settings. These two captures show how the interface looked in our localization checks.",
+      "left":"Khmer · Dual-camera preview and layouts",
+      "right":"Khmer · Photo settings"
+    },
+    "duo":{
+      "title":"What changes when you fold the phone?",
+      "lead":"On the outer display, the job is to take a quick shot. Open the phone and you have space to compose both views. Set it down partly folded and the important controls still need to be within reach.",
+      "body":"We checked the outer display, the unfolded display and partially folded positions. On supported configurations, you can send the teleprompter script to the outer display. These are captures from the simulator. Extended recording on a physical Duo is still to be verified.",
+      "left":"Outer display · Quick framing",
+      "right":"Inner display · Dual-camera layout",
+      "guide":"Read the iPhone Duo guide"
+    },
+    "camera":{
+      "title":"Keep the camera focused on the shot",
+      "lead":"Dragging the picture-in-picture window could switch capture modes. Changing the aspect ratio could make the frame jump. A Live Photo could flash again after the shutter. Each made it harder to tell what the camera had just done.",
+      "body":"Drag the inset to move it. The selected aspect ratio now carries across photo and video. Layout, Camera, Beauty and Fun group the controls in More. Photo clarity and video formats are in Settings, with Flash and Live still available at the top.",
+      "result":"We checked landscape output, repeated photo/video switches, and Flash with Live Photos on an iPhone. In that test, the viewfinder flashed once and resumed stably after returning to the app.",
+      "left":"Layouts · Arrange the two views",
+      "right":"Viewfinder · Turn Live on before shooting"
+    },
+    "films":{
+      "title":"See the camera in use",
+      "front":"Frame both views, choose a layout and record",
+      "duo":"From the outer display to the inner display",
+      "note":"Illustrative AI scenes edited with app screens. The Duo interface is from a simulator."
+    }
+  },
+  "th": {
+    "title":"เบื้องหลัง DualCam 2.3 | ภาษาเขมร iPhone Duo และการถ่ายที่ลื่นไหลขึ้น",
+    "description":"ทำไม DualCam เพิ่มภาษาเขมร ปรับการถ่ายบน iPhone Duo อย่างไร และแก้ปัญหาตั้งแต่จัดภาพจนถึงดูผลงาน",
+    "label":"DualCam 2.3 · เบื้องหลังเวอร์ชัน",
+    "heading":"ถ่ายสองมุมได้ง่ายขึ้น",
+    "intro":"เปิดกล้องแล้วเห็นภาพทั้งสองมุม กดถ่ายได้ทันเวลา และกลับมาดูผลงานได้ง่าย นี่คือสิ่งที่เราใช้ตัดสินใจเมื่อปรับ DualCam 2.3",
+    "availability":"หน้านี้อธิบายเวอร์ชัน 2.3 ตรวจสอบเวอร์ชันที่เปิดให้ดาวน์โหลดใน App Store ของคุณ",
+    "back":"กลับไปยัง DualCam",
+    "download":"ดูใน App Store",
+    "heroAlt":"ฉากจำลองการถ่ายด้วยโทรศัพท์ริมแม่น้ำที่พนมเปญ",
+    "heroNote":"ฉากสร้างด้วย AI ส่วนหน้าจอที่ใช้สาธิตมาจาก DualCam",
+    "language":{
+      "title":"ทำไมเราจึงเพิ่มภาษาเขมร",
+      "lead":"เมื่อดูการใช้งานในเอเชียตะวันออกเฉียงใต้ เราเห็นว่าแม้มีภาษาไทย เวียดนาม และมาเลย์แล้ว แต่ผู้ใช้ในกัมพูชายังไม่มีหน้ากล้องภาษาเขมร การเข้าใจปุ่มได้ทันทีเป็นส่วนสำคัญของการถ่ายภาพ",
+      "body":"เราเริ่มจากหน้ากล้อง เมนูเลย์เอาต์ และการตั้งค่าภาพถ่าย เลือกภาษาเขมรได้ในการตั้งค่าภาษาของแอป ภาพด้านล่างมาจากการตรวจหน้าจอภาษาเขมร",
+      "left":"ภาษาเขมร · หน้ากล้องและเลย์เอาต์",
+      "right":"ภาษาเขมร · การตั้งค่าภาพถ่าย"
+    },
+    "duo":{
+      "title":"เมื่อพับโทรศัพท์ ปุ่มและภาพควรอยู่ตรงไหน",
+      "lead":"จอนอกเหมาะกับการถ่ายอย่างรวดเร็ว เมื่อกางเครื่อง จอด้านในมีพื้นที่ให้จัดภาพทั้งสองมุม และเมื่อวางเครื่องแบบพับบางส่วน ปุ่มสำคัญควรอยู่ในตำแหน่งที่กดสะดวก",
+      "body":"เราตรวจจอนอก จอด้านใน และท่าพับบางส่วน บนอุปกรณ์ที่รองรับสามารถส่งบทไปจอนอกได้ ภาพด้านล่างมาจากเครื่องจำลอง ส่วนการบันทึกระยะยาวบนเครื่องจริงยังรอการตรวจสอบ",
+      "left":"จอนอก · จัดภาพอย่างรวดเร็ว",
+      "right":"จอด้านใน · จัดภาพจากกล้องทั้งสอง",
+      "guide":"อ่านคู่มือ iPhone Duo"
+    },
+    "camera":{
+      "title":"จัดปุ่มให้ถ่ายได้ต่อเนื่อง",
+      "lead":"เมื่อก่อนการลากภาพซ้อนอาจเปลี่ยนโหมดถ่าย การเปลี่ยนสัดส่วนอาจทำให้กรอบกระโดด และ Live Photo อาจทำให้จอแฟลชซ้ำจนไม่แน่ใจว่าถ่ายสำเร็จหรือยัง",
+      "body":"ตอนนี้ลากภาพซ้อนเพื่อย้ายตำแหน่งได้โดยตรง ภาพถ่ายและวิดีโอใช้สัดส่วนเดียวกัน เมนูเพิ่มเติมจัดปุ่มตามงานถ่าย ส่วนความคมชัดและรูปแบบวิดีโออยู่ในการตั้งค่า",
+      "result":"เราตรวจภาพแนวนอน การสลับโหมดหลายครั้ง และการใช้แฟลชร่วมกับ Live Photo บน iPhone ในการทดสอบนี้จอแฟลชครั้งเดียวและกลับมาที่กล้องได้อย่างเสถียร",
+      "left":"เลย์เอาต์ · จัดภาพทั้งสองมุม",
+      "right":"หน้ากล้อง · เปิด Live ก่อนถ่าย"
+    },
+    "films":{
+      "title":"ดูการถ่ายในสถานการณ์ตัวอย่าง",
+      "front":"จัดภาพ เลือกเลย์เอาต์ แล้วเริ่มบันทึก",
+      "duo":"จากจอนอกไปยังจอด้านใน",
+      "note":"ฉากประกอบสร้างด้วย AI และตัดต่อกับหน้าจอของแอป ส่วน iPhone Duo ใช้เครื่องจำลอง"
+    }
+  }
+}

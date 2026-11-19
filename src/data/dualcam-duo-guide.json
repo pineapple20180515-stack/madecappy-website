@@ -9,7 +9,7 @@
     "linkTitle": "iPhone Duo 双摄指南",
     "linkDescription": "从外屏随手拍，到展开构图和半折提词，看看怎么操作。",
     "watch": "演示视频",
-    "demoNote": "模拟器界面演示，展示外屏、展开构图与提词的操作。",
+    "demoNote": "场景为 AI 演绎，内外屏及提词画面来自模拟器。",
     "stepsHeading": "三个拍摄场景",
     "steps": [
       ["合上手机，外屏随手拍", "打开 DualCam，选择照片或视频。在更多 → 布局里选择画中画，把自己的反应放在小窗里，边走边拍旅行或活动现场。"],
@@ -34,7 +34,7 @@
     "linkTitle": "iPhone Duo dual-camera guide",
     "linkDescription": "See how to frame on the outer or inner display and read a script while you film.",
     "watch": "Watch the demo",
-    "demoNote": "Simulator demonstration of the outer display, the unfolded camera and the teleprompter.",
+    "demoNote": "Illustrative AI scenes alongside simulator views of the outer display, unfolded camera and teleprompter.",
     "stepsHeading": "Three ways to shoot",
     "steps": [
       ["Frame a quick shot on the outer display", "Open DualCam while the device is folded. Choose Photo or Video, then use More → Layouts → Picture-in-Picture to show your reaction in a movable window."],
@@ -59,7 +59,7 @@
     "linkTitle": "คู่มือกล้องคู่บน iPhone Duo",
     "linkDescription": "ดูวิธีใช้จอนอก จอด้านใน และอ่านบทระหว่างถ่าย",
     "watch": "ดูวิดีโอสาธิต",
-    "demoNote": "สาธิตจอนอก กล้องเมื่อกางเครื่อง และการอ่านบทด้วยภาพจากเครื่องจำลอง",
+    "demoNote": "ฉากสร้างด้วย AI พร้อมหน้าจอจำลองสำหรับจอนอก จอใน และเทเลพรอมพ์เตอร์",
     "stepsHeading": "สามวิธีในการถ่าย",
     "steps": [
       ["ใช้จอนอกเพื่อถ่ายได้ทันที", "เปิด DualCam ขณะพับเครื่อง เลือกภาพถ่ายหรือวิดีโอ แล้วเลือกเพิ่มเติม → เลย์เอาต์ → ภาพซ้อน เพื่อวางภาพจากกล้องหน้าในหน้าต่างที่ย้ายได้"],

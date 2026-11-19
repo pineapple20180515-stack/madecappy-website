@@ -3,11 +3,11 @@ import copy from '../data/dualcam-marketing.json';
 import published from '../data/dualcam-published-videos.json';
 import campaigns from '../data/dualcam-campaigns.json';
 import '../styles/dualcam-marketing.css';
-interface Props { locale: keyof typeof copy; title?: string; description?: string; guide?: string; }
-const { locale, guide, title, description } = Astro.props;
+interface Props { locale: keyof typeof copy; title?: string; description?: string; guide?: string; socialImage?: string; }
+const { locale, guide, title, description, socialImage } = Astro.props;
 const d=copy[locale];
 const home=(l:string)=>l==='zh'?'/dualcam/':`/dualcam/${l}/`;
-const route=(l:string)=>guide==='iphone-duo'?`${home(l)}iphone-duo/`:guide?`/dualcam/${l}/guides/${guide}/`:home(l);
+const route=(l:string)=>guide==='release-2-3'?`${home(l)}releases/2.3/`:guide==='iphone-duo'?`${home(l)}iphone-duo/`:guide?`/dualcam/${l}/guides/${guide}/`:home(l);
 const canonical=new URL(route(locale),Astro.site).href;
 const pageTitle=title||d.title;
 const pageDescription=description||d.description;
@@ -30,7 +30,7 @@ const videoSchema = published.videos.map(video=>({
 <link rel="canonical" href={canonical}/>
 {Object.entries(copy).map(([key,value])=><link rel="alternate" hreflang={value.lang} href={new URL(route(key),Astro.site).href}/>)}
 <link rel="alternate" hreflang="x-default" href={new URL(route('en'),Astro.site).href}/>
-<meta property="og:type" content={guide?'article':'website'}/><meta property="og:title" content={pageTitle}/><meta property="og:description" content={pageDescription}/><meta property="og:url" content={canonical}/><meta property="og:image" content="https://madecappy.com/dualcam/media/share.jpg"/><meta name="twitter:card" content="summary_large_image"/>
+<meta property="og:type" content={guide?'article':'website'}/><meta property="og:title" content={pageTitle}/><meta property="og:description" content={pageDescription}/><meta property="og:url" content={canonical}/><meta property="og:image" content={new URL(socialImage||"/dualcam/media/share.jpg",Astro.site).href}/><meta name="twitter:card" content="summary_large_image"/>
 <link rel="icon" href="/dualcam/icon.png"/>
 <script type="application/ld+json" set:html={JSON.stringify(structured).replace(/</g,'\\u003c')}/>
 {!guide && videoSchema.map(video=><script type="application/ld+json" set:html={JSON.stringify(video).replace(/</g,'\\u003c')}/>)}
