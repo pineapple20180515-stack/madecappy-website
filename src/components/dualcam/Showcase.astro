@@ -1,0 +1,178 @@
+---
+import { defaultLocale, locales, showcasePath } from '../../lib/dualcam-showcase/locales.mjs';
+import { getCopy } from '../../lib/dualcam-showcase/copy.js';
+import { actualCnyCents, goalCnyCents } from '../../lib/dualcam-showcase/cash-values.js';
+import { salesSnapshot } from '../../lib/dualcam-showcase/revenue-data.js';
+import '../../lib/dualcam-showcase/showcase.css';
+import Attribution from './Attribution.astro';
+
+const {locale=defaultLocale}=Astro.props;
+const entry=locales[locale];
+const copy=getCopy(locale);
+const canonical=new URL(showcasePath(locale),Astro.site);
+const share=new URL('/dualcam/media/share.jpg',Astro.site);
+const legacyHome=entry.legacy==='zh'?'/dualcam/':`/dualcam/${entry.legacy}/`;
+const guideHome=`/dualcam/${entry.legacy}/guides/`;
+const legacyLanguage={zh:'zh-Hans',en:'en',th:'th'}[entry.legacy];
+const media=entry.base==='zh'?'zh':entry.legacy==='th'?'th':'en';
+const money=(currency,value,digits)=>new Intl.NumberFormat(entry.format,{
+  style:'currency',currency,currencyDisplay:'narrowSymbol',minimumFractionDigits:digits,maximumFractionDigits:digits
+}).format(value/100);
+const structured={
+  '@context':'https://schema.org','@type':'SoftwareApplication',name:'DualCam',
+  applicationCategory:'MultimediaApplication',operatingSystem:'iOS',
+  inLanguage:locale,url:canonical.href,description:copy.ui.description,
+  image:new URL('/dualcam/showcase/app-icon.png',Astro.site).href,
+  downloadUrl:'https://apps.apple.com/app/id6774681432'
+};
+---
+<!doctype html>
+<html lang={locale} dir={entry.dir||'ltr'}>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>{copy.ui.title}</title>
+  <meta name="description" content={copy.ui.description}/>
+  <link rel="canonical" href={canonical.href}/>
+  {Object.keys(locales).map(code=><link rel="alternate" hreflang={code} href={new URL(showcasePath(code),Astro.site).href}/>)}
+  <link rel="alternate" hreflang="x-default" href={new URL(showcasePath(defaultLocale),Astro.site).href}/>
+  <link rel="icon" href="/dualcam/showcase/app-icon.png" type="image/png"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content={copy.ui.title}/>
+  <meta property="og:description" content={copy.ui.description}/>
+  <meta property="og:url" content={canonical.href}/>
+  <meta property="og:image" content={share.href}/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <script type="application/ld+json" set:html={JSON.stringify(structured).replace(/</g,'\\u003c')}/>
+</head>
+<body>
+<header class="site-header frame">
+  <a class="wordmark" href="#top" aria-label="DualCam"><img class="app-icon" src="/dualcam/showcase/app-icon.png" width="34" height="34" alt="">DualCam</a>
+  <nav class="site-nav" aria-label={copy.ui.navigation}>
+    <a href="#film" data-text="navFilm">{copy.ui.navFilm}</a>
+    <a href="#features" data-editorial="navFeatures">{copy.editorial.navFeatures}</a>
+    <a href="#build" data-text="navBuild">{copy.ui.navBuild}</a>
+    <a href="#jar" data-text="navJar">{copy.ui.navJar}</a>
+  </nav>
+  <div class="header-actions">
+    <label class="language"><span class="sr-only" data-text="language">{copy.ui.language}</span><select id="language" aria-label={copy.ui.language}>{Object.entries(locales).map(([code,entry])=><option value={code} selected={code===locale} lang={code} dir={entry.dir||'ltr'}>{entry.name}</option>)}</select></label>
+    <a class="store-link" data-store-link data-placement="header" href="https://apps.apple.com/app/id6774681432" target="_blank" rel="noreferrer">App Store <span aria-hidden="true">↗</span></a>
+  </div>
+</header>
+<main id="top">
+  <section class="hero frame" aria-labelledby="hero-title">
+    <div class="hero-copy">
+      <p class="kicker" data-text="kicker">{copy.ui.kicker}</p>
+      <h1 id="hero-title"><span data-text="heroLineOne">{copy.ui.heroLineOne}</span><span data-text="heroLineTwo">{copy.ui.heroLineTwo}</span></h1>
+      <p class="hero-description" data-text="heroDescription">{copy.ui.heroDescription}</p>
+      <div class="hero-actions"><a class="pill" data-store-link data-placement="hero" data-editorial="download" href="https://apps.apple.com/app/id6774681432" target="_blank" rel="noreferrer">在 App Store 下载</a><a class="text-link" href="#film"><span class="play-icon" aria-hidden="true"></span><span data-text="watch">{copy.ui.watch}</span></a></div>
+    </div>
+    <figure class="optics" aria-labelledby="scene-title">
+      <div class="stage" id="phone-stage" role="img" aria-labelledby="scene-title">
+        <div id="phone-render"><img src="/dualcam/showcase/phone-still.webp" alt="" fetchpriority="high"/></div>
+        <p id="scene-title" class="stage-title">iPhone 18 Pro <span aria-hidden="true">/</span> <span id="finish-caption">{copy.ui.red}</span></p>
+        <span class="lens-label" id="lens-label" hidden></span>
+        <p class="scene-hint" id="scene-hint" data-text="sceneHint">{copy.ui.sceneHint}</p>
+      </div>
+      <figcaption class="figure-controls">
+        <div class="view-controls" id="view-controls" role="group" aria-label={copy.ui.controls}>
+          <button type="button" data-view="orbit" aria-pressed="true" data-text="orbit">{copy.ui.orbit}</button>
+          <button type="button" data-view="front" aria-pressed="false" data-text="front">{copy.ui.front}</button>
+          <button type="button" data-view="rear" aria-pressed="false" data-text="rear">{copy.ui.rear}</button>
+          <button type="button" data-view="explode" aria-pressed="false" data-text="explode">{copy.ui.explode}</button>
+        </div>
+        <div class="finish-controls" id="finish-controls" role="group" aria-label={copy.ui.finish} hidden>
+          <button type="button" data-finish="silver" aria-pressed="false" aria-label={copy.ui.silver}><span class="swatch silver"></span><span data-text="silver">{copy.ui.silver}</span></button>
+          <button type="button" data-finish="red" aria-pressed="true" aria-label={copy.ui.red}><span class="swatch red"></span><span data-text="red">{copy.ui.red}</span></button>
+        </div>
+        <span class="sr-only" id="view-state" role="status"></span>
+      </figcaption>
+    </figure>
+  </section>
+  <section class="film frame" id="film" aria-labelledby="film-heading">
+    <div class="section-intro"><div><p class="section-index" data-text="chapterFilm">{copy.ui.chapterFilm}</p><h2 id="film-heading" data-text="filmHeading">{copy.ui.filmHeading}</h2></div><p data-text="filmDescription">{copy.ui.filmDescription}</p></div>
+    <span id="quick-demo" class="sr-only"></span><span id="thai-demos" class="sr-only"></span><div class="film-grid">
+      <video id="film-player" data-demo-id="dualcam-landscape" aria-label={copy.ui.videoLabel} controls playsinline preload="none" poster="/dualcam/showcase/film-poster.jpg"><source src="/dualcam/showcase/dualcam-landscape-cut.mp4" type="video/mp4"></video>
+      <div class="camera-compare">
+        <figure><div class="source-image rear-image"><img src="/dualcam/showcase/rear.webp" alt="" loading="lazy" width="800" height="450"></div><figcaption><span class="signal"></span><span data-text="rearView">{copy.ui.rearView}</span></figcaption></figure>
+        <figure><div class="source-image front-image"><img src="/dualcam/showcase/front.webp" alt="" loading="lazy" width="390" height="520"></div><figcaption><span class="signal"></span><span data-text="frontView">{copy.ui.frontView}</span></figcaption></figure>
+      </div>
+    </div>
+    <p class="media-note" data-text="mediaNote">{copy.ui.mediaNote}</p>
+  </section>
+  <section class="features frame" id="features" aria-labelledby="features-heading">
+    <div class="section-intro"><div><p class="section-index" data-editorial="navFeatures">{copy.editorial.navFeatures}</p><h2 id="features-heading" data-editorial="featuresTitle">{copy.editorial.featuresTitle}</h2></div>
+      <a class="text-link" href="https://www.madecappy.com/dualcam/media/layout-demo.mp4" target="_blank" rel="noreferrer" data-editorial="layoutsVideo">{copy.editorial.layoutsVideo}</a></div>
+    <div class="feature-grid">
+      <article class="feature"><div><h3 data-editorial="photo">{copy.editorial.photo}</h3><p data-editorial="photoBody">{copy.editorial.photoBody}</p></div><img src={`/dualcam/media/ui29-${media}-photo.webp`} data-feature-media="photo" alt="" width="520" height="680" loading="lazy"></article>
+      <article class="feature"><div><h3 data-editorial="layouts">{copy.editorial.layouts}</h3><p data-editorial="layoutsBody">{copy.editorial.layoutsBody}</p></div><img src={`/dualcam/media/ui29-${media}-layouts.webp`} data-feature-media="layouts" alt="" width="520" height="680" loading="lazy"></article>
+      <article class="feature"><div><h3 data-editorial="prompter">{copy.editorial.prompter}</h3><p data-editorial="prompterBody">{copy.editorial.prompterBody}</p></div><img src={`/dualcam/media/ui29-${media}-prompter.webp`} data-feature-media="prompter" alt="" width="520" height="680" loading="lazy"></article>
+    </div>
+  </section>
+  <section class="build frame" id="build" aria-labelledby="build-heading">
+    <div class="section-intro"><div><p class="section-index" data-text="chapterBuild">{copy.ui.chapterBuild}</p><h2 id="build-heading" data-text="buildHeading">{copy.ui.buildHeading}</h2></div><p data-text="buildDescription">{copy.ui.buildDescription}</p></div>
+    <span id="updates" class="sr-only"></span><div class="release-list">
+      <a class="release" id="release-link" href={legacyHome+"releases/2.3/"} hreflang={legacyLanguage} target="_blank" rel="noreferrer"><span class="release-number">2.3</span><span><strong data-editorial="releaseTitle">{copy.editorial.releaseTitle}</strong><span class="release-summary" data-editorial="releaseBody">{copy.editorial.releaseBody}</span></span><span class="release-chevron" aria-hidden="true">↗</span></a>
+      <a class="release" href="https://apps.apple.com/app/id6774681432" target="_blank" rel="noreferrer"><span class="release-number release-archive">2.2</span><span><strong data-editorial="storeHistory">{copy.editorial.storeHistory}</strong><span class="release-summary" data-editorial="storeHistoryBody">{copy.editorial.storeHistoryBody}</span></span><span class="release-chevron" aria-hidden="true">↗</span></a>
+    </div>
+  </section>
+  <section class="jar-section frame" id="jar" aria-labelledby="jar-heading">
+    <div class="jar-card">
+      <div class="jar-content">
+        <p class="section-index" data-text="chapterJar">{copy.ui.chapterJar}</p>
+        <h2 id="jar-heading" data-text="jarHeading">{copy.ui.jarHeading}</h2>
+        <p class="jar-intent" data-editorial="jarIntent">{copy.editorial.jarIntent}</p>
+        <div class="goal-number" id="asc-cny" dir="ltr"><span id="asc-cny-value">{money("CNY",actualCnyCents,2)}</span><span class="goal-target" id="asc-cny-target">/ {money("CNY",goalCnyCents,0)}</span></div>
+        <div class="progress">
+          <div class="proceeds" id="asc-proceeds"><span data-sales-text="proceeds">{copy.sales.proceeds}</span><strong id="asc-total">{money("USD",salesSnapshot.summary.usdCents,2)}</strong></div>
+          <div class="progress-line" id="asc-progress" aria-hidden="true"><i></i></div>
+          <p id="asc-coverage" role="status">{salesSnapshot.start} – {salesSnapshot.end}</p>
+          <p id="asc-forecast" hidden></p>
+          <p id="asc-latest" hidden></p>
+        </div>
+        <button type="button" class="text-link" id="open-monthly" data-sales-text="open">{copy.sales.open}</button>
+      </div>
+      <div class="jar-scene">
+        <div class="pig-stage" id="pig-stage" aria-label={copy.ui.pigLabel}>
+          <div id="jar-render"><img src="/dualcam/showcase/jar-still.webp" alt="" loading="lazy"/></div>
+          <span class="pig-state" id="pig-state" role="status">{copy.cash.current}</span>
+          <span class="pig-hint" data-text="pigHint">{copy.ui.pigHint}</span>
+        </div>
+        <div class="pig-controls" id="pig-controls" hidden aria-label={copy.ui.pigControlLabel}>
+          <button type="button" class="pig-play" id="pig-play"><span class="play-icon" aria-hidden="true"></span><span id="pig-play-label">{copy.cash.play}</span></button>
+          <button type="button" id="pig-full">{copy.cash.full}</button>
+          <button type="button" id="pig-spin" aria-pressed="false"><span aria-hidden="true">↻</span> <span id="pig-spin-label">{copy.ui.pigSpin}</span></button>
+          <button type="button" id="pig-reset" hidden>{copy.cash.reset}</button>
+          <button type="button" id="pig-withdraw" hidden>{copy.cash.take}</button>
+        </div>
+        <p class="pig-denominations" id="pig-denominations" hidden></p>
+      </div>
+    </div>
+  </section>
+  <section class="guides frame" id="guides" aria-labelledby="guides-heading">
+    <div class="section-intro"><div><p class="section-index" data-editorial="guidesLabel">{copy.editorial.guidesLabel}</p><h2 id="guides-heading" data-editorial="guidesTitle">{copy.editorial.guidesTitle}</h2></div></div>
+    <div class="guide-list">
+      <a data-guide="record" href={guideHome+"record-front-back/"} hreflang={legacyLanguage} target="_blank" rel="noreferrer"><span data-editorial="guideRecord">{copy.editorial.guideRecord}</span><span aria-hidden="true">↗</span></a>
+      <a data-guide="layout" href={guideHome+"choose-a-layout/"} hreflang={legacyLanguage} target="_blank" rel="noreferrer"><span data-editorial="guideLayouts">{copy.editorial.guideLayouts}</span><span aria-hidden="true">↗</span></a>
+      <a data-guide="duo" href={legacyHome+"iphone-duo/"} hreflang={legacyLanguage} target="_blank" rel="noreferrer"><span data-editorial="guideDuo">{copy.editorial.guideDuo}</span><span aria-hidden="true">↗</span></a>
+    </div>
+    <div class="faq" id="faq">
+      <h3 data-editorial="faqTitle">{copy.editorial.faqTitle}</h3>
+      <details><summary data-editorial="faqDevices">{copy.editorial.faqDevices}</summary><p data-editorial="faqDevicesAnswer">{copy.editorial.faqDevicesAnswer}</p></details>
+      <details><summary data-editorial="faqPrivacy">{copy.editorial.faqPrivacy}</summary><p data-editorial="faqPrivacyAnswer">{copy.editorial.faqPrivacyAnswer}</p></details>
+      <details><summary data-editorial="faqPro">{copy.editorial.faqPro}</summary><p data-editorial="faqProAnswer">{copy.editorial.faqProAnswer}</p></details>
+    </div>
+  </section>
+</main>
+<dialog id="monthly-dialog" aria-labelledby="monthly-heading"><form method="dialog"><button class="close-dialog" aria-label={copy.ui.close}>×</button></form><h2 id="monthly-heading" data-sales-text="title">{copy.sales.title}</h2><p id="monthly-status">{copy.sales.empty}</p>
+  <div class="sales-views"><button type="button" data-sales-view="daily" data-sales-text="daily" aria-pressed="true">按日</button><button type="button" data-sales-view="monthly" data-sales-text="monthly" aria-pressed="false">按月</button></div>
+  <div class="monthly-scroll" id="monthly-results" hidden>
+    <table><thead><tr><th scope="col" id="sales-period">{copy.sales.dates}</th><th scope="col" data-sales-text="downloads">{copy.sales.downloads}</th><th scope="col" data-sales-text="estimate">{copy.sales.estimate}</th></tr></thead><tbody id="monthly-rows"></tbody></table>
+  </div></dialog>
+<footer class="site-footer frame"><a class="wordmark" href="#top"><img class="app-icon" src="/dualcam/showcase/app-icon.png" width="27" height="27" alt="">DualCam</a><div><a href="mailto:metrocpp@outlook.com" data-editorial="support">{copy.editorial.support}</a><a href="/dualcam/privacy/" target="_blank" rel="noreferrer" data-text="privacy">{copy.ui.privacy}</a><a href="/dualcam/terms/" target="_blank" rel="noreferrer" data-text="terms">{copy.ui.terms}</a></div></footer>
+<Attribution/>
+<script>
+  import '../../lib/dualcam-showcase/app.js';
+</script>
+</body>
+</html>

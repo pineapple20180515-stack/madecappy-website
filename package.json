@@ -17,6 +17,8 @@
     "@tailwindcss/vite": "^4.3.0",
     "@vercel/analytics": "^2.0.1",
     "astro": "^5.18.1",
-    "tailwindcss": "^4.3.0"
+    "cannon-es": "0.20.0",
+    "tailwindcss": "^4.3.0",
+    "three": "0.183.2"
   }
 }

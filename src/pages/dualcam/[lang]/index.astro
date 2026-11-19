@@ -1,6 +1,13 @@
 ---
-import Landing from '../../../components/dualcam/Landing.astro';
-export function getStaticPaths(){return ['en','th'].map(lang=>({params:{lang},props:{locale:lang}}));}
+import Showcase from '../../../components/dualcam/Showcase.astro';
+import { defaultLocale, locales, showcasePath } from '../../../lib/dualcam-showcase/locales.mjs';
+
+export function getStaticPaths() {
+  return Object.keys(locales).filter(locale=>locale!==defaultLocale).map(locale=>({
+    params:{lang:showcasePath(locale).split('/')[2]},
+    props:{locale}
+  }));
+}
 const {locale}=Astro.props;
 ---
-<Landing locale={locale}/>
+<Showcase locale={locale}/>

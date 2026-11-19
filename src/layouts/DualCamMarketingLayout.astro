@@ -1,7 +1,7 @@
 ---
 import copy from '../data/dualcam-marketing.json';
 import published from '../data/dualcam-published-videos.json';
-import campaigns from '../data/dualcam-campaigns.json';
+import Attribution from '../components/dualcam/Attribution.astro';
 import '../styles/dualcam-marketing.css';
 interface Props { locale: keyof typeof copy; title?: string; description?: string; guide?: string; socialImage?: string; }
 const { locale, guide, title, description, socialImage } = Astro.props;
@@ -45,26 +45,6 @@ const videoSchema = published.videos.map(video=>({
 <main id="main"><slot/></main>
 <footer class="site-footer"><div class="wrap footer-row"><div><strong>{d.footer}</strong><p>{d.home} · <a href="/projects">madecappy.com</a></p></div><nav><a href="mailto:metrocpp@outlook.com">{d.support}</a><a href="/dualcam/privacy">{d.privacy}</a><a href="/dualcam/terms">{d.terms}</a></nav></div></footer>
 
-<script id="dualcam-campaign-config" type="application/json" set:html={JSON.stringify(campaigns).replace(/</g,'\\u003c')}/>
-<script>
-import { track, inject } from '@vercel/analytics';
-import { attributionFor } from '../lib/dualcam-attribution.mjs';
-if (!['localhost','127.0.0.1',''].includes(location.hostname)) inject();
-const config=JSON.parse(document.getElementById('dualcam-campaign-config')?.textContent||'{}');
-let stored=null;
-try {stored=JSON.parse(sessionStorage.getItem('dualcam-attribution')||'null');} catch {}
-const attribution=attributionFor(location.search,document.referrer,stored);
-try {sessionStorage.setItem('dualcam-attribution',JSON.stringify(attribution));} catch {}
-for(const el of document.querySelectorAll<HTMLAnchorElement>('a[data-store-link]')) {
-const url=new URL(el.href);
-if(/^\d+$/.test(config.providerToken||'')) {url.searchParams.set('pt',config.providerToken);url.searchParams.set('ct',config.campaigns?.[attribution.source]||config.campaigns.website);url.searchParams.set('mt','8');el.href=url.href;}
-el.addEventListener('click',()=>{try {track('dualcam_download_click',{language:document.documentElement.lang,source:attribution.source,campaign:attribution.campaign,placement:el.dataset.placement||'body'});}catch{}});
-}
-const videos=[...document.querySelectorAll<HTMLVideoElement>('video')];
-for (const video of videos) {
-video.addEventListener('play',()=>{for(const other of videos)if(other!==video&&!other.paused)other.pause();});
-video.addEventListener('play',()=>{try{track('dualcam_demo_play',{language:document.documentElement.lang,source:attribution.source,video:video.dataset.demoId||'layout-simulator'});}catch{}},{once:true});
-}
-</script>
+<Attribution/>
 </body>
 </html>
