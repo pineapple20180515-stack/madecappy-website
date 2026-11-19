@@ -1,0 +1,77 @@
+{
+  "zh": {
+    "title": "iPhone Duo 怎么拍前后双摄？DualCam 使用指南",
+    "description": "了解 iPhone Duo 的外屏取景、展开拍摄、半折摆放和外屏提词。包含前后摄像头同录的操作步骤与版本说明。",
+    "heading": "用 iPhone Duo 拍下风景和反应",
+    "intro": "用 DualCam 同时取景前置和后置摄像头，拍成同一张照片或同一段视频。合上 iPhone Duo 随手取景，展开后用更大的屏幕安排两个画面。",
+    "release": "下方 Duo 专属体验以 DualCam 2.3 为准。演示为模拟器界面，下载安装页显示当前地区可用版本。",
+    "back": "DualCam 产品首页",
+    "linkTitle": "iPhone Duo 双摄指南",
+    "linkDescription": "从外屏随手拍，到展开构图和半折提词，看看怎么操作。",
+    "watch": "演示视频",
+    "demoNote": "模拟器界面演示，展示外屏、展开构图与提词的操作。",
+    "stepsHeading": "三个拍摄场景",
+    "steps": [
+      ["合上手机，外屏随手拍", "打开 DualCam，选择照片或视频。在更多 → 布局里选择画中画，把自己的反应放在小窗里，边走边拍旅行或活动现场。"],
+      ["展开手机，在大屏安排两个画面", "展开 iPhone Duo 后，在内屏确认主画面和小窗的位置。展示物品、做教程或录开箱时，可以试试上下或左右分屏，让两个视角都看得清。"],
+      ["半折放稳，打开提词器", "把手机放在稳定的桌面，打开更多 → 玩法 → 提词器，输入台词并调整滚动速度。支持时，可以将台词送到外屏，方便镜头前的人看稿。提词器是 Pro 功能。"]
+    ],
+    "questions": "常见问题",
+    "faq": [
+      ["怎样用前后摄像头同时录制？", "打开 DualCam，切换到视频，选择画中画或分屏布局，再按录制键。前后两个画面会按选定的布局进入成片。双摄取景需要设备支持。"],
+      ["展开和折叠后，可以用同一个布局吗？", "画中画、上下和左右布局可按拍摄姿态选择。半折时，界面会根据系统提供的折叠区域调整控件位置。构图以拍摄时屏幕里的预览为准。"],
+      ["两面屏幕分别显示什么？", "合上时可以在外屏打开相机取景，展开后在内屏操作。使用 2.3 的外屏提词时，内屏用于取景和控制，外屏显示台词，功能取决于设备与系统支持。"],
+      ["前后双摄也能拍实况照片吗？", "支持的设备可在照片模式开启实况。成片会保留快门前后的一小段动态，打开相册详情后长按播放。这是 Pro 功能。"]
+    ]
+  },
+  "en": {
+    "title": "How to use both cameras on iPhone Duo | DualCam Guide",
+    "description": "A practical guide to front and rear camera recording on iPhone Duo, with the outer and inner displays, tabletop framing and the outer display teleprompter.",
+    "heading": "Film the scene and your reaction on iPhone Duo",
+    "intro": "DualCam combines the front and rear camera views in one photo or video. Use the outer display for a quick shot and unfold iPhone Duo for more room to compose both views.",
+    "release": "The Duo-specific features shown below are for DualCam 2.3. The demo uses simulator screens. Check the App Store for the version available in your region.",
+    "back": "DualCam home",
+    "linkTitle": "iPhone Duo dual-camera guide",
+    "linkDescription": "See how to frame on the outer or inner display and read a script while you film.",
+    "watch": "Watch the demo",
+    "demoNote": "Simulator demonstration of the outer display, the unfolded camera and the teleprompter.",
+    "stepsHeading": "Three ways to shoot",
+    "steps": [
+      ["Frame a quick shot on the outer display", "Open DualCam while the device is folded. Choose Photo or Video, then use More → Layouts → Picture-in-Picture to show your reaction in a movable window."],
+      ["Unfold for more room to compose", "Use the inner display to check both views. Try Top/Bottom or Left/Right for a tutorial, a product demo or an unboxing where each view needs room."],
+      ["Set it on a table and read your script", "Partially fold the device on a stable surface. Open More → Fun → Teleprompter, enter your script and adjust its speed. On supported configurations, send the script to the outer display for the person on camera. The teleprompter is a Pro feature."]
+    ],
+    "questions": "Frequently asked questions",
+    "faq": [
+      ["How do I record the front and rear cameras at the same time?", "Open DualCam, switch to Video, choose picture-in-picture or a split layout, and start recording. Both views appear in the saved video in the layout you chose. Dual-camera capture depends on device support."],
+      ["Can I use the same layout when I fold or unfold?", "Choose picture-in-picture or a split layout for the way you are filming. In partially folded positions, the controls can adapt to the fold region reported by the system. Use the camera preview to check your framing."],
+      ["What appears on each display?", "You can frame a shot on the outer display when folded or use the inner display when unfolded. With 2.3 outer-display prompting, use the inner display to frame and control the shot while the script appears outside where supported."],
+      ["Can I take dual-camera Live Photos?", "On supported devices, enable Live in Photo mode. The saved photo includes motion around the shutter. In the gallery, open it and touch and hold to play. Live Photos are a Pro feature."]
+    ]
+  },
+  "th": {
+    "title": "วิธีใช้กล้องหน้าและหลังพร้อมกันบน iPhone Duo | DualCam",
+    "description": "คู่มือถ่ายด้วยกล้องหน้าและหลังบน iPhone Duo ใช้จอนอก จอด้านใน วางเครื่องแบบพับครึ่ง และอ่านบทบนจอนอก",
+    "heading": "ถ่ายทั้งวิวและปฏิกิริยาของคุณบน iPhone Duo",
+    "intro": "DualCam รวมภาพจากกล้องหน้าและกล้องหลังไว้ในรูปหรือวิดีโอเดียว ใช้จอนอกเมื่ออยากถ่ายเร็ว หรือกางเครื่องเพื่อจัดทั้งสองมุมบนจอด้านใน",
+    "release": "ฟีเจอร์สำหรับ Duo ในหน้านี้อ้างอิง DualCam 2.3 วิดีโอใช้ภาพจากเครื่องจำลอง ตรวจสอบเวอร์ชันที่เปิดให้ดาวน์โหลดใน App Store ของคุณ",
+    "back": "หน้าแรก DualCam",
+    "linkTitle": "คู่มือกล้องคู่บน iPhone Duo",
+    "linkDescription": "ดูวิธีใช้จอนอก จอด้านใน และอ่านบทระหว่างถ่าย",
+    "watch": "ดูวิดีโอสาธิต",
+    "demoNote": "สาธิตจอนอก กล้องเมื่อกางเครื่อง และการอ่านบทด้วยภาพจากเครื่องจำลอง",
+    "stepsHeading": "สามวิธีในการถ่าย",
+    "steps": [
+      ["ใช้จอนอกเพื่อถ่ายได้ทันที", "เปิด DualCam ขณะพับเครื่อง เลือกภาพถ่ายหรือวิดีโอ แล้วเลือกเพิ่มเติม → เลย์เอาต์ → ภาพซ้อน เพื่อวางภาพจากกล้องหน้าในหน้าต่างที่ย้ายได้"],
+      ["กางเครื่องเพื่อจัดภาพทั้งสองมุม", "ใช้จอด้านในตรวจดูตำแหน่งของภาพ ลองแบ่งจอบน–ล่างหรือซ้าย–ขวาเมื่อทำคลิปสอน สาธิตสินค้า หรือแกะกล่อง"],
+      ["วางเครื่องบนโต๊ะแล้วอ่านบท", "พับเครื่องบางส่วนแล้ววางบนพื้นมั่นคง เปิดเทเลพรอมพ์เตอร์ ใส่บทและปรับความเร็ว บนอุปกรณ์ที่รองรับ สามารถส่งบทไปยังจอนอกให้คนหน้ากล้องอ่านได้ เทเลพรอมพ์เตอร์เป็นฟีเจอร์ Pro"]
+    ],
+    "questions": "คำถามที่พบบ่อย",
+    "faq": [
+      ["จะบันทึกกล้องหน้าและกล้องหลังพร้อมกันได้อย่างไร", "เปิด DualCam เลือกวิดีโอ เลือกภาพซ้อนหรือแบ่งจอ แล้วกดบันทึก วิดีโอจะมีทั้งสองมุมตามเลย์เอาต์ที่เลือก การถ่ายด้วยกล้องคู่ขึ้นอยู่กับอุปกรณ์"],
+      ["พับหรือกางเครื่องแล้วยังใช้เลย์เอาต์ได้ไหม", "เลือกภาพซ้อนหรือแบ่งจอให้เหมาะกับท่าที่ถือเครื่อง เมื่อพับบางส่วน ปุ่มจะปรับตามบริเวณรอยพับที่ระบบรายงาน ตรวจสอบการจัดภาพในหน้ากล้องก่อนถ่าย"],
+      ["แต่ละจอแสดงอะไร", "เมื่อพับเครื่องใช้จอนอกจัดภาพ เมื่อกางเครื่องใช้จอด้านใน ในเวอร์ชัน 2.3 หากรองรับ คุณสามารถควบคุมกล้องจากจอด้านในและแสดงบทบนจอนอกได้"],
+      ["ถ่าย Live Photo ด้วยกล้องคู่ได้ไหม", "บนอุปกรณ์ที่รองรับ ให้เปิด Live ในโหมดภาพถ่าย ภาพที่บันทึกจะมีการเคลื่อนไหวช่วงก่อนและหลังกดชัตเตอร์ แตะภาพค้างไว้เพื่อเล่น ฟีเจอร์นี้อยู่ใน Pro"]
+    ]
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "providerToken": "",
+  "campaigns": {
+    "website": "dc_web_th",
+    "youtube": "dc_yt_th",
+    "x": "dc_x_th",
+    "instagram": "dc_ig_th",
+    "tiktok": "dc_tt_th",
+    "facebook": "dc_fb_th",
+    "creator": "dc_creator_th",
+    "google": "dc_web_google",
+    "chatgpt": "dc_web_chatgpt",
+    "doubao": "dc_web_doubao"
+  }
+}

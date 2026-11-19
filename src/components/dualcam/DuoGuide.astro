@@ -1,0 +1,67 @@
+---
+import Layout from '../../layouts/DualCamMarketingLayout.astro';
+import copy from '../../data/dualcam-duo-guide.json';
+
+interface Props { locale: keyof typeof copy }
+const {locale} = Astro.props;
+const d = copy[locale];
+const home = locale === 'zh' ? '/dualcam/' : `/dualcam/${locale}/`;
+const asset = '/dualcam/media/';
+const steps = ['duo-outer', 'duo-open', 'duo-prompter'];
+---
+<Layout locale={locale} guide="iphone-duo" title={d.title} description={d.description}>
+  <article class="duo-guide wrap">
+    <header class="duo-guide-hero">
+      <a class="text-link" href={home}>{d.back}</a>
+      <h1>{d.heading}</h1>
+      <p class="intro">{d.intro}</p>
+      <p class="small-note">{d.release}</p>
+    </header>
+
+    <section aria-labelledby="duo-video" class="duo-watch">
+      <div><h2 id="duo-video">{d.watch}</h2><p>{d.demoNote}</p></div>
+      <video controls playsinline preload="none" poster={asset+'duo-demo-poster.webp'} width="1920" height="1080" data-demo-id="iphone-duo" aria-label={d.watch}>
+        <source src={asset+'iphone-duo-demo.mp4'} type="video/mp4"/>
+        <track kind="captions" srclang="zh-Hans" label="简体中文" src={asset+'iphone-duo-demo-zh-Hans.vtt'} default={locale==='zh'}/>
+        <track kind="captions" srclang="en" label="English" src={asset+'iphone-duo-demo-en.vtt'}/>
+        <track kind="captions" srclang="th" label="ไทย" src={asset+'iphone-duo-demo-th.vtt'} default={locale==='th'}/>
+        <a href={asset+'iphone-duo-demo.mp4'}>{d.watch}</a>
+      </video>
+    </section>
+
+    <section aria-labelledby="duo-steps">
+      <h2 id="duo-steps">{d.stepsHeading}</h2>
+      <ol class="duo-steps">
+        {d.steps.map(([heading, body],i) => <li>
+          <figure><img src={asset+steps[i]+'.webp'} alt={heading} loading="lazy"/></figure>
+          <div><h3>{heading}</h3><p>{body}</p></div>
+        </li>)}
+      </ol>
+    </section>
+
+    <section aria-labelledby="duo-faq" class="duo-faq">
+      <h2 id="duo-faq">{d.questions}</h2>
+      {d.faq.map(([q,a]) => <section><h3>{q}</h3><p>{a}</p></section>)}
+    </section>
+
+    <footer><a class="button primary" href="https://apps.apple.com/app/id6774681432" data-store-link data-placement="duo-guide">App Store</a></footer>
+  </article>
+</Layout>
+
+<style>
+.duo-guide { padding-block: clamp(48px,8vw,110px); }
+.duo-guide-hero { max-width: 760px; padding-bottom: 32px; }
+.duo-guide-hero h1 { font-size: clamp(2.2rem,5vw,4.5rem); line-height: 1.05; margin: 20px 0; }
+.duo-watch { display: grid; grid-template-columns: 1fr minmax(0, 2fr); gap: 24px; align-items: center; margin-bottom: 64px; }
+.duo-watch video { display: block; width: 100%; height: auto; border-radius: 18px; background: #161b20; }
+.duo-steps { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; padding:0; list-style:none; }
+.duo-steps li { border:1px solid #dce6ea; border-radius:18px; overflow:hidden; }
+.duo-steps figure { margin:0; display:grid; place-items:center; aspect-ratio:4/3; background:#14222b; padding:12px; }
+.duo-steps img { width:100%; height:100%; max-height:230px; object-fit:contain; border-radius:8px; }
+.duo-steps li > div { padding: 18px; }
+.duo-steps h3,.duo-faq h3 { margin:0 0 6px; font-size:1.15rem; }
+.duo-steps p,.duo-faq p { margin:0; }
+.duo-faq { max-width: 850px; margin-block: 64px 36px; }
+.duo-faq section { padding: 16px 0; border-bottom: 1px solid #dce6ea; }
+@media(max-width:740px) { .duo-watch,.duo-steps { grid-template-columns:1fr; } }
+</style>

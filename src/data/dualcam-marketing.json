@@ -1,0 +1,572 @@
+{
+  "en": {
+    "lang": "en",
+    "title": "DualCam for iPhone — Record Front & Back Cameras Together",
+    "description": "Record front and rear cameras together on a compatible iPhone. Explore picture-in-picture, split screen, dual-camera photos and Pro Live Photos.",
+    "badge": "DUALCAM · FOR IPHONE",
+    "headline": [
+      "The view in front.",
+      "The feeling behind."
+    ],
+    "intro": "Record the world and your reaction together. Two camera views, saved as one photo or video.",
+    "download": "Download on the App Store",
+    "watch": "See the layouts",
+    "nav": [
+      "Overview",
+      "How to use",
+      "Questions"
+    ],
+    "home": "Made by Cappy",
+    "imageNote": "Illustrative app preview · AI-generated scene",
+    "galleryTitle": "Two views. Your way.",
+    "galleryIntro": "Keep your face in a small window, or give both views space with a split layout. Some layouts and effects require Pro.",
+    "shots": [
+      "Dual-camera photos",
+      "Live Photos · Pro",
+      "Dual-camera video",
+      "Flexible layouts",
+      "Postcards · Pro",
+      "Teleprompter · Pro"
+    ],
+    "demoTitle": "See how the layouts look",
+    "demoText": "A 30-second interface demonstration using AI-generated sample scenes. This is a silent simulator demo, not footage captured on an iPhone.",
+    "transcriptLabel": "Read the demo description",
+    "demoTranscript": [
+      "0–5s: Picture-in-picture photo layout with a travel scene.",
+      "5–10s: Front and rear views in video mode.",
+      "10–15s: Top-bottom split layout.",
+      "15–20s: A concert scene with a reaction window.",
+      "20–25s: Side-by-side split layout.",
+      "25–30s: Picture-in-picture with a dinner scene."
+    ],
+    "featuresTitle": "Capture more of the moment",
+    "features": [
+      [
+        "Video & photos",
+        "Use front and back cameras together and save a combined photo or video."
+      ],
+      [
+        "Live Photos · Pro",
+        "Keep the moments around the shutter with both views in one Live Photo."
+      ],
+      [
+        "Flexible layouts",
+        "Picture-in-picture, top-bottom and side-by-side. Move and resize the small window."
+      ],
+      [
+        "Teleprompter · Pro",
+        "Keep your script in view and control scrolling while recording."
+      ],
+      [
+        "Creative effects",
+        "Try face stickers, background blur or swap, Person Cutout and Shock Mode."
+      ],
+      [
+        "On-device processing",
+        "Camera compositing and visual effects are processed on your device. Purchases and optional location services may connect online."
+      ]
+    ],
+    "guideTitle": "Start with a simple shot",
+    "guideIntro": "A short guide for recording both cameras, and another for choosing a layout.",
+    "guides": [
+      [
+        "Record front and back together",
+        "From camera permissions to saving a short test video."
+      ],
+      [
+        "Choose your dual-camera layout",
+        "When to use picture-in-picture, top-bottom or side-by-side."
+      ]
+    ],
+    "read": "Read the guide",
+    "pricingTitle": "Start with basic capture",
+    "pricingText": "Basic capture is free. Pro unlocks all Pro features and exports without a watermark. Some layouts and effects require Pro; one watermarked Pro creation is available to try.",
+    "plans": [
+      [
+        "Weekly Pro",
+        "An auto-renewing subscription."
+      ],
+      [
+        "Lifetime Pro",
+        "A one-time purchase."
+      ]
+    ],
+    "priceNote": "Check the app for current local prices. A lifetime purchase does not automatically cancel an existing weekly subscription. Manage renewal in your App Store account.",
+    "faqTitle": "Before you download",
+    "faq": [
+      [
+        "Does it work on every iPhone?",
+        "Dual-camera capture requires an iPhone with multi-camera support and iOS 15 or later. Check compatibility in the App Store and try a short recording on your device."
+      ],
+      [
+        "Are the cameras recorded at the same time?",
+        "Yes. On a compatible iPhone, DualCam combines front and back camera views into one photo or video."
+      ],
+      [
+        "Can I export without a watermark?",
+        "Watermark-free export is included in Pro. Check the in-app purchase screen for the current features and local prices."
+      ],
+      [
+        "Does the app upload my recordings?",
+        "Camera compositing and visual effects run on your device. Purchases and restoring purchases connect to the App Store; optional city names use Apple location services, and sending feedback uses email."
+      ],
+      [
+        "Are these real camera recordings?",
+        "The promotional images use AI-generated scenes. The layout video shows the app interface in a simulator with sample imagery, not a real-world camera test."
+      ],
+      [
+        "Where can I ask for help?",
+        "Use the support email below. Include your iPhone model, iOS version and a short description; do not send private photos unless necessary."
+      ]
+    ],
+    "support": "Support",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "footer": "DualCam · Front & Back",
+    "bottomTitle": "Keep both sides of the story.",
+    "compat": "iOS 15+ · Compatible iPhone required",
+    "guideBack": "Back to DualCam",
+    "guideDisclaimer": "Button names can vary by language and version. Illustrations use sample scenes. Try a short test on your own iPhone before an important recording.",
+    "guideSteps": [
+      [
+        [
+          "Check compatibility and permissions",
+          "Install DualCam from the App Store. Allow camera access; allow microphone access if you want sound. Dual-camera recording requires supported iPhone hardware."
+        ],
+        [
+          "Choose Video",
+          "Open video mode. Check that both front and rear views are visible, then choose a layout that keeps your subject clear."
+        ],
+        [
+          "Record a short test",
+          "Record a few seconds, stop, and save. Review framing and sound in Photos before filming a longer moment."
+        ],
+        [
+          "Record and review",
+          "Keep both lenses clear. After recording, review the saved video. Pro options and watermark-free export are shown in the app."
+        ]
+      ],
+      [
+        [
+          "Picture-in-picture for reactions",
+          "Use the rear view for the scene and the smaller front view for your face. Move the window away from important details."
+        ],
+        [
+          "Top-bottom for two equal subjects",
+          "Give each view a clear part of the frame. Check faces and horizons near the split."
+        ],
+        [
+          "Side-by-side for comparison",
+          "Choose this layout when both views matter equally. Frame each subject so it stays visible after the split."
+        ],
+        [
+          "Check the result before sharing",
+          "Record a short test in your chosen orientation. Review both views in the exported file. Some layouts require Pro."
+        ]
+      ]
+    ],
+    "guideSummary": [
+      "Record both views, then review one saved video.",
+      "Choose the layout that keeps your main subject clear."
+    ],
+    "updateTitle": "What is new in 2.3",
+    "updates": [
+      [
+        "Clearer capture controls",
+        "Choose photo clarity in Settings, and select HD or 4K video with 24, 30 or 60 fps when the camera combination supports it. The default is 30 fps."
+      ],
+      [
+        "Keep your framing when you turn",
+        "The camera layout stays in place while icons and saved media follow the way you hold your device."
+      ],
+      [
+        "More ways to create",
+        "Make a postcard from the rear view, browse live style previews, or use the teleprompter while recording. Pro features are marked in the app."
+      ],
+      [
+        "A steadier camera and gallery",
+        "Improved Auto Flash with Live Photos, background camera resume, and sharing of photos and videos. Swipe through saved work or down to dismiss it."
+      ]
+    ]
+  },
+  "th": {
+    "lang": "th",
+    "title": "DualCam สำหรับ iPhone — ถ่ายกล้องหน้าและหลังพร้อมกัน",
+    "description": "ถ่ายภาพและวิดีโอด้วยกล้องหน้าและหลังพร้อมกันบน iPhone ที่รองรับ เลือกภาพซ้อนภาพหรือแบ่งหน้าจอ พร้อม Live Photos ใน Pro",
+    "badge": "DUALCAM · สำหรับ IPHONE",
+    "headline": [
+      "เก็บวิวตรงหน้า",
+      "และตัวคุณไปพร้อมกัน"
+    ],
+    "intro": "บันทึกสิ่งที่คุณเห็นและความรู้สึกของคุณ รวมภาพจากสองกล้องไว้ในภาพถ่ายหรือวิดีโอเดียว",
+    "download": "ดาวน์โหลดบน App Store",
+    "watch": "ดูตัวอย่างรูปแบบภาพ",
+    "nav": [
+      "รู้จัก DualCam",
+      "วิธีใช้งาน",
+      "คำถามที่พบบ่อย"
+    ],
+    "home": "สร้างโดย Cappy",
+    "imageNote": "ภาพตัวอย่างแอป · ฉากสร้างด้วย AI",
+    "galleryTitle": "สองมุมมอง ในแบบของคุณ",
+    "galleryIntro": "วางใบหน้าของคุณในหน้าต่างเล็ก หรือแบ่งพื้นที่ให้ทั้งสองมุมมอง บางรูปแบบและเอฟเฟกต์ต้องใช้ Pro",
+    "shots": [
+      "ภาพถ่ายสองกล้อง",
+      "Live Photos · Pro",
+      "วิดีโอสองกล้อง",
+      "เลย์เอาต์ที่ยืดหยุ่น",
+      "โปสการ์ด · Pro",
+      "เทเลพรอมพ์เตอร์ · Pro"
+    ],
+    "demoTitle": "ดูรูปแบบภาพก่อนเริ่มถ่าย",
+    "demoText": "วิดีโอสาธิตหน้าจอแอป 30 วินาที ใช้ฉากตัวอย่างที่สร้างด้วย AI ไม่มีเสียง และบันทึกจากเครื่องจำลอง ไม่ใช่ภาพที่ถ่ายจริงด้วย iPhone",
+    "transcriptLabel": "อ่านคำอธิบายวิดีโอ",
+    "demoTranscript": [
+      "0–5 วินาที: ภาพซ้อนภาพในฉากท่องเที่ยว",
+      "5–10 วินาที: มุมมองกล้องหน้าและหลังในโหมดวิดีโอ",
+      "10–15 วินาที: รูปแบบแบ่งภาพบนและล่าง",
+      "15–20 วินาที: ฉากคอนเสิร์ตพร้อมหน้าต่างแสดงปฏิกิริยา",
+      "20–25 วินาที: รูปแบบแบ่งภาพซ้ายและขวา",
+      "25–30 วินาที: ภาพซ้อนภาพในฉากมื้ออาหาร"
+    ],
+    "featuresTitle": "เก็บช่วงเวลาได้ครบกว่าเดิม",
+    "features": [
+      [
+        "ภาพถ่ายและวิดีโอ",
+        "ใช้กล้องหน้าและหลังพร้อมกัน แล้วบันทึกเป็นภาพถ่ายหรือวิดีโอเดียว"
+      ],
+      [
+        "Live Photos · Pro",
+        "เก็บช่วงเวลาก่อนและหลังกดชัตเตอร์ พร้อมภาพจากสองกล้องใน Live Photo เดียว"
+      ],
+      [
+        "จัดวางภาพได้หลายแบบ",
+        "ภาพซ้อนภาพ แบ่งบนและล่าง หรือแบ่งซ้ายและขวา พร้อมย้ายและปรับขนาดหน้าต่างเล็ก"
+      ],
+      [
+        "เครื่องช่วยอ่านสคริปต์ · Pro",
+        "ดูสคริปต์และควบคุมการเลื่อนข้อความขณะบันทึกวิดีโอ"
+      ],
+      [
+        "เอฟเฟกต์สร้างสรรค์",
+        "ลองสติกเกอร์ใบหน้า เบลอหรือเปลี่ยนพื้นหลัง ตัดตัวบุคคลเข้าฉาก และเอฟเฟกต์ตกใจ"
+      ],
+      [
+        "ประมวลผลบนอุปกรณ์",
+        "การรวมภาพและเอฟเฟกต์ทำงานบนอุปกรณ์ การซื้อและบริการตำแหน่งที่ตั้งบางอย่างอาจใช้อินเทอร์เน็ต"
+      ]
+    ],
+    "guideTitle": "เริ่มจากคลิปสั้น ๆ",
+    "guideIntro": "ดูวิธีบันทึกจากสองกล้อง และวิธีเลือกรูปแบบภาพที่เหมาะกับสิ่งที่อยากถ่าย",
+    "guides": [
+      [
+        "ถ่ายวิดีโอกล้องหน้าและหลังพร้อมกัน",
+        "ตั้งแต่การอนุญาตใช้กล้องจนถึงการบันทึกคลิปทดลอง"
+      ],
+      [
+        "เลือกรูปแบบภาพจากสองกล้อง",
+        "เมื่อไหร่ควรใช้ภาพซ้อนภาพ แบ่งบนล่าง หรือแบ่งซ้ายขวา"
+      ]
+    ],
+    "read": "อ่านวิธีใช้งาน",
+    "pricingTitle": "เริ่มถ่ายด้วยฟังก์ชันพื้นฐานฟรี",
+    "pricingText": "ฟังก์ชันถ่ายภาพพื้นฐานใช้ฟรี Pro ปลดล็อกฟังก์ชัน Pro ทั้งหมดและส่งออกโดยไม่มีลายน้ำ บางรูปแบบและเอฟเฟกต์ต้องใช้ Pro โดยทดลองสร้างผลงาน Pro แบบมีลายน้ำได้หนึ่งครั้ง",
+    "plans": [
+      [
+        "Pro รายสัปดาห์",
+        "การสมัครสมาชิกที่ต่ออายุอัตโนมัติ"
+      ],
+      [
+        "Pro ตลอดชีพ",
+        "ซื้อครั้งเดียว"
+      ]
+    ],
+    "priceNote": "ตรวจสอบราคาปัจจุบันในแอป การซื้อตลอดชีพไม่ได้ยกเลิกสมาชิกรายสัปดาห์ที่มีอยู่โดยอัตโนมัติ จัดการการต่ออายุได้ในบัญชี App Store",
+    "faqTitle": "ก่อนดาวน์โหลด",
+    "faq": [
+      [
+        "ใช้ได้กับ iPhone ทุกรุ่นไหม?",
+        "การถ่ายด้วยสองกล้องต้องใช้ iPhone ที่รองรับการทำงานหลายกล้องพร้อมกัน และ iOS 15 ขึ้นไป ตรวจสอบความเข้ากันได้ใน App Store และทดลองบันทึกคลิปสั้นบนเครื่องของคุณ"
+      ],
+      [
+        "กล้องหน้าและหลังทำงานพร้อมกันจริงไหม?",
+        "ใช่ บน iPhone ที่รองรับ DualCam รวมภาพจากกล้องหน้าและหลังไว้ในภาพถ่ายหรือวิดีโอเดียว"
+      ],
+      [
+        "ส่งออกแบบไม่มีลายน้ำได้ไหม?",
+        "การส่งออกแบบไม่มีลายน้ำรวมอยู่ใน Pro ดูฟังก์ชันและราคาปัจจุบันได้ที่หน้าซื้อภายในแอป"
+      ],
+      [
+        "แอปอัปโหลดวิดีโอของฉันไหม?",
+        "การรวมภาพและเอฟเฟกต์ทำงานบนอุปกรณ์ การซื้อและกู้คืนการซื้อเชื่อมต่อกับ App Store ชื่อเมืองแบบเลือกใช้มาจากบริการตำแหน่งที่ตั้งของ Apple และการส่งข้อเสนอแนะใช้อีเมล"
+      ],
+      [
+        "ภาพตัวอย่างนี้ถ่ายจากกล้องจริงไหม?",
+        "ภาพประชาสัมพันธ์ใช้ฉากที่สร้างด้วย AI วิดีโอแสดงหน้าจอแอปในเครื่องจำลองโดยใช้ภาพตัวอย่าง ไม่ใช่การทดสอบกล้องในสถานที่จริง"
+      ],
+      [
+        "ติดต่อขอความช่วยเหลือได้อย่างไร?",
+        "ใช้อีเมลด้านล่าง ระบุรุ่น iPhone เวอร์ชัน iOS และปัญหาโดยย่อ ไม่ต้องส่งภาพส่วนตัวหากไม่จำเป็น"
+      ]
+    ],
+    "support": "ติดต่อเรา",
+    "privacy": "ความเป็นส่วนตัว",
+    "terms": "ข้อกำหนดการใช้งาน",
+    "footer": "DualCam · กล้องหน้าและหลัง",
+    "bottomTitle": "เก็บทั้งภาพที่เห็น และความรู้สึกของคุณ",
+    "compat": "iOS 15 ขึ้นไป · ต้องใช้ iPhone ที่รองรับ",
+    "guideBack": "กลับไปที่ DualCam",
+    "guideDisclaimer": "ชื่อปุ่มอาจต่างกันตามภาษาและเวอร์ชัน ภาพประกอบใช้ฉากตัวอย่าง ควรทดลองบันทึกคลิปสั้นบน iPhone ของคุณก่อนถ่ายช่วงเวลาสำคัญ",
+    "guideSteps": [
+      [
+        [
+          "ตรวจสอบอุปกรณ์และสิทธิ์การเข้าถึง",
+          "ติดตั้ง DualCam จาก App Store อนุญาตให้ใช้กล้อง และอนุญาตไมโครโฟนหากต้องการบันทึกเสียง การใช้สองกล้องพร้อมกันต้องอาศัย iPhone ที่รองรับ"
+        ],
+        [
+          "เลือกโหมดวิดีโอ",
+          "เปิดโหมดวิดีโอ ตรวจสอบว่าเห็นภาพจากกล้องหน้าและหลัง แล้วเลือกรูปแบบที่ทำให้เห็นสิ่งที่ต้องการถ่ายชัดเจน"
+        ],
+        [
+          "ทดลองบันทึกคลิปสั้น",
+          "บันทึกสักสองสามวินาที หยุดและบันทึกไฟล์ ตรวจสอบภาพและเสียงในแอปรูปภาพก่อนถ่ายคลิปยาว"
+        ],
+        [
+          "บันทึกและตรวจสอบผลงาน",
+          "ระวังไม่ให้นิ้วบังเลนส์ทั้งสอง หลังถ่ายให้เปิดดูวิดีโอที่บันทึก ตัวเลือก Pro และการส่งออกไม่มีลายน้ำแสดงอยู่ในแอป"
+        ]
+      ],
+      [
+        [
+          "ใช้ภาพซ้อนภาพเพื่อเก็บปฏิกิริยา",
+          "ใช้ภาพจากกล้องหลังแสดงฉาก และหน้าต่างเล็กจากกล้องหน้าแสดงใบหน้า ย้ายหน้าต่างให้พ้นรายละเอียดสำคัญ"
+        ],
+        [
+          "แบ่งบนและล่างเมื่อทั้งสองภาพสำคัญ",
+          "แบ่งพื้นที่ให้แต่ละมุมมอง ตรวจสอบใบหน้าและเส้นขอบฟ้าที่อยู่ใกล้รอยแบ่ง"
+        ],
+        [
+          "แบ่งซ้ายและขวาเพื่อแสดงคู่กัน",
+          "เลือกรูปแบบนี้เมื่อทั้งสองมุมมองมีความสำคัญ จัดตำแหน่งให้ตัวแบบยังอยู่ในกรอบหลังแบ่งภาพ"
+        ],
+        [
+          "ตรวจสอบก่อนแชร์",
+          "ทดลองบันทึกตามแนวหน้าจอที่ต้องการ แล้วตรวจสอบทั้งสองมุมมองในไฟล์ที่ส่งออก บางรูปแบบต้องใช้ Pro"
+        ]
+      ]
+    ],
+    "guideSummary": [
+      "บันทึกสองมุมมอง แล้วตรวจสอบวิดีโอที่บันทึกไว้",
+      "เลือกรูปแบบที่ทำให้เห็นสิ่งสำคัญได้ชัดเจน"
+    ],
+    "updateTitle": "มีอะไรใหม่ในเวอร์ชัน 2.3",
+    "updates": [
+      [
+        "ตั้งค่าการถ่ายได้ชัดเจนขึ้น",
+        "เลือกความคมชัดของภาพถ่ายในการตั้งค่า และเลือกวิดีโอ HD หรือ 4K ที่ 24, 30 หรือ 60 fps ตามที่ชุดกล้องของอุปกรณ์รองรับ ค่าเริ่มต้นคือ 30 fps"
+      ],
+      [
+        "หมุนเครื่องโดยไม่เสียการจัดภาพ",
+        "ตำแหน่งช่องมองภาพและปุ่มยังคงเดิม ส่วนไอคอนและไฟล์ที่บันทึกจะปรับตามทิศทางที่ถือเครื่อง"
+      ],
+      [
+        "สร้างสรรค์ได้หลายแบบ",
+        "ทำโปสการ์ดจากกล้องหลัง ดูตัวอย่างสไตล์แบบสด หรือใช้เทเลพรอมป์เตอร์ขณะบันทึก ฟีเจอร์ Pro มีสัญลักษณ์ในแอป"
+      ],
+      [
+        "กล้องและอัลบั้มใช้งานสะดวกขึ้น",
+        "ปรับแฟลชอัตโนมัติกับ Live Photos การกลับเข้าแอป และการแชร์ภาพกับวิดีโอ ปัดซ้ายขวาเพื่อดูผลงานหรือปัดลงเพื่อปิดรายละเอียด"
+      ]
+    ]
+  },
+  "zh": {
+    "lang": "zh-Hans",
+    "title": "DualCam 前后双摄 — 同时记录风景和自己",
+    "description": "在支持多摄的 iPhone 上同时使用前后摄像头，合成一张照片或一条视频。支持画中画、分屏和 Pro 实况照片。",
+    "badge": "DUALCAM · IPHONE 相机",
+    "headline": [
+      "后置拍世界，",
+      "前置拍你。"
+    ],
+    "intro": "记录眼前的画面，也留下镜头后的表情。两路视角，合成一张照片或一条视频。",
+    "download": "在 App Store 下载",
+    "watch": "看看布局效果",
+    "nav": [
+      "产品介绍",
+      "使用指南",
+      "常见问题"
+    ],
+    "home": "由 Cappy 制作",
+    "imageNote": "产品示意 · 场景由 AI 生成",
+    "galleryTitle": "两个视角，由你安排。",
+    "galleryIntro": "用小窗保留自己的表情，或用分屏让两个视角各占一席。部分布局和特效需要 Pro。",
+    "shots": [
+      "前后双摄照片",
+      "实况照片 · Pro",
+      "前后双摄视频",
+      "自由布局",
+      "明信片 · Pro",
+      "提词器 · Pro"
+    ],
+    "demoTitle": "先看看它怎么呈现",
+    "demoText": "30 秒界面演示，使用 AI 生成的示例场景。视频无声，录制自模拟器，不是真机拍摄成片。",
+    "transcriptLabel": "查看视频内容说明",
+    "demoTranscript": [
+      "0–5 秒：旅行场景中的画中画拍照布局。",
+      "5–10 秒：视频模式的前后双摄视角。",
+      "10–15 秒：上下分屏布局。",
+      "15–20 秒：演唱会场景和表情小窗。",
+      "20–25 秒：左右分屏布局。",
+      "25–30 秒：聚餐场景中的画中画。"
+    ],
+    "featuresTitle": "把这一刻拍得更完整",
+    "features": [
+      [
+        "拍照与录像",
+        "前后摄像头同时拍摄，保存为合成的照片或视频。"
+      ],
+      [
+        "实况照片 · Pro",
+        "保留快门前后的瞬间，让两个视角一起成为一张实况照片。"
+      ],
+      [
+        "自由布局",
+        "画中画、上下分屏、左右分屏，小窗可以移动和缩放。"
+      ],
+      [
+        "提词器 · Pro",
+        "录制时查看文稿，控制文字滚动。"
+      ],
+      [
+        "创意特效",
+        "人脸贴纸、背景虚化与更换、人入景和震惊模式。"
+      ],
+      [
+        "设备端处理",
+        "拍摄合成与视觉特效在设备端完成；购买和可选的定位服务可能联网。"
+      ]
+    ],
+    "guideTitle": "从一段短视频开始",
+    "guideIntro": "先学会前后同录，再选一个适合你的布局。",
+    "guides": [
+      [
+        "如何同时录制前后摄像头",
+        "从授予权限，到保存并检查一段测试视频。"
+      ],
+      [
+        "如何选择双摄布局",
+        "画中画、上下分屏和左右分屏，分别适合什么场景。"
+      ]
+    ],
+    "read": "阅读指南",
+    "pricingTitle": "先用基础功能开始拍",
+    "pricingText": "基础拍摄免费。Pro 解锁全部 Pro 功能并支持无水印导出；部分布局和特效需要 Pro，可以试用一次带水印的 Pro 创作。",
+    "plans": [
+      [
+        "Pro 周会员",
+        "自动续期订阅。"
+      ],
+      [
+        "Pro 永久买断",
+        "一次性购买。"
+      ]
+    ],
+    "priceNote": "实际价格以 App 内当地价格为准。购买永久会员不会自动取消已有周订阅，请在 App Store 账户中管理续订。",
+    "faqTitle": "下载前，你可能想知道",
+    "faq": [
+      [
+        "所有 iPhone 都支持吗？",
+        "前后双摄需要支持多摄的 iPhone，以及 iOS 15 或更高版本。请查看 App Store 兼容信息，并在自己的手机上先录一段短视频。"
+      ],
+      [
+        "前后摄像头是同时录制的吗？",
+        "是的。在支持的 iPhone 上，DualCam 将前后摄像头画面合成为一张照片或一条视频。"
+      ],
+      [
+        "可以无水印导出吗？",
+        "Pro 包含无水印导出，具体功能与当地价格可在 App 内购买页面查看。"
+      ],
+      [
+        "会上传我的拍摄内容吗？",
+        "拍摄合成与视觉特效在设备端处理。购买和恢复购买连接 App Store；可选城市名称使用 Apple 定位服务，发送反馈使用邮件。"
+      ],
+      [
+        "这些展示是真机拍摄的吗？",
+        "宣传图采用 AI 生成的场景。布局视频使用模拟器中的原生界面与示例画面，不是真实场景中的相机性能测试。"
+      ],
+      [
+        "遇到问题怎么联系？",
+        "可以通过下方支持邮箱联系。请说明 iPhone 型号、iOS 版本和问题，不必发送无关私人照片。"
+      ]
+    ],
+    "support": "联系支持",
+    "privacy": "隐私政策",
+    "terms": "使用条款",
+    "footer": "DualCam · 前后双摄",
+    "bottomTitle": "镜头前后，都值得记录。",
+    "compat": "iOS 15+ · 需要支持多摄的 iPhone",
+    "guideBack": "返回 DualCam",
+    "guideDisclaimer": "按钮名称可能随语言和版本变化。配图使用示例场景；拍摄重要内容前，请先在自己的 iPhone 上完成一次短视频测试。",
+    "guideSteps": [
+      [
+        [
+          "确认设备和权限",
+          "从 App Store 安装 DualCam，允许使用相机；需要录音时允许麦克风。前后同时录制需要手机支持多摄。"
+        ],
+        [
+          "切换到视频模式",
+          "确认前后两路画面都显示出来，选择不会遮挡主体的布局。"
+        ],
+        [
+          "先录一段短视频",
+          "录制几秒后停止并保存，在照片 App 里检查画面和声音，再开始长时间拍摄。"
+        ],
+        [
+          "录制并检查结果",
+          "保持两侧镜头无遮挡。录制结束后检查保存的视频；Pro 功能与无水印导出以 App 内说明为准。"
+        ]
+      ],
+      [
+        [
+          "画中画：突出场景，保留反应",
+          "让后置画面展示场景，小窗展示自己。移动小窗，避开人物、字幕或其他重要细节。"
+        ],
+        [
+          "上下分屏：让两个主体都有空间",
+          "分别安排上下两个视角，留意靠近分界线的脸部和地平线。"
+        ],
+        [
+          "左右分屏：并列展示两个视角",
+          "当两个视角同样重要时使用，检查分屏之后主体是否仍完整。"
+        ],
+        [
+          "分享前检查导出结果",
+          "用计划使用的方向录一段短视频，检查保存文件中的两个画面。部分布局需要 Pro。"
+        ]
+      ]
+    ],
+    "guideSummary": [
+      "同时录下两个视角，再检查保存的视频。",
+      "选择让主体更清楚的布局。"
+    ],
+    "updateTitle": "2.3 版本更新",
+    "updates": [
+      [
+        "拍摄设置更清楚",
+        "照片清晰度在设置中选择；视频提供设备双摄组合实际支持的高清、4K 与 24、30、60 帧选项，默认 30 帧。"
+      ],
+      [
+        "横拿手机，构图保持原位",
+        "转动手机时，取景边界和操作位置保持稳定，图标与保存的作品跟随持机方向。"
+      ],
+      [
+        "更多创作方式",
+        "把后置画面做成明信片，实时浏览风格小图，或在录像时使用提词器。会员功能在应用内标注。"
+      ],
+      [
+        "拍摄与相册更顺手",
+        "优化自动闪光搭配实况照片、后台返回与作品分享。相册支持左右切换照片、视频和实况，下滑关闭详情。"
+      ]
+    ]
+  }
+}

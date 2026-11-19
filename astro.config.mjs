@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 import vercel from '@astrojs/vercel/static';
 
 export default defineConfig({
-  site: 'https://madecappy.com',
+  site: "https://www.madecappy.com",
   integrations: [mdx(), sitemap()],
   vite: {
     plugins: [tailwindcss()],

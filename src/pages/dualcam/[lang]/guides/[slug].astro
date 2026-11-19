@@ -1,0 +1,10 @@
+---
+import Layout from '../../../../layouts/DualCamMarketingLayout.astro';
+import copy from '../../../../data/dualcam-marketing.json';
+export function getStaticPaths(){return ['en','th','zh'].flatMap(lang=>['record-front-back','choose-a-layout'].map((slug,index)=>({params:{lang,slug},props:{locale:lang,index,slug}})));}
+const {locale,index,slug}=Astro.props;
+const d=copy[locale as keyof typeof copy];const home=locale==='zh'?'/dualcam/':`/dualcam/${locale}/`;
+---
+<Layout locale={locale} guide={slug} title={`${d.guides[index][0]} | DualCam`} description={d.guides[index][1]}>
+<article class="guide-page wrap"><a class="text-link" href={home}>← {d.guideBack}</a><header><p class="eyebrow">DUALCAM</p><h1>{locale==='zh' ? (index===0?['如何同时录制','前后摄像头']:['如何选择','双摄布局']).map(t=><span style="display:inline-block">{t}</span>) : d.guides[index][0]}</h1><p class="intro">{d.guideSummary[index]}</p></header><div class="guide-body"><div><ol class="steps">{d.guideSteps[index].map(([title,text],i)=><li><span class="step-number">{i+1}</span><div><h2>{title}</h2><p>{text}</p></div></li>)}</ol><p class="small-note">{d.guideDisclaimer}</p><a class="button primary" href="https://apps.apple.com/app/id6774681432" data-store-link data-placement="guide">{d.download} ↗</a></div><figure><img src={`/dualcam/media/ui29-${locale}-${index===0?'video':'layouts'}.webp`} width="720" height="1561" alt={index===0?d.shots[2]:d.shots[3]}/><figcaption>{d.imageNote}</figcaption></figure></div></article>
+</Layout>

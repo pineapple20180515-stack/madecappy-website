@@ -1,0 +1,93 @@
+{
+  "copy": {
+    "zh": {
+      "title": "听听泰语原声，看看双摄的三种呈现",
+      "intro": "画中画拍照、双摄录像、上下分屏。点击播放，即可听到视频中的泰语原声。",
+      "note": "AI 生成的功能场景示意，保留生成视频的原声；不是 iPhone 真机录屏或真实拍摄样片。",
+      "youtube": "在 YouTube 观看",
+      "x": "查看 X 帖子",
+      "play": "播放原声视频",
+      "badge": "泰语原声 · AI 演示"
+    },
+    "en": {
+      "title": "Three dual-camera ideas, with original Thai audio",
+      "intro": "Picture-in-picture photos, front-and-back video, and a top-and-bottom layout. Press play to hear the original Thai audio.",
+      "note": "AI-generated scenes illustrating the features, with the original generated audio. These are not iPhone screen recordings or real camera footage.",
+      "youtube": "Watch on YouTube",
+      "x": "View on X",
+      "play": "Play with original audio",
+      "badge": "Thai audio · AI demo"
+    },
+    "th": {
+      "title": "ดู 3 รูปแบบกล้องคู่ พร้อมเสียงภาษาไทย",
+      "intro": "ภาพซ้อนภาพ วิดีโอกล้องหน้าและหลัง และภาพแบ่งบนล่าง กดเล่นเพื่อฟังเสียงภาษาไทยต้นฉบับของวิดีโอ",
+      "note": "วิดีโอตัวอย่างสร้างด้วย AI พร้อมเสียงต้นฉบับ เพื่ออธิบายรูปแบบการใช้งาน ไม่ใช่การบันทึกหน้าจอ iPhone หรือภาพที่ถ่ายจากกล้องจริง",
+      "youtube": "ดูบน YouTube",
+      "x": "ดูโพสต์บน X",
+      "play": "เล่นวิดีโอพร้อมเสียงต้นฉบับ",
+      "badge": "เสียงภาษาไทย · ตัวอย่าง AI"
+    }
+  },
+  "videos": [
+    {
+      "id": "photo",
+      "title": {
+        "zh": "画中画拍照",
+        "en": "Picture-in-picture photos",
+        "th": "ถ่ายรูปแบบภาพซ้อนภาพ"
+      },
+      "description": {
+        "zh": "把眼前风景和自己的表情放在同一张照片里。",
+        "en": "Keep the view and your expression together in one photo.",
+        "th": "เก็บทั้งวิวและรอยยิ้มไว้ในภาพเดียว"
+      },
+      "src": "/dualcam/media/thai-photo-original.mp4",
+      "poster": "/dualcam/media/thai-photo-original.jpg",
+      "youtubeId": "a8eR1gzlSTI",
+      "youtube": "https://www.youtube.com/shorts/a8eR1gzlSTI",
+      "x": "https://x.com/pineapple201805/status/2112102031938728357",
+      "published": "2026-10-19",
+      "duration": "PT10S"
+    },
+    {
+      "id": "video",
+      "title": {
+        "zh": "前后双摄录像",
+        "en": "Front-and-back video",
+        "th": "วิดีโอกล้องหน้าและหลัง"
+      },
+      "description": {
+        "zh": "同时呈现眼前的画面和镜头后的你。",
+        "en": "Show what is in front of you and the person behind the camera.",
+        "th": "บันทึกทั้งวิวตรงหน้าและความรู้สึกของคุณ"
+      },
+      "src": "/dualcam/media/thai-video-original.mp4",
+      "poster": "/dualcam/media/thai-video-original.jpg",
+      "youtubeId": "l3BZVC59xfE",
+      "youtube": "https://www.youtube.com/shorts/l3BZVC59xfE",
+      "x": "https://x.com/pineapple201805/status/2112102361066074594",
+      "published": "2026-10-19",
+      "duration": "PT10S"
+    },
+    {
+      "id": "top-bottom",
+      "title": {
+        "zh": "上下分屏",
+        "en": "Top-and-bottom layout",
+        "th": "กล้องคู่แบบบนล่าง"
+      },
+      "description": {
+        "zh": "上下两个画面，记录同一时刻的两个视角。",
+        "en": "Two stacked frames for two perspectives on the same moment.",
+        "th": "สองมุมมองในเวลาเดียวกัน จัดวางภาพแบบบนล่าง"
+      },
+      "src": "/dualcam/media/thai-top-bottom-original.mp4",
+      "poster": "/dualcam/media/thai-top-bottom-original.jpg",
+      "youtubeId": "OXmC0fKm95I",
+      "youtube": "https://www.youtube.com/shorts/OXmC0fKm95I",
+      "x": "https://x.com/pineapple201805/status/2112102546621771845",
+      "published": "2026-10-19",
+      "duration": "PT10S"
+    }
+  ]
+}

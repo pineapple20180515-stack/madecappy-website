@@ -1,0 +1,70 @@
+---
+import copy from '../data/dualcam-marketing.json';
+import published from '../data/dualcam-published-videos.json';
+import campaigns from '../data/dualcam-campaigns.json';
+import '../styles/dualcam-marketing.css';
+interface Props { locale: keyof typeof copy; title?: string; description?: string; guide?: string; }
+const { locale, guide, title, description } = Astro.props;
+const d=copy[locale];
+const home=(l:string)=>l==='zh'?'/dualcam/':`/dualcam/${l}/`;
+const route=(l:string)=>guide==='iphone-duo'?`${home(l)}iphone-duo/`:guide?`/dualcam/${l}/guides/${guide}/`:home(l);
+const canonical=new URL(route(locale),Astro.site).href;
+const pageTitle=title||d.title;
+const pageDescription=description||d.description;
+const structured=guide?{'@context':'https://schema.org','@type':'Article',headline:pageTitle,description:pageDescription,inLanguage:d.lang,url:canonical,author:{'@type':'Organization',name:'Chengdu Boluo Unlimited Network Technology Co., Ltd.'}}:{'@context':'https://schema.org','@type':'SoftwareApplication',name:'DualCam',applicationCategory:'MultimediaApplication',operatingSystem:'iOS 15 or later; compatible multi-camera device required',description:pageDescription,url:canonical,downloadUrl:'https://apps.apple.com/app/id6774681432',image:'https://madecappy.com/dualcam/icon.png',inLanguage:d.lang};
+const videoSchema = published.videos.map(video=>({
+  '@context':'https://schema.org','@type':'VideoObject',
+  name:video.title[locale],description:`${video.description[locale]} ${published.copy[locale].note}`,
+  thumbnailUrl:new URL(video.poster,Astro.site).href,
+  contentUrl:new URL(video.src,Astro.site).href,
+  embedUrl:`https://www.youtube.com/embed/${video.youtubeId}`,
+  uploadDate:video.published,duration:video.duration,inLanguage:'th',
+  isAccessibleForFree:true,sameAs:[video.youtube,video.x]
+}));
+---
+<!doctype html>
+<html lang={d.lang}>
+<head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>{pageTitle}</title><meta name="description" content={pageDescription}/>
+<link rel="canonical" href={canonical}/>
+{Object.entries(copy).map(([key,value])=><link rel="alternate" hreflang={value.lang} href={new URL(route(key),Astro.site).href}/>)}
+<link rel="alternate" hreflang="x-default" href={new URL(route('en'),Astro.site).href}/>
+<meta property="og:type" content={guide?'article':'website'}/><meta property="og:title" content={pageTitle}/><meta property="og:description" content={pageDescription}/><meta property="og:url" content={canonical}/><meta property="og:image" content="https://madecappy.com/dualcam/media/share.jpg"/><meta name="twitter:card" content="summary_large_image"/>
+<link rel="icon" href="/dualcam/icon.png"/>
+<script type="application/ld+json" set:html={JSON.stringify(structured).replace(/</g,'\\u003c')}/>
+{!guide && videoSchema.map(video=><script type="application/ld+json" set:html={JSON.stringify(video).replace(/</g,'\\u003c')}/>)}
+</head>
+<body>
+<a class="skip-link" href="#main">{locale==='th'?'ข้ามไปยังเนื้อหา':locale==='zh'?'跳到正文':'Skip to content'}</a>
+<header class="site-header"><div class="wrap nav-row">
+<a class="brand" href={home(locale)}><img src="/dualcam/icon.png" width="32" height="32" alt=""/>DualCam</a>
+<nav class="section-nav" aria-label={locale==='zh'?'页面导航':locale==='th'?'เมนูหลัก':'Main navigation'}><a href={`${home(locale)}#features`}>{d.nav[0]}</a><a href={`${home(locale)}#guides`}>{d.nav[1]}</a><a href={`${home(locale)}#faq`}>{d.nav[2]}</a></nav>
+<nav class="languages" aria-label="Language">{[['th','ไทย'],['en','EN'],['zh','中文']].map(([key,label])=><a href={route(key)} lang={copy[key as keyof typeof copy].lang} hreflang={copy[key as keyof typeof copy].lang} aria-current={key===locale?'page':undefined}>{label}</a>)}</nav>
+</div></header>
+<main id="main"><slot/></main>
+<footer class="site-footer"><div class="wrap footer-row"><div><strong>{d.footer}</strong><p>{d.home} · <a href="/projects">madecappy.com</a></p></div><nav><a href="mailto:metrocpp@outlook.com">{d.support}</a><a href="/dualcam/privacy">{d.privacy}</a><a href="/dualcam/terms">{d.terms}</a></nav></div></footer>
+
+<script id="dualcam-campaign-config" type="application/json" set:html={JSON.stringify(campaigns).replace(/</g,'\\u003c')}/>
+<script>
+import { track, inject } from '@vercel/analytics';
+import { attributionFor } from '../lib/dualcam-attribution.mjs';
+if (!['localhost','127.0.0.1',''].includes(location.hostname)) inject();
+const config=JSON.parse(document.getElementById('dualcam-campaign-config')?.textContent||'{}');
+let stored=null;
+try {stored=JSON.parse(sessionStorage.getItem('dualcam-attribution')||'null');} catch {}
+const attribution=attributionFor(location.search,document.referrer,stored);
+try {sessionStorage.setItem('dualcam-attribution',JSON.stringify(attribution));} catch {}
+for(const el of document.querySelectorAll<HTMLAnchorElement>('a[data-store-link]')) {
+const url=new URL(el.href);
+if(/^\d+$/.test(config.providerToken||'')) {url.searchParams.set('pt',config.providerToken);url.searchParams.set('ct',config.campaigns?.[attribution.source]||config.campaigns.website);url.searchParams.set('mt','8');el.href=url.href;}
+el.addEventListener('click',()=>{try {track('dualcam_download_click',{language:document.documentElement.lang,source:attribution.source,campaign:attribution.campaign,placement:el.dataset.placement||'body'});}catch{}});
+}
+const videos=[...document.querySelectorAll<HTMLVideoElement>('video')];
+for (const video of videos) {
+video.addEventListener('play',()=>{for(const other of videos)if(other!==video&&!other.paused)other.pause();});
+video.addEventListener('play',()=>{try{track('dualcam_demo_play',{language:document.documentElement.lang,source:attribution.source,video:video.dataset.demoId||'layout-simulator'});}catch{}},{once:true});
+}
+</script>
+</body>
+</html>

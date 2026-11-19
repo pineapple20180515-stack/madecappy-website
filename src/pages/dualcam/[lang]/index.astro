@@ -1,0 +1,6 @@
+---
+import Landing from '../../../components/dualcam/Landing.astro';
+export function getStaticPaths(){return ['en','th'].map(lang=>({params:{lang},props:{locale:lang}}));}
+const {locale}=Astro.props;
+---
+<Landing locale={locale}/>
