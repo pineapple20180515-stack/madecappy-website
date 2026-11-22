@@ -27,6 +27,29 @@ summary: 一句话摘要
 ---
 ```
 
+## DualCam sales refresh
+
+The workflow checks App Store Connect every day at 02:17 Beijing time. It writes
+only DualCam's public daily and monthly totals, then calls the production Deploy
+Hook for `main`. Apple report dates use Pacific Time. The task keeps the existing
+snapshot if Apple's next report is unavailable or the proceeds cannot be verified.
+
+In the repository's Actions settings, add these secrets:
+
+| Secret | Value |
+| --- | --- |
+| `DUALCAM_ASC_ISSUER_ID` | App Store Connect team Issuer ID |
+| `DUALCAM_ASC_KEY_ID` | Team key ID with the Sales and Reports role |
+| `DUALCAM_ASC_PRIVATE_KEY` | Content of that team's `.p8` key |
+| `DUALCAM_ASC_VENDOR_NUMBER` | Vendor number for the account that owns DualCam |
+| `DUALCAM_VERCEL_DEPLOY_HOOK` | Vercel Deploy Hook for the production branch `main` |
+
+Set the Actions repository variable `DUALCAM_REVENUE_ENABLED` to `true` after
+adding the secrets and allowing the workflow to commit to `main`. Run
+**Update DualCam website revenue** manually from Actions to verify the first
+pull and deployment. Check the public revenue section's data cutoff after the
+deployment succeeds.
+
 ## ⚠️ Privacy notice (for contributors / forks)
 This is a public repo. Never commit:
 - API keys (DeepSeek, 火山引擎, etc.)

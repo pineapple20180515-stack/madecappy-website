@@ -1,0 +1,56 @@
+name: Update DualCam website revenue
+
+on:
+  schedule:
+    - cron: '17 18 * * *' # 02:17 Asia/Shanghai the next day
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: dualcam-revenue-production
+
+jobs:
+  update:
+    if: github.ref == 'refs/heads/main' && vars.DUALCAM_REVENUE_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          ref: main
+      - uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
+        with:
+          node-version: '22'
+          package-manager-cache: false
+      - name: Pull DualCam sales from App Store Connect
+        env:
+          ASC_ISSUER_ID: ${{ secrets.DUALCAM_ASC_ISSUER_ID }}
+          ASC_KEY_ID: ${{ secrets.DUALCAM_ASC_KEY_ID }}
+          ASC_PRIVATE_KEY: ${{ secrets.DUALCAM_ASC_PRIVATE_KEY }}
+          ASC_VENDOR_NUMBER: ${{ secrets.DUALCAM_ASC_VENDOR_NUMBER }}
+        run: node scripts/refresh-dualcam-revenue.mjs
+      - name: Publish the updated snapshot
+        id: publish
+        env:
+          DEPLOY_HOOK: ${{ secrets.DUALCAM_VERCEL_DEPLOY_HOOK }}
+        run: |
+          set -eu
+          test -n "$DEPLOY_HOOK" || { echo 'Missing DUALCAM_VERCEL_DEPLOY_HOOK'; exit 1; }
+          snapshot=src/lib/dualcam-showcase/revenue-data.js
+          if ! git diff --quiet -- "$snapshot"; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add -- "$snapshot"
+            git commit -m 'Update DualCam sales snapshot'
+            git push origin HEAD:main
+            echo 'changed=true' >> "$GITHUB_OUTPUT"
+          fi
+      - name: Trigger the production deployment
+        if: steps.publish.outputs.changed == 'true' || github.event_name == 'workflow_dispatch'
+        env:
+          DEPLOY_HOOK: ${{ secrets.DUALCAM_VERCEL_DEPLOY_HOOK }}
+        run: |
+          curl --silent --show-error --fail --max-time 20 --retry 3 \
+            --output /dev/null --request POST "$DEPLOY_HOOK"
