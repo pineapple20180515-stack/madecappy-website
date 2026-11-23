@@ -1,0 +1,170 @@
+{
+  "zh-Hans": {
+    "title": "先拍风景，再拍你的表情",
+    "description": "DualCam 2.4 用先后拍把两次取景合成照片或视频。调整小窗和画幅，剪好片段，也能套用圣诞明信片。",
+    "intro": "有时想先拍眼前的风景，再把镜头转向自己。DualCam 2.4 把两次快门留给你，拍完再把它们排在一张照片或一段视频里。",
+    "features": [
+      [
+        "先后拍",
+        "两拍可各选前置或后置，也可以一拍是照片，另一拍是视频。每一拍都有时间单独取景。"
+      ],
+      [
+        "拍完再构图",
+        "拖动、双指缩放来调整两路画面，切换小窗或分屏，也能裁剪视频片段。保存时会另存一份。"
+      ],
+      [
+        "圣诞明信片",
+        "横滑看看不同贺卡模板，把风景和同伴的表情排进一张贺卡。开拍前就能预览。"
+      ]
+    ],
+    "trial": "非会员可以分别免费体验先后拍和圣诞明信片，各 3 次。",
+    "devices": "为 iPhone、iPad 和 iPhone Duo 准备了商店预览。应用新增韩语，并分别适配美式与英式英语。",
+    "devicesTitle": "设备与语言",
+    "store": "查看 App Store",
+    "home": "返回 DualCam",
+    "previous": "查看 2.3 版本",
+    "oneAlt": "先后拍的 App Store 用图，展示两次取景与合成效果",
+    "twoAlt": "圣诞明信片的 App Store 用图，展示节日模板",
+    "availability": "2.4 已提交 Apple 审核。当地可下载版本以 App Store 为准。"
+  },
+  "zh-Hant": {
+    "title": "先拍風景，再拍你的表情",
+    "description": "DualCam 2.4 用先後拍把兩次取景合成照片或影片。調整小視窗與畫面比例、剪輯片段，也能套用聖誕明信片。",
+    "intro": "有時想先拍眼前的風景，再把鏡頭轉向自己。DualCam 2.4 讓你分兩次取景，拍完再排進同一張照片或一段影片。",
+    "features": [
+      [
+        "先後拍",
+        "兩次都能自由選擇前置或後置鏡頭，也能搭配照片和影片。你有時間分別構圖。"
+      ],
+      [
+        "拍完再構圖",
+        "拖曳、雙指縮放兩路畫面，切換小視窗或分割畫面，也能裁剪影片。儲存時會另存一份。"
+      ],
+      [
+        "聖誕明信片",
+        "左右滑動瀏覽不同賀卡範本，拍攝前就能預覽風景和人物合在一起的樣子。"
+      ]
+    ],
+    "trial": "非會員可分別免費體驗先後拍與聖誕明信片，各 3 次。",
+    "devices": "商店提供 iPhone、iPad 和 iPhone Duo 預覽。App 新增韓文，也分別支援美式和英式英文。",
+    "devicesTitle": "裝置與語言",
+    "store": "查看 App Store",
+    "home": "返回 DualCam",
+    "previous": "查看 2.3 版本",
+    "oneAlt": "先後拍的 App Store 圖片，展示兩次取景和合成效果",
+    "twoAlt": "聖誕明信片的 App Store 圖片，展示節日範本",
+    "availability": "2.4 已提交 Apple 審核。可下載版本以當地 App Store 為準。"
+  },
+  "en-US": {
+    "title": "Capture the view. Then your reaction.",
+    "description": "DualCam 2.4 combines two takes in one photo or video. Reframe both views, trim your clips, and try Christmas postcard templates.",
+    "intro": "Some moments need a second angle. Take your time with the view, turn the camera around, and put both shots together in a photo or video.",
+    "features": [
+      [
+        "Two Takes",
+        "Choose the front or rear camera for each take. Shoot two photos, or pair a photo with video."
+      ],
+      [
+        "Reframe after shooting",
+        "Drag or pinch either view, change the layout or aspect ratio, and trim video. Save the edit as a new copy."
+      ],
+      [
+        "Christmas Postcards",
+        "Swipe through festive templates and preview how your two views look together before you shoot."
+      ]
+    ],
+    "trial": "Nonmembers get three free uses each for Two Takes and Christmas Postcards.",
+    "devices": "Store previews cover iPhone, iPad, and iPhone Duo. The app adds Korean and separate US and UK English options.",
+    "devicesTitle": "Devices and languages",
+    "store": "View on the App Store",
+    "home": "Back to DualCam",
+    "previous": "See version 2.3",
+    "oneAlt": "App Store preview showing two separate takes combined in one layout",
+    "twoAlt": "App Store preview showing a Christmas postcard template",
+    "availability": "Version 2.4 has been submitted to Apple for review. Check your local App Store for the available version."
+  },
+  "th": {
+    "title": "ถ่ายวิวก่อน แล้วถ่ายสีหน้าของคุณ",
+    "description": "DualCam 2.4 รวมภาพจากการถ่ายสองครั้งเป็นรูปหรือวิดีโอเดียว จัดเฟรม ตัดคลิป และลองใช้เทมเพลตโปสการ์ดคริสต์มาสได้",
+    "intro": "บางช่วงเวลาต้องใช้สองมุมกล้อง ค่อย ๆ เก็บภาพตรงหน้า แล้วหันกล้องมาถ่ายตัวเอง ก่อนรวมทั้งสองมุมเป็นรูปหรือวิดีโอเดียว",
+    "features": [
+      [
+        "ถ่ายสองครั้ง",
+        "เลือกกล้องหน้าหรือกล้องหลังแยกกันได้ในแต่ละครั้ง จะถ่ายภาพทั้งสองครั้งหรือใช้ภาพคู่กับวิดีโอก็ได้"
+      ],
+      [
+        "จัดเฟรมหลังถ่าย",
+        "ลากหรือจีบนิ้วเพื่อปรับแต่ละมุม เปลี่ยนเลย์เอาต์และสัดส่วนภาพ ตัดคลิป แล้วบันทึกเป็นไฟล์ใหม่"
+      ],
+      [
+        "โปสการ์ดคริสต์มาส",
+        "ปัดดูเทมเพลตการ์ดเทศกาล แล้วดูตัวอย่างภาพทั้งสองมุมบนการ์ดได้ก่อนถ่าย"
+      ]
+    ],
+    "trial": "ผู้ที่ไม่ได้เป็นสมาชิกทดลองใช้การถ่ายสองครั้งและโปสการ์ดคริสต์มาสได้ฟรีอย่างละ 3 ครั้ง",
+    "devices": "มีภาพตัวอย่างใน App Store สำหรับ iPhone, iPad และ iPhone Duo แอปเพิ่มภาษาเกาหลีและแยกตัวเลือกภาษาอังกฤษแบบสหรัฐฯ กับสหราชอาณาจักร",
+    "devicesTitle": "อุปกรณ์และภาษา",
+    "store": "ดูใน App Store",
+    "home": "กลับไปที่ DualCam",
+    "previous": "ดูเวอร์ชัน 2.3",
+    "oneAlt": "ภาพตัวอย่างจาก App Store แสดงภาพจากการถ่ายสองครั้งในเฟรมเดียว",
+    "twoAlt": "ภาพตัวอย่างเทมเพลตโปสการ์ดคริสต์มาสจาก App Store",
+    "availability": "ส่งเวอร์ชัน 2.4 ให้ Apple ตรวจสอบแล้ว ดูเวอร์ชันที่ดาวน์โหลดได้ใน App Store ของคุณ"
+  },
+  "ko": {
+    "title": "풍경을 먼저, 내 표정은 그다음",
+    "description": "DualCam 2.4에서 두 번 찍은 장면을 사진이나 동영상 하나로 합쳐 보세요. 화면을 바꾸고, 영상을 자르고, 크리스마스 엽서도 만들 수 있어요.",
+    "intro": "눈앞의 풍경을 먼저 찍고 카메라를 돌려 표정을 담아 보세요. 두 장면을 한 장의 사진이나 한 편의 동영상으로 만들 수 있어요.",
+    "features": [
+      [
+        "두 번 촬영",
+        "촬영할 때마다 전면 또는 후면 카메라를 선택할 수 있어요. 사진과 동영상도 함께 사용할 수 있어요."
+      ],
+      [
+        "촬영 후 구도 편집",
+        "각 화면을 드래그하거나 두 손가락으로 확대·축소하고, 레이아웃과 비율을 바꾸거나 동영상을 자를 수 있어요. 편집본은 새 파일로 저장돼요."
+      ],
+      [
+        "크리스마스 엽서",
+        "좌우로 밀어 여러 엽서 템플릿을 살펴보고, 촬영 전에 두 장면이 어떻게 어울리는지 미리 볼 수 있어요."
+      ]
+    ],
+    "trial": "비회원은 두 번 촬영과 크리스마스 엽서를 각각 3회 무료로 체험할 수 있어요.",
+    "devices": "App Store 미리보기는 iPhone, iPad, iPhone Duo용으로 준비했어요. 앱에는 한국어가 추가됐고 미국식 영어와 영국식 영어를 따로 선택할 수 있어요.",
+    "devicesTitle": "지원 기기와 언어",
+    "store": "App Store에서 보기",
+    "home": "DualCam으로 돌아가기",
+    "previous": "2.3 버전 보기",
+    "oneAlt": "두 번 촬영한 장면을 하나의 화면에 합친 App Store 미리보기",
+    "twoAlt": "크리스마스 엽서 템플릿 App Store 미리보기",
+    "availability": "2.4 버전을 Apple에 심사 제출했어요. 다운로드 가능한 버전은 해당 지역 App Store에서 확인해 주세요."
+  },
+  "en-GB": {
+    "title": "Capture the view. Then your reaction.",
+    "description": "DualCam 2.4 combines two takes in one photo or video. Reframe both views, trim your clips, and try Christmas postcard templates.",
+    "intro": "Some moments need a second angle. Take your time with the view, turn the camera around, and put both shots together in a photo or video.",
+    "features": [
+      [
+        "Two Takes",
+        "Choose the front or rear camera for each take. Shoot two photos, or pair a photo with video."
+      ],
+      [
+        "Reframe after shooting",
+        "Drag or pinch either view, change the layout or aspect ratio, and trim video. Save the edit as a new copy."
+      ],
+      [
+        "Christmas Postcards",
+        "Swipe through festive templates and preview how your two views look together before you shoot."
+      ]
+    ],
+    "trial": "Nonmembers get three free uses each for Two Takes and Christmas Postcards.",
+    "devices": "App Store previews cover iPhone, iPad and iPhone Duo. The app adds Korean and separate UK and US English options.",
+    "devicesTitle": "Devices and languages",
+    "store": "View on the App Store",
+    "home": "Back to DualCam",
+    "previous": "See version 2.3",
+    "oneAlt": "App Store preview showing two separate takes combined in one layout",
+    "twoAlt": "App Store preview showing a Christmas postcard template",
+    "availability": "Version 2.4 has been submitted to Apple for review. Check your local App Store for the available version."
+  }
+}

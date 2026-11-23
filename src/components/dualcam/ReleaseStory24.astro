@@ -1,0 +1,113 @@
+---
+import copy from '../../data/dualcam-version-24.json';
+import {release24Locales, release24Path} from '../../lib/dualcam-release-24.mjs';
+import '../../styles/dualcam-marketing.css';
+import Attribution from './Attribution.astro';
+
+interface Props { locale: keyof typeof copy; }
+const {locale} = Astro.props;
+const d = copy[locale];
+const routes = release24Locales[locale];
+const media = '/dualcam/media/release-24/';
+const url = new URL(release24Path(locale), Astro.site).href;
+const title = `DualCam 2.4 | ${d.title}`;
+const image = new URL(`${media}${locale}-share.jpg`, Astro.site).href;
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description: d.description,
+  datePublished: '2026-11-23',
+  inLanguage: locale,
+  mainEntityOfPage: url,
+  image,
+  author: {'@type': 'Organization', name: 'DualCam', url: new URL('/dualcam/', Astro.site).href},
+};
+---
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>{title}</title>
+    <meta name="description" content={d.description}/>
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content={title}/>
+    <meta property="og:description" content={d.description}/>
+    <meta property="og:url" content={url}/>
+    <meta property="og:image" content={image}/>
+    <meta property="og:image:width" content="1200"/>
+    <meta property="og:image:height" content="630"/>
+    <link rel="icon" href="/dualcam/icon.png"/>
+    <link rel="canonical" href={url}/>
+    {Object.keys(release24Locales).map(language => <link rel="alternate" hreflang={language} href={new URL(release24Path(language), Astro.site).href}/>)}
+    <link rel="alternate" hreflang="x-default" href={new URL(release24Path('en-US'), Astro.site).href}/>
+    <script type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g,'\\u003c')}/>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap nav-row">
+        <a class="brand" href={routes.home}><img src="/dualcam/icon.png" alt="" width="32" height="32"/>DualCam</a>
+        <nav class="languages" aria-label="Language">
+          {Object.entries(release24Locales).map(([language, value]) =>
+            <a href={release24Path(language)} lang={language} hreflang={language} aria-current={language === locale ? 'page' : undefined}>{value.label}</a>
+          )}
+        </nav>
+      </div>
+    </header>
+    <main class="wrap release" id="main">
+      <article>
+        <header class="release-hero">
+          <div class="intro">
+            <p class="eyebrow">DUALCAM 2.4</p>
+            <h1>{d.title}</h1>
+            <p class="lead">{d.intro}</p>
+            <a class="button primary" href="https://apps.apple.com/app/id6774681432" data-store-link data-placement="release-24">{d.store}</a>
+            <p class="availability">{d.availability}</p>
+          </div>
+          <div class="screens">
+            {[['two-takes', d.oneAlt], ['postcard', d.twoAlt]].map(([name, alt], i) =>
+              <img src={`${media}${locale}-${name}.webp`} alt={alt} width="620" height="1344" fetchpriority={i === 0 ? 'high' : 'auto'}/>
+            )}
+          </div>
+        </header>
+        <div class="features">
+          {d.features.map(([heading, text]) => <section><h2>{heading}</h2><p>{text}</p></section>)}
+        </div>
+        <p class="trial">{d.trial}</p>
+        <section class="devices">
+          <h2>{d.devicesTitle}</h2>
+          <p>{d.devices}</p>
+        </section>
+      </article>
+    </main>
+    <footer class="site-footer"><div class="wrap footer-row"><a href={routes.home}>{d.home}</a><a href={routes.archive}>{d.previous}</a></div></footer>
+    <Attribution/>
+  </body>
+</html>
+<style>
+  .release { padding-block: clamp(30px, 7vw, 90px) 64px; }
+  .release-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(20px, 6vw, 80px); align-items: center; }
+  .intro { margin: 0; }
+  .release h1 { color: #f5f4ed; font-size: clamp(2.35rem, 5.1vw, 5rem); line-height: 1.09; margin: 14px 0 20px; letter-spacing: -.04em; }
+  .eyebrow { color: #e8bf5b; }
+  .lead { font-size: clamp(1.04rem, 1.7vw, 1.24rem); line-height: 1.65; margin: 0 0 22px; }
+  .availability { color: #bcc5bf; font-size: .87rem; margin: 14px 0 0; }
+  .screens { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 14px; padding: 18px; border-radius: 24px; background: #1d221e; }
+  .screens img { display: block; width: 100%; height: auto; border-radius: 10px; }
+  .screens img + img { margin-top: 23px; }
+  .features { border-top: 1px solid #374039; margin-top: clamp(34px, 6vw, 72px); padding-top: 26px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+  .release h2 { font-size: 1.18rem; color: #f5f4ed; margin: 0 0 7px; }
+  .features p, .devices p { margin: 0; }
+  .trial { margin: 24px 0 32px; border-left: 3px solid #e8bf5b; padding: 10px 0 10px 13px; color: #e9ddbb; }
+  .languages { flex-wrap: wrap; }
+  @media (max-width: 760px) {
+    .release-hero { grid-template-columns: 1fr; }
+    .screens { max-width: 440px; margin-inline: auto; }
+    .features { grid-template-columns: 1fr; }
+    .nav-row { flex-direction: column; align-items: flex-start; padding-block: 12px; gap: 10px; }
+    .languages { justify-content: flex-start; gap: 4px 8px; }
+    .languages a { padding-inline: 6px; }
+  }
+</style>

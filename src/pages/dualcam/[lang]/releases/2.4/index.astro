@@ -1,0 +1,12 @@
+---
+import Release from '../../../../../components/dualcam/ReleaseStory24.astro';
+import { release24Locales, release24Path } from '../../../../../lib/dualcam-release-24.mjs';
+
+export function getStaticPaths() {
+  return Object.keys(release24Locales)
+    .filter(locale => locale !== 'zh-Hans')
+    .map(locale => ({params: {lang: release24Path(locale).split('/')[2]}, props: {locale}}));
+}
+const {locale} = Astro.props;
+---
+<Release locale={locale}/>

@@ -200,3 +200,6 @@ html[lang=vi] .hero h1{font-size:clamp(35px,5.55vw,76px)}
 .monthly-scroll td small{display:block;font-size:10px;margin-top:2px}
 .monthly-scroll td:nth-child(2){font-variant-numeric:tabular-nums}
 .monthly-scroll td:first-child{white-space:nowrap}
+
+.release-24-shortcut { display: inline-flex; gap: .55em; align-items: center; margin-top: 1.05rem; padding: .45rem .8rem; border: 1px solid currentColor; border-radius: 999px; font-size: .9rem; text-decoration: none; }
+.release-24-shortcut:hover { text-decoration: underline; }
