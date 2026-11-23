@@ -1,0 +1,153 @@
+---
+import {release24Editorial} from '../../data/dualcam-24-editorial.mjs';
+import copy from '../../data/dualcam-version-24.json';
+import {release24Media} from '../../lib/dualcam-release-24.mjs';
+
+interface Props {locale: keyof typeof copy;}
+const {locale}=Astro.props;
+const d=release24Editorial[locale];
+const steps=[d.first,d.second,d.combine,copy[locale].features[2][0]];
+const trimCopy: Record<string,string> = {
+  'zh-Hans':'剪视频片段','zh-Hant':'裁剪影片片段','en-US':'Trim the clip','en-GB':'Trim the clip',
+  ja:'動画をトリミング',ko:'영상 자르기',th:'ตัดคลิป',de:'Clip kürzen',fr:'Couper le clip',
+  es:'Recortar el clip','pt-BR':'Cortar o clipe',ru:'Обрезать клип',ar:'اقتطاع المقطع',
+  id:'Pangkas klip',ms:'Potong klip',vi:'Cắt đoạn video',km:'កាត់វីដេអូ',
+};
+const source=`${release24Media}demo/${locale}/`;
+---
+<dualcam-release-demo class="demo" data-step="0" data-layout="stacked" data-play={d.play} data-pause={d.pause}>
+  <figure class="viewfinder" aria-label={d.demo}>
+    <div class="photo photo-a"><img src={source+'friends-front.webp'} width="800" height="800" alt="" decoding="async"/></div>
+    <div class="photo photo-b"><img src={source+'friends-rear.webp'} width="800" height="800" alt="" decoding="async"/></div>
+    <div class="photo photo-travel"><img src={source+'travel-rear.webp'} width="800" height="800" alt="" loading="lazy" decoding="async"/></div>
+    <div class="paper"><span dir="ltr">DUALCAM</span></div>
+    <div class="viewfinder-border" aria-hidden="true"></div>
+  </figure>
+  <div class="demo-controls" hidden>
+    <div class="demo-steps" role="group" aria-label={d.demo}>
+      {steps.map((step,i)=><button type="button" data-jump={i} aria-pressed={i===0?'true':'false'}><span>{step}</span></button>)}
+    </div>
+    <div class="demo-bottom">
+      <button type="button" class="play" data-play-toggle>{d.play}</button>
+      <div class="demo-layouts" role="group" aria-label={d.combine} hidden>
+        {([['stacked',d.stacked],['side',d.side],['inset',d.inset]]).map(([value,label],i)=><button type="button" data-demo-layout={value} aria-pressed={i===0?'true':'false'}>{label}</button>)}
+      </div>
+    </div>
+    <label class="demo-trim" hidden>
+      <span>{trimCopy[locale]}</span>
+      <span class="trim-control">
+        <input type="range" min="1" max="6" value="6" step="0.1" dir="ltr"/>
+        <output dir="ltr">00:06.0</output>
+      </span>
+    </label>
+  </div>
+</dualcam-release-demo>
+
+<script>
+  class DualcamReleaseDemo extends HTMLElement {
+    connectedCallback() {
+      if (this.hasAttribute('data-ready')) return;
+      const controls = this.querySelector<HTMLElement>('.demo-controls');
+      const layouts = this.querySelector<HTMLElement>('.demo-layouts');
+      const toggle = this.querySelector<HTMLButtonElement>('[data-play-toggle]');
+      const trim = this.querySelector<HTMLElement>('.demo-trim');
+      const trimInput = trim?.querySelector<HTMLInputElement>('input');
+      const trimTime = trim?.querySelector<HTMLOutputElement>('output');
+      if (!controls || !layouts || !toggle || !trim || !trimInput || !trimTime) return;
+      const jump = Array.from(this.querySelectorAll<HTMLButtonElement>('[data-jump]'));
+      const layoutButtons = this.querySelectorAll<HTMLButtonElement>('[data-demo-layout]');
+      const layoutOrder = ['stacked','side','inset'];
+      let step = 0;
+      let layout = 0;
+      let timer: number | undefined;
+      const select = (index: number) => {
+        step = index;
+        this.dataset.step = String(step);
+        layouts.hidden = step !== 2;
+        trim.hidden = step !== 2;
+        jump.forEach((button,i)=>button.setAttribute('aria-pressed',String(i===step)));
+      };
+      const setLayout = (index:number) => {
+        layout = index;
+        this.dataset.layout = layoutOrder[index];
+        layoutButtons.forEach((button,i)=>button.setAttribute('aria-pressed',String(i===layout)));
+      };
+      const pause = () => {
+        window.clearTimeout(timer);
+        timer = undefined;
+        toggle.textContent = this.dataset.play ?? '';
+      };
+      const advance = () => {
+        if (step === 2 && layout < layoutOrder.length-1) setLayout(layout+1);
+        else if (step < jump.length-1) select(step+1);
+        else {
+          pause();
+          return;
+        }
+        timer = window.setTimeout(advance,1550);
+      };
+      trimInput.addEventListener('input',()=>{
+        pause();
+        trimTime.value = `00:${Number(trimInput.value).toFixed(1).padStart(4,'0')}`;
+      });
+      jump.forEach((button,i) => button.addEventListener('click',()=>{
+        pause();
+        select(i);
+      }));
+      layoutButtons.forEach((button,i) => button.addEventListener('click',()=>{
+        pause();
+        setLayout(i);
+      }));
+      toggle.addEventListener('click',()=>{
+        if (timer !== undefined) {
+          pause();
+          return;
+        }
+        setLayout(0);
+        select(0);
+        toggle.textContent = this.dataset.pause ?? '';
+        timer = window.setTimeout(advance,1550);
+      });
+      controls.hidden = false;
+      this.setAttribute('data-ready','');
+    }
+  }
+  if (!customElements.get('dualcam-release-demo')) customElements.define('dualcam-release-demo',DualcamReleaseDemo);
+</script>
+
+<style>
+  .demo { display: grid; gap: 12px; width: min(100%,440px); margin-inline: auto; }
+  .viewfinder { position: relative; margin: 0; overflow: hidden; border-radius: 24px; aspect-ratio: 4 / 3; background: #192018; isolation: isolate; }
+  .photo { position: absolute; overflow: hidden; transition: inset .65s cubic-bezier(.2,.7,.24,1), opacity .38s, border-radius .35s; }
+  .photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 42%; display: block; }
+  .photo-a { inset: 0; z-index: 2; }
+  .photo-b { inset: 0; opacity: 0; }
+  .photo-travel, .paper { inset: 0; opacity: 0; z-index: 1; }
+  .paper { background: #efe0bb; color: #745b32; position: absolute; display: grid; align-items: end; justify-items: start; padding: 12px; font-size: .68rem; letter-spacing: .14em; transition: inset .65s,opacity .38s; }
+  .viewfinder-border { position: absolute; inset: 0; pointer-events: none; border: 1px solid #ffffff40; border-radius: inherit; z-index: 4; }
+  .demo[data-step="1"] .photo-a, .demo[data-step="2"][data-layout="inset"] .photo-a { inset: 5% 67% 59% 4%; border-radius: 13%; box-shadow: 0 0 0 2px #ffffffd0; }
+  .demo[data-step="1"] .photo-b, .demo[data-step="2"] .photo-b { opacity: 1; }
+  .demo[data-step="2"][data-layout="stacked"] .photo-a { inset: 0 0 50%; }
+  .demo[data-step="2"][data-layout="stacked"] .photo-b { inset: 50% 0 0; }
+  .demo[data-step="2"][data-layout="stacked"] :is(.photo-a,.photo-b) img { object-position: 50% 19%; }
+  .demo[data-step="2"][data-layout="side"] .photo-a { inset: 0 50% 0 0; }
+  .demo[data-step="2"][data-layout="side"] .photo-b { inset: 0 0 0 50%; }
+  .demo[data-step="3"] .photo-a { inset: 63% 7% 7% 65%; box-shadow: 0 0 0 4px #fff5df; border-radius: 6px; }
+  .demo[data-step="3"] .photo-travel { inset: 4% 3% 44%; opacity: 1; }
+  .demo[data-step="3"] .paper { opacity: 1; z-index: 0; border: 4px dashed #b45c45; }
+  .demo-controls { display: grid; gap: 10px; min-width: 0; }
+  .demo-steps { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 6px; }
+  .demo-controls[hidden], .demo-layouts[hidden], .demo-trim[hidden] { display: none; }
+  .demo button { font: inherit; line-height: 1.25; padding: 7px; min-height: 42px; color: #f5f4ed; background: #222823; border: 1px solid #414a43; border-radius: 10px; cursor: pointer; overflow-wrap: anywhere; }
+  .demo-steps button { font-size: clamp(.7rem,2.8vw,.86rem); }
+  .demo button[aria-pressed="true"] { background: #ead68e; border-color: #ead68e; color: #211900; }
+  .demo-bottom { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .demo-bottom .play { padding-inline: 12px; background: transparent; }
+  .demo-layouts { display:flex; gap: 6px; flex-wrap: wrap; }
+  .demo-layouts button { font-size: .79rem; }
+  .demo-trim { border-top: 1px solid #3e493e; padding-top: 7px; display: grid; gap: 4px; font-size: .8rem; }
+  .trim-control { display: flex; align-items: center; gap: 8px; }
+  .trim-control input { flex: 1; min-width: 0; accent-color: #ead68e; cursor: ew-resize; }
+  .trim-control output { color: #e7d8a7; font-variant-numeric: tabular-nums; }
+  @media(prefers-reduced-motion: reduce) { .photo, .paper { transition: none; } }
+</style>

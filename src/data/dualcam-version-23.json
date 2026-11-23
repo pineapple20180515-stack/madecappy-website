@@ -33,6 +33,27 @@
       "left":"布局 · 拍摄时调整两个画面",
       "right":"取景 · 拍摄前打开实况"
     },
+    "notes":{
+      "title": "开发手记",
+      "entries": [
+        {
+          "title": "为什么做这一版",
+          "text": "把双摄常用操作留在取景页，减少从看到画面到按下快门之间的来回。也希望在外屏、内屏和不同语言下，都能马上找到快门。"
+        },
+        {
+          "title": "遇到了什么问题",
+          "text": "拖小窗有时误切到视频，切画幅会让画面跳动，实况拍完后额外闪一下。折叠状态又改变了屏幕上能用的空间。"
+        },
+        {
+          "title": "最反复打磨的地方",
+          "text": "反复复查的是从取景到成片的连续动作，包括横屏方向、照片与视频切换，以及闪光和实况同时打开时的反馈。"
+        },
+        {
+          "title": "最好玩，也最有挑战的地方",
+          "text": "同一套双摄从外屏随拍变成内屏构图，还要在半折状态下给快门留出好按的位置。用外屏提词也让镜头前的人多了一种拍法。"
+        }
+      ]
+    },
     "films":{
       "title":"看一次怎么拍",
       "front":"从取景、选布局到开始录像",
@@ -74,6 +95,27 @@
       "left":"Layouts · Arrange the two views",
       "right":"Viewfinder · Turn Live on before shooting"
     },
+    "notes":{
+      "title": "Development notes",
+      "entries": [
+        {
+          "title": "Why make this version?",
+          "text": "Keep common dual-camera controls in the viewfinder so there are fewer detours between seeing a scene and pressing the shutter. Make it easy to find the shutter on different displays and in different languages."
+        },
+        {
+          "title": "What went wrong?",
+          "text": "Dragging the inset could switch to video, changing aspect ratio could jump the preview, and a Live Photo sometimes gave an extra flash. Folding also changed the space available for controls."
+        },
+        {
+          "title": "Where we kept refining",
+          "text": "We kept checking the path from viewfinder to saved result, especially landscape orientation, switching between photo and video, and the feedback with flash and Live Photos on together."
+        },
+        {
+          "title": "The fun part and the challenge",
+          "text": "The same camera had to work for quick shots on the cover display, careful framing on the inner display, and easy shutter access when half-folded. A cover-display teleprompter also gave the person on camera a new way to shoot."
+        }
+      ]
+    },
     "films":{
       "title":"See the camera in use",
       "front":"Frame both views, choose a layout and record",
@@ -114,6 +156,27 @@
       "result":"เราตรวจภาพแนวนอน การสลับโหมดหลายครั้ง และการใช้แฟลชร่วมกับ Live Photo บน iPhone ในการทดสอบนี้จอแฟลชครั้งเดียวและกลับมาที่กล้องได้อย่างเสถียร",
       "left":"เลย์เอาต์ · จัดภาพทั้งสองมุม",
       "right":"หน้ากล้อง · เปิด Live ก่อนถ่าย"
+    },
+    "notes":{
+      "title": "บันทึกการพัฒนา",
+      "entries": [
+        {
+          "title": "ทำไมถึงทำเวอร์ชันนี้",
+          "text": "เก็บเครื่องมือกล้องคู่ที่ใช้บ่อยไว้บนหน้าถ่าย เพื่อให้กดชัตเตอร์ได้ทัน และหาชัตเตอร์ได้ง่ายทั้งบนจอด้านนอก จอด้านใน และในภาษาต่าง ๆ"
+        },
+        {
+          "title": "เจอปัญหาอะไร",
+          "text": "การลากหน้าต่างเล็กบางครั้งสลับไปโหมดวิดีโอ เมื่อเปลี่ยนสัดส่วน ภาพจะกระโดด และ Live Photo อาจกะพริบเพิ่มอีกครั้ง การพับเครื่องยังทำให้พื้นที่ควบคุมเปลี่ยนไปด้วย"
+        },
+        {
+          "title": "ส่วนที่ปรับซ้ำบ่อยที่สุด",
+          "text": "เราตรวจซ้ำตั้งแต่จัดเฟรมจนเห็นผลงาน โดยเฉพาะทิศทางภาพแนวนอน การสลับภาพกับวิดีโอ และการตอบสนองเมื่อเปิดแฟลชกับ Live Photo พร้อมกัน"
+        },
+        {
+          "title": "ความสนุกและความท้าทาย",
+          "text": "กล้องเดียวกันต้องใช้ถ่ายเร็วบนจอด้านนอก จัดเฟรมบนจอด้านใน และกดชัตเตอร์ได้สะดวกเมื่อพับครึ่ง เครื่องอ่านสคริปต์บนจอนอกยังเปิดโอกาสให้คนหน้ากล้องถ่ายได้อีกแบบ"
+        }
+      ]
     },
     "films":{
       "title":"ดูการถ่ายในสถานการณ์ตัวอย่าง",

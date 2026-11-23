@@ -23,9 +23,7 @@
     "store": "查看 App Store",
     "home": "返回 DualCam",
     "previous": "查看 2.3 版本",
-    "oneAlt": "先后拍的 App Store 用图，展示两次取景与合成效果",
-    "twoAlt": "圣诞明信片的 App Store 用图，展示节日模板",
-    "availability": "2.4 已提交 Apple 审核。当地可下载版本以 App Store 为准。"
+    "availability": "当地可下载版本以 App Store 为准。"
   },
   "zh-Hant": {
     "title": "先拍風景，再拍你的表情",
@@ -51,9 +49,7 @@
     "store": "查看 App Store",
     "home": "返回 DualCam",
     "previous": "查看 2.3 版本",
-    "oneAlt": "先後拍的 App Store 圖片，展示兩次取景和合成效果",
-    "twoAlt": "聖誕明信片的 App Store 圖片，展示節日範本",
-    "availability": "2.4 已提交 Apple 審核。可下載版本以當地 App Store 為準。"
+    "availability": "可下載版本以當地 App Store 為準。"
   },
   "en-US": {
     "title": "Capture the view. Then your reaction.",
@@ -79,9 +75,7 @@
     "store": "View on the App Store",
     "home": "Back to DualCam",
     "previous": "See version 2.3",
-    "oneAlt": "App Store preview showing two separate takes combined in one layout",
-    "twoAlt": "App Store preview showing a Christmas postcard template",
-    "availability": "Version 2.4 has been submitted to Apple for review. Check your local App Store for the available version."
+    "availability": "Check your local App Store for the available version."
   },
   "th": {
     "title": "ถ่ายวิวก่อน แล้วถ่ายสีหน้าของคุณ",
@@ -107,9 +101,7 @@
     "store": "ดูใน App Store",
     "home": "กลับไปที่ DualCam",
     "previous": "ดูเวอร์ชัน 2.3",
-    "oneAlt": "ภาพตัวอย่างจาก App Store แสดงภาพจากการถ่ายสองครั้งในเฟรมเดียว",
-    "twoAlt": "ภาพตัวอย่างเทมเพลตโปสการ์ดคริสต์มาสจาก App Store",
-    "availability": "ส่งเวอร์ชัน 2.4 ให้ Apple ตรวจสอบแล้ว ดูเวอร์ชันที่ดาวน์โหลดได้ใน App Store ของคุณ"
+    "availability": "ดูเวอร์ชันที่ดาวน์โหลดได้ใน App Store ของคุณ"
   },
   "ko": {
     "title": "풍경을 먼저, 내 표정은 그다음",
@@ -135,9 +127,7 @@
     "store": "App Store에서 보기",
     "home": "DualCam으로 돌아가기",
     "previous": "2.3 버전 보기",
-    "oneAlt": "두 번 촬영한 장면을 하나의 화면에 합친 App Store 미리보기",
-    "twoAlt": "크리스마스 엽서 템플릿 App Store 미리보기",
-    "availability": "2.4 버전을 Apple에 심사 제출했어요. 다운로드 가능한 버전은 해당 지역 App Store에서 확인해 주세요."
+    "availability": "다운로드 가능한 버전은 해당 지역 App Store에서 확인해 주세요."
   },
   "en-GB": {
     "title": "Capture the view. Then your reaction.",
@@ -163,8 +153,292 @@
     "store": "View on the App Store",
     "home": "Back to DualCam",
     "previous": "See version 2.3",
-    "oneAlt": "App Store preview showing two separate takes combined in one layout",
-    "twoAlt": "App Store preview showing a Christmas postcard template",
-    "availability": "Version 2.4 has been submitted to Apple for review. Check your local App Store for the available version."
+    "availability": "Check your local App Store for the available version."
+  },
+  "ja": {
+    "title": "景色を撮って、そのあとに表情を",
+    "description": "DualCam 2.4なら別々に撮った2つの場面を1枚の写真や1本の動画にまとめられます。撮影後の構図調整やクリスマスカードも。",
+    "intro": "風景を撮りたい瞬間と、それを見た人の表情を残したい瞬間は少しずれます。2回に分けて撮り、あとで1つの作品にまとめられるようにしました。",
+    "features": [
+      [
+        "2回撮影",
+        "撮るたびに前面・背面カメラを選べます。写真と動画も組み合わせられます。"
+      ],
+      [
+        "撮影後に構図を調整",
+        "ドラッグやピンチで各画面を調整し、比率や子画面を変更できます。動画をトリミングして別のファイルとして保存できます。"
+      ],
+      [
+        "クリスマスカード",
+        "テンプレートを横にスワイプして、撮影前に2つの場面を合わせたプレビューを確認できます。"
+      ]
+    ],
+    "trial": "会員登録なしで、2回撮影とクリスマスカードをそれぞれ3回ずつ無料でお試しいただけます。",
+    "devices": "iPhone、iPad、iPhone Duo用の画像を用意しました。アプリに韓国語を追加し、米国英語と英国英語を別々に選べます。",
+    "devicesTitle": "対応端末と言語",
+    "store": "App Storeで見る",
+    "home": "DualCamに戻る",
+    "previous": "バージョン2.3を見る",
+    "availability": "ダウンロードできるバージョンはお住まいの地域のApp Storeでご確認ください。"
+  },
+  "de": {
+    "title": "Erst die Aussicht, dann deine Reaktion",
+    "description": "DualCam 2.4 kombiniert zwei Aufnahmen zu einem Foto oder Video. Passe den Bildausschnitt an, kürze Clips oder gestalte eine Weihnachtspostkarte.",
+    "intro": "Die Aussicht und das Gesicht, das sie zum Staunen bringt, brauchen manchmal zwei Momente. Nimm beide Ansichten einzeln auf und füge sie danach zusammen.",
+    "features": [
+      [
+        "Zwei Aufnahmen",
+        "Wähle für jede Aufnahme die Front- oder Rückkamera. Ein Foto lässt sich mit einem Video kombinieren."
+      ],
+      [
+        "Nachträglich gestalten",
+        "Verschiebe oder zoome beide Ansichten, wechsle das Layout oder Format und kürze das Video. Speichere die Bearbeitung als neue Datei."
+      ],
+      [
+        "Weihnachtspostkarten",
+        "Wische durch die Vorlagen und sieh schon vor der Aufnahme, wie beide Ansichten auf einer Karte wirken."
+      ]
+    ],
+    "trial": "Ohne Mitgliedschaft kannst du die zwei Aufnahmen und die Weihnachtspostkarten jeweils dreimal kostenlos ausprobieren.",
+    "devices": "Vorschaubilder für iPhone, iPad und iPhone Duo. Die App bietet jetzt Koreanisch sowie eigene Optionen für US- und UK-Englisch.",
+    "devicesTitle": "Geräte und Sprachen",
+    "store": "Im App Store ansehen",
+    "home": "Zurück zu DualCam",
+    "previous": "Version 2.3 ansehen",
+    "availability": "Die verfügbare Version findest du in deinem lokalen App Store."
+  },
+  "fr": {
+    "title": "Le paysage d’abord, votre réaction ensuite",
+    "description": "DualCam 2.4 réunit deux prises en une photo ou une vidéo. Recadrez chaque vue, coupez un clip ou essayez les cartes de Noël.",
+    "intro": "On n’a pas toujours envie de saisir le paysage et sa réaction à la même seconde. Prenez le temps de cadrer chacun, puis réunissez les deux prises.",
+    "features": [
+      [
+        "Deux prises",
+        "Choisissez la caméra avant ou arrière pour chaque prise. Vous pouvez associer une photo à une vidéo."
+      ],
+      [
+        "Recadrer après la prise",
+        "Déplacez ou agrandissez chaque vue, changez la disposition et le format, puis coupez la vidéo. Enregistrez le montage en tant que copie."
+      ],
+      [
+        "Cartes de Noël",
+        "Faites défiler les modèles et prévisualisez vos deux vues réunies sur une carte avant de déclencher."
+      ]
+    ],
+    "trial": "Sans abonnement, essayez gratuitement les deux prises et les cartes de Noël, trois fois chacune.",
+    "devices": "Des visuels sont prévus pour iPhone, iPad et iPhone Duo. L’app ajoute le coréen et distingue l’anglais américain de l’anglais britannique.",
+    "devicesTitle": "Appareils et langues",
+    "store": "Voir sur l’App Store",
+    "home": "Retour à DualCam",
+    "previous": "Voir la version 2.3",
+    "availability": "Consultez votre App Store local pour connaître la version disponible."
+  },
+  "es": {
+    "title": "Primero el paisaje, después tu reacción",
+    "description": "DualCam 2.4 reúne dos tomas en una foto o un vídeo. Ajusta cada encuadre, recorta clips o crea una postal navideña.",
+    "intro": "El paisaje y la reacción al verlo no siempre ocurren en el mismo segundo. Haz ambas tomas por separado y júntalas después.",
+    "features": [
+      [
+        "Dos tomas",
+        "Elige la cámara frontal o trasera para cada toma. También puedes combinar una foto con un vídeo."
+      ],
+      [
+        "Reencuadra después",
+        "Arrastra o haz zoom en cada imagen, cambia el diseño o la proporción y recorta el vídeo. Guarda la edición como una copia nueva."
+      ],
+      [
+        "Postales navideñas",
+        "Desliza para ver las plantillas y comprueba cómo quedan las dos imágenes en una postal antes de disparar."
+      ]
+    ],
+    "trial": "Sin suscripción puedes probar gratis las dos tomas y las postales navideñas tres veces cada una.",
+    "devices": "Hay imágenes para iPhone, iPad y iPhone Duo. La app añade coreano y opciones independientes para el inglés de EE. UU. y del Reino Unido.",
+    "devicesTitle": "Dispositivos e idiomas",
+    "store": "Ver en el App Store",
+    "home": "Volver a DualCam",
+    "previous": "Ver la versión 2.3",
+    "availability": "Consulta la versión disponible en el App Store de tu región."
+  },
+  "pt-BR": {
+    "title": "Primeiro a paisagem, depois sua reação",
+    "description": "O DualCam 2.4 junta duas capturas em uma foto ou um vídeo. Ajuste o enquadramento, corte trechos ou faça um cartão de Natal.",
+    "intro": "A paisagem e a reação de quem vê nem sempre acontecem no mesmo segundo. Faça as duas capturas com calma e junte tudo depois.",
+    "features": [
+      [
+        "Duas capturas",
+        "Escolha a câmera frontal ou traseira para cada captura. Você pode combinar uma foto com um vídeo."
+      ],
+      [
+        "Ajuste depois de capturar",
+        "Arraste ou use dois dedos para ajustar cada imagem, mude o layout ou a proporção e corte o vídeo. Salve a edição em um novo arquivo."
+      ],
+      [
+        "Cartões de Natal",
+        "Deslize pelos modelos e veja como as duas imagens ficam no cartão antes de capturar."
+      ]
+    ],
+    "trial": "Quem não é assinante pode testar duas capturas e cartões de Natal de graça, três vezes cada.",
+    "devices": "Há imagens para iPhone, iPad e iPhone Duo. O app ganhou coreano e opções separadas para inglês dos EUA e do Reino Unido.",
+    "devicesTitle": "Dispositivos e idiomas",
+    "store": "Ver na App Store",
+    "home": "Voltar ao DualCam",
+    "previous": "Ver a versão 2.3",
+    "availability": "Confira a versão disponível na App Store da sua região."
+  },
+  "ru": {
+    "title": "Сначала пейзаж, потом ваша реакция",
+    "description": "В DualCam 2.4 можно объединить две съёмки в фото или видео, изменить кадрирование, обрезать ролик и сделать рождественскую открытку.",
+    "intro": "На красивый вид и на реакцию на него хочется выделить по отдельному кадру. Снимите их в удобном темпе и объедините после съёмки.",
+    "features": [
+      [
+        "Два кадра",
+        "Для каждого кадра можно выбрать переднюю или заднюю камеру. Фото можно сочетать с видео."
+      ],
+      [
+        "Кадрирование после съёмки",
+        "Передвигайте и масштабируйте каждый кадр, меняйте пропорции и раскладку, обрезайте видео. Сохраняйте результат отдельным файлом."
+      ],
+      [
+        "Рождественские открытки",
+        "Листайте шаблоны и смотрите, как оба кадра будут выглядеть на открытке, ещё до съёмки."
+      ]
+    ],
+    "trial": "Без подписки доступны три бесплатные попытки для двух кадров и три для рождественских открыток.",
+    "devices": "Подготовлены изображения для iPhone, iPad и iPhone Duo. В приложении появился корейский язык и отдельные варианты английского для США и Великобритании.",
+    "devicesTitle": "Устройства и языки",
+    "store": "Посмотреть в App Store",
+    "home": "Назад к DualCam",
+    "previous": "Посмотреть версию 2.3",
+    "availability": "Доступную версию можно проверить в App Store вашего региона."
+  },
+  "ar": {
+    "title": "صوّر المشهد أولًا، ثم ردّ فعلك",
+    "description": "يجمع DualCam 2.4 لقطتين في صورة أو فيديو واحد. اضبط تأطير كل لقطة، واقتطع جزءًا من الفيديو، أو صمّم بطاقة عيد الميلاد.",
+    "intro": "قد تحتاج إلى لحظتين مختلفتين لتصوير المشهد وتعبير وجهك عند رؤيته. التقط كلًّا منهما على مهل، ثم اجمعهما بعد التصوير.",
+    "features": [
+      [
+        "لقطتان متتاليتان",
+        "اختر الكاميرا الأمامية أو الخلفية لكل لقطة. ويمكنك الجمع بين صورة وفيديو."
+      ],
+      [
+        "تأطير بعد التصوير",
+        "اسحب كل مشهد أو غيّر حجمه بإصبعين، وبدّل التخطيط والنسبة، واقتطع جزءًا من الفيديو. احفظ التعديل في نسخة جديدة."
+      ],
+      [
+        "بطاقات عيد الميلاد",
+        "مرّر بين القوالب لمعاينة المشهدين معًا على البطاقة قبل التصوير."
+      ]
+    ],
+    "trial": "يمكن لغير المشتركين تجربة التصوير بلقطتين وبطاقات عيد الميلاد ثلاث مرات مجانًا لكل ميزة.",
+    "devices": "تتوفر صور معاينة لـ iPhone وiPad وiPhone Duo. أُضيفت الكورية إلى التطبيق مع خيارين منفصلين للإنجليزية الأمريكية والبريطانية.",
+    "devicesTitle": "الأجهزة واللغات",
+    "store": "عرض في App Store",
+    "home": "العودة إلى DualCam",
+    "previous": "عرض الإصدار 2.3",
+    "availability": "تحقّق من الإصدار المتاح في App Store لمنطقتك."
+  },
+  "id": {
+    "title": "Pemandangannya dulu, reaksimu kemudian",
+    "description": "DualCam 2.4 menggabungkan dua pengambilan dalam satu foto atau video. Atur bingkai, pangkas klip, atau buat kartu pos Natal.",
+    "intro": "Pemandangan dan ekspresi saat melihatnya tak selalu muncul di detik yang sama. Ambil keduanya secara terpisah, lalu gabungkan setelah selesai.",
+    "features": [
+      [
+        "Dua pengambilan",
+        "Pilih kamera depan atau belakang untuk setiap pengambilan. Foto juga bisa digabung dengan video."
+      ],
+      [
+        "Atur bingkai setelah merekam",
+        "Geser atau cubit masing-masing tampilan, ganti tata letak atau rasio, lalu pangkas video. Simpan hasil edit sebagai salinan baru."
+      ],
+      [
+        "Kartu pos Natal",
+        "Geser untuk melihat pilihan templat. Kamu bisa melihat kedua sudut pada kartu sebelum mengambil gambar."
+      ]
+    ],
+    "trial": "Nonanggota bisa mencoba dua pengambilan dan kartu pos Natal masing-masing tiga kali secara gratis.",
+    "devices": "Tersedia gambar untuk iPhone, iPad, dan iPhone Duo. Aplikasi menambahkan bahasa Korea dan pilihan bahasa Inggris AS serta Inggris Britania.",
+    "devicesTitle": "Perangkat dan bahasa",
+    "store": "Lihat di App Store",
+    "home": "Kembali ke DualCam",
+    "previous": "Lihat versi 2.3",
+    "availability": "Cek versi yang tersedia di App Store wilayahmu."
+  },
+  "ms": {
+    "title": "Rakam pemandangan dahulu, kemudian reaksi anda",
+    "description": "DualCam 2.4 menggabungkan dua rakaman dalam satu foto atau video. Laraskan bingkai, potong klip atau cipta poskad Krismas.",
+    "intro": "Pemandangan dan reaksi anda mungkin muncul pada waktu berbeza. Ambil kedua-duanya secara berasingan, kemudian satukannya selepas merakam.",
+    "features": [
+      [
+        "Dua tangkapan",
+        "Pilih kamera depan atau belakang bagi setiap tangkapan. Anda juga boleh menggabungkan foto dengan video."
+      ],
+      [
+        "Laraskan selepas merakam",
+        "Seret atau cubit setiap paparan, ubah susun atur atau nisbah, dan potong video. Simpan suntingan sebagai salinan baharu."
+      ],
+      [
+        "Poskad Krismas",
+        "Leret untuk memilih templat dan lihat pratonton dua paparan pada poskad sebelum merakam."
+      ]
+    ],
+    "trial": "Bukan ahli boleh mencuba dua tangkapan dan poskad Krismas secara percuma, tiga kali bagi setiap ciri.",
+    "devices": "Imej disediakan untuk iPhone, iPad dan iPhone Duo. Aplikasi menambah bahasa Korea serta pilihan bahasa Inggeris AS dan UK.",
+    "devicesTitle": "Peranti dan bahasa",
+    "store": "Lihat di App Store",
+    "home": "Kembali ke DualCam",
+    "previous": "Lihat versi 2.3",
+    "availability": "Semak versi yang tersedia di App Store wilayah anda."
+  },
+  "vi": {
+    "title": "Chụp cảnh trước, ghi lại biểu cảm sau",
+    "description": "DualCam 2.4 ghép hai lần chụp hoặc quay thành một ảnh hay video. Chỉnh khung, cắt clip hoặc làm bưu thiếp Giáng sinh.",
+    "intro": "Phong cảnh và biểu cảm khi nhìn thấy nó không nhất thiết xuất hiện cùng lúc. Hãy thoải mái ghi lại từng góc, rồi ghép chúng sau.",
+    "features": [
+      [
+        "Hai lần ghi hình",
+        "Chọn camera trước hoặc sau riêng cho từng lần. Bạn có thể kết hợp ảnh với video."
+      ],
+      [
+        "Chỉnh khung sau khi ghi hình",
+        "Kéo hoặc chụm ngón tay để chỉnh từng khung, đổi bố cục và tỉ lệ, rồi cắt video. Lưu bản chỉnh sửa thành tệp mới."
+      ],
+      [
+        "Bưu thiếp Giáng sinh",
+        "Vuốt để xem các mẫu và xem trước hai khung hình trên bưu thiếp trước khi chụp."
+      ]
+    ],
+    "trial": "Người dùng chưa đăng ký có thể thử miễn phí hai lần ghi hình và bưu thiếp Giáng sinh, mỗi tính năng ba lượt.",
+    "devices": "Có ảnh giới thiệu cho iPhone, iPad và iPhone Duo. Ứng dụng thêm tiếng Hàn và hai lựa chọn tiếng Anh Mỹ, Anh Anh.",
+    "devicesTitle": "Thiết bị và ngôn ngữ",
+    "store": "Xem trên App Store",
+    "home": "Quay lại DualCam",
+    "previous": "Xem bản 2.3",
+    "availability": "Xem phiên bản có thể tải ở App Store tại khu vực của bạn."
+  },
+  "km": {
+    "title": "ថតទេសភាពមុន រួចថតទឹកមុខរបស់អ្នក",
+    "description": "DualCam 2.4 បញ្ចូលការថតពីរដងជារូបថត ឬវីដេអូតែមួយ។ អ្នកអាចកែស៊ុម កាត់វីដេអូ និងធ្វើកាតបុណ្យណូអែល។",
+    "intro": "ទេសភាព និងទឹកមុខពេលឃើញវា អាចកើតឡើងនៅពេលខុសគ្នា។ ថតម្តងមួយ រួចបញ្ចូលទិដ្ឋភាពទាំងពីរជាមួយគ្នា។",
+    "features": [
+      [
+        "ថតម្តងមួយ",
+        "ជ្រើសកាមេរ៉ាមុខ ឬក្រោយសម្រាប់ការថតនីមួយៗ។ អ្នកអាចបញ្ចូលរូបថតជាមួយវីដេអូ។"
+      ],
+      [
+        "កែស៊ុមក្រោយថត",
+        "អូស ឬប្រើម្រាមដៃពីរដើម្បីកែទំហំក្នុងស៊ុមនីមួយៗ ប្តូរប្លង់ ឬកាត់វីដេអូ។ រក្សាទុកជាឯកសារថ្មី។"
+      ],
+      [
+        "កាតបុណ្យណូអែល",
+        "អូសដើម្បីជ្រើសគំរូកាត និងមើលទិដ្ឋភាពទាំងពីរជាមុនសិន។"
+      ]
+    ],
+    "trial": "អ្នកមិនទាន់ជាវ អាចសាកល្បងថតម្តងមួយ និងធ្វើកាតបុណ្យណូអែលបានឥតគិតថ្លៃ មុខងារនីមួយៗ ៣ ដង។",
+    "devices": "មានរូបបង្ហាញសម្រាប់ iPhone, iPad និង iPhone Duo។ កម្មវិធីមានភាសាខ្មែរ ភាសាកូរ៉េ និងជម្រើសភាសាអង់គ្លេសសហរដ្ឋអាមេរិក និងចក្រភពអង់គ្លេស។",
+    "devicesTitle": "ឧបករណ៍ និងភាសា",
+    "store": "មើលក្នុង App Store",
+    "home": "ត្រឡប់ទៅ DualCam",
+    "previous": "មើលកំណែ 2.3",
+    "availability": "ពិនិត្យកំណែដែលអាចទាញយកបានក្នុង App Store ក្នុងតំបន់របស់អ្នក។"
   }
 }

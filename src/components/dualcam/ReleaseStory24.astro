@@ -1,31 +1,40 @@
 ---
 import copy from '../../data/dualcam-version-24.json';
-import {release24Locales, release24Path} from '../../lib/dualcam-release-24.mjs';
+import {release24Editorial} from '../../data/dualcam-24-editorial.mjs';
+import {release24Locales, release24Media, release24Path} from '../../lib/dualcam-release-24.mjs';
 import '../../styles/dualcam-marketing.css';
 import Attribution from './Attribution.astro';
+import ReleaseDemo from './ReleaseDemo24.astro';
+import ReleaseGallery from './ReleaseGallery24.astro';
+import ReleaseNotes from './ReleaseNotes.astro';
+import {getCopy} from '../../lib/dualcam-showcase/copy.js';
 
 interface Props { locale: keyof typeof copy; }
 const {locale} = Astro.props;
 const d = copy[locale];
+const e = release24Editorial[locale];
 const routes = release24Locales[locale];
-const media = '/dualcam/media/release-24/';
 const url = new URL(release24Path(locale), Astro.site).href;
 const title = `DualCam 2.4 | ${d.title}`;
-const image = new URL(`${media}${locale}-share.jpg`, Astro.site).href;
+const image = new URL(`${release24Media}${locale}-share.jpg`, Astro.site).href;
+const headings=[e.why,e.issues,e.effort,e.challenge];
+const notes=headings.map((title,i)=>({title,text:e.paragraphs[i]}));
+const relatedFaq=getCopy(locale).editorial;
 const schema = {
   '@context': 'https://schema.org',
-  '@type': 'Article',
-  headline: title,
-  description: d.description,
-  datePublished: '2026-11-23',
-  inLanguage: locale,
-  mainEntityOfPage: url,
-  image,
-  author: {'@type': 'Organization', name: 'DualCam', url: new URL('/dualcam/', Astro.site).href},
+  '@graph': [
+    {'@type': 'Article', headline: title, description: d.description, datePublished: '2026-11-23',
+      inLanguage: locale, mainEntityOfPage: url, image, articleSection: [...headings, ...d.features.map(([heading])=>heading)],
+      author: {'@type': 'Organization', name: 'DualCam', url: new URL('/dualcam/', Astro.site).href}},
+    {'@type': 'BreadcrumbList', itemListElement: [
+      {'@type':'ListItem',position:1,name:'DualCam',item:new URL(routes.home,Astro.site).href},
+      {'@type':'ListItem',position:2,name:'DualCam 2.4',item:url},
+    ]},
+  ],
 };
 ---
 <!doctype html>
-<html lang={locale}>
+<html lang={locale} dir={routes.dir || 'ltr'}>
   <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -49,36 +58,47 @@ const schema = {
     <header class="site-header">
       <div class="wrap nav-row">
         <a class="brand" href={routes.home}><img src="/dualcam/icon.png" alt="" width="32" height="32"/>DualCam</a>
-        <nav class="languages" aria-label="Language">
-          {Object.entries(release24Locales).map(([language, value]) =>
-            <a href={release24Path(language)} lang={language} hreflang={language} aria-current={language === locale ? 'page' : undefined}>{value.label}</a>
-          )}
-        </nav>
+        <details class="language-menu">
+          <summary aria-label={e.language}>{routes.label}</summary>
+          <nav class="languages" aria-label={e.language}>
+            {Object.entries(release24Locales).map(([language, value]) =>
+              <a href={release24Path(language)} lang={language} hreflang={language} aria-current={language === locale ? 'page' : undefined}>{value.label}</a>
+            )}
+          </nav>
+        </details>
       </div>
     </header>
     <main class="wrap release" id="main">
       <article>
         <header class="release-hero">
-          <div class="intro">
+          <div>
             <p class="eyebrow">DUALCAM 2.4</p>
             <h1>{d.title}</h1>
             <p class="lead">{d.intro}</p>
             <a class="button primary" href="https://apps.apple.com/app/id6774681432" data-store-link data-placement="release-24">{d.store}</a>
             <p class="availability">{d.availability}</p>
           </div>
-          <div class="screens">
-            {[['two-takes', d.oneAlt], ['postcard', d.twoAlt]].map(([name, alt], i) =>
-              <img src={`${media}${locale}-${name}.webp`} alt={alt} width="620" height="1344" fetchpriority={i === 0 ? 'high' : 'auto'}/>
-            )}
-          </div>
+          <section class="hero-demo" id="demo" aria-labelledby="demo-title">
+            <h2 id="demo-title">{e.demo}</h2>
+            <ReleaseDemo locale={locale}/>
+          </section>
         </header>
+        <nav class="chapter-links" aria-label="DualCam 2.4">
+          <a href="#demo">{e.demo}</a>
+          <a href="#store-screenshots">{e.gallery}</a>
+          <a href="#development">{e.notes}</a>
+        </nav>
         <div class="features">
           {d.features.map(([heading, text]) => <section><h2>{heading}</h2><p>{text}</p></section>)}
         </div>
         <p class="trial">{d.trial}</p>
-        <section class="devices">
-          <h2>{d.devicesTitle}</h2>
+        <ReleaseGallery locale={locale}/>
+        <ReleaseNotes title={e.notes} entries={notes}/>
+        <section class="devices" aria-labelledby="device-title">
+          <h2 id="device-title">{d.devicesTitle}</h2>
           <p>{d.devices}</p>
+          <h3>{relatedFaq.faqDevices}</h3>
+          <p>{relatedFaq.faqDevicesAnswer}</p>
         </section>
       </article>
     </main>
@@ -88,26 +108,29 @@ const schema = {
 </html>
 <style>
   .release { padding-block: clamp(30px, 7vw, 90px) 64px; }
-  .release-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(20px, 6vw, 80px); align-items: center; }
-  .intro { margin: 0; }
-  .release h1 { color: #f5f4ed; font-size: clamp(2.35rem, 5.1vw, 5rem); line-height: 1.09; margin: 14px 0 20px; letter-spacing: -.04em; }
+  .release-hero { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr); gap: clamp(20px, 6vw, 80px); align-items: center; }
+  .release h1 { color: #f5f4ed; font-size: clamp(2.25rem, 5.1vw, 5rem); line-height: 1.12; margin: 14px 0 20px; letter-spacing: -.035em; overflow-wrap: anywhere; }
   .eyebrow { color: #e8bf5b; }
   .lead { font-size: clamp(1.04rem, 1.7vw, 1.24rem); line-height: 1.65; margin: 0 0 22px; }
   .availability { color: #bcc5bf; font-size: .87rem; margin: 14px 0 0; }
-  .screens { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 14px; padding: 18px; border-radius: 24px; background: #1d221e; }
-  .screens img { display: block; width: 100%; height: auto; border-radius: 10px; }
-  .screens img + img { margin-top: 23px; }
-  .features { border-top: 1px solid #374039; margin-top: clamp(34px, 6vw, 72px); padding-top: 26px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
-  .release h2 { font-size: 1.18rem; color: #f5f4ed; margin: 0 0 7px; }
-  .features p, .devices p { margin: 0; }
-  .trial { margin: 24px 0 32px; border-left: 3px solid #e8bf5b; padding: 10px 0 10px 13px; color: #e9ddbb; }
-  .languages { flex-wrap: wrap; }
+  .hero-demo { border: 1px solid #313a34; border-radius: 24px; background: #171c18; padding: clamp(12px, 2vw, 24px); min-width: 0; }
+  .hero-demo h2 { max-width: 440px; margin: 0 auto 12px; font-size: 1.08rem; color: #e6dcbb; }
+  .chapter-links { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-block-start: 28px; padding-block: 10px; border-bottom: 1px solid #374039; }
+  .chapter-links a { color: #e6dcbb; font-size: .92rem; text-underline-offset: 3px; }
+  .features { padding-block-start: 22px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+  .features h2,.devices h2 { font-size: 1.18rem; color: #f5f4ed; margin: 0 0 7px; }
+  .features p,.devices p { margin: 0; }
+  .trial { margin: 24px 0 32px; border-inline-start: 3px solid #e8bf5b; padding: 10px 13px; color: #e9ddbb; background: #171711; }
+  .devices { border-top: 1px solid #374039; margin-block-start: 32px; padding-block-start: 20px; }
+  .devices h3 { margin: 14px 0 6px; font-size: 1rem; }
+  .language-menu { position: relative; z-index: 10; }
+  .language-menu summary { display: flex; align-items: center; gap: 8px; min-height: 40px; padding: 6px 10px; cursor: pointer; font-size: .9rem; }
+  .language-menu summary::after { position: static; inline-size: 1em; text-align: center; font-size: 1.05rem; }
+  .language-menu .languages { position: absolute; z-index: 22; inset-inline-end: 0; inset-block-start: 100%; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); width: min(86vw,300px); gap: 3px; padding: 8px; background: #202622; border: 1px solid #424b45; border-radius: 12px; box-shadow: 0 12px 32px #0008; }
+  .language-menu .languages a { font-size: .85rem; padding: 6px; overflow-wrap: anywhere; }
+  :where(#demo,#store-screenshots,#development) { scroll-margin-block-start: 86px; }
+  :global(html[dir="rtl"]) .release h1 { letter-spacing: normal; }
   @media (max-width: 760px) {
-    .release-hero { grid-template-columns: 1fr; }
-    .screens { max-width: 440px; margin-inline: auto; }
-    .features { grid-template-columns: 1fr; }
-    .nav-row { flex-direction: column; align-items: flex-start; padding-block: 12px; gap: 10px; }
-    .languages { justify-content: flex-start; gap: 4px 8px; }
-    .languages a { padding-inline: 6px; }
+    .release-hero,.features { grid-template-columns: 1fr; }
   }
 </style>

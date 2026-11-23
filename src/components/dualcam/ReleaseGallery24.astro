@@ -1,0 +1,50 @@
+---
+import {release24Devices, release24Media, screenshot24Path} from '../../lib/dualcam-release-24.mjs';
+import {release24Editorial} from '../../data/dualcam-24-editorial.mjs';
+
+interface Props {locale: string;}
+const {locale}=Astro.props;
+const d=release24Editorial[locale];
+const names=['iPhone','iPad 13″',`iPhone Duo · ${d.cover}`,`iPhone Duo · ${d.inner}`];
+---
+<section id="store-screenshots" class="shot-gallery" aria-labelledby="shot-gallery-title">
+  <h2 id="shot-gallery-title">{d.gallery}</h2>
+  <p>{d.artwork}</p>
+  {locale === 'km' && <figure class="km-interface">
+    <img src={release24Media+'demo/km/app-interface.webp'} width="393" height="852" alt="មុខងារថតម្តងមួយក្នុងកម្មវិធី DualCam ជាភាសាខ្មែរ" loading="lazy"/>
+    <figcaption>ចំណុចប្រទាក់ DualCam ជាភាសាខ្មែរ</figcaption>
+  </figure>}
+  {release24Devices.map((device,index)=>
+    <details name="store-device" open={index===0}>
+      <summary><span>{names[index]}</span><span class="shot-count">09</span></summary>
+      <div class="shot-row">
+        {d.captions.map((caption,i)=>{
+          const url=screenshot24Path(locale,device.id,i+1);
+          return <figure>
+            <a href={url}><img src={url} width={device.width} height={device.height} alt={caption} loading="lazy" decoding="async"/></a>
+            <figcaption>{caption}</figcaption>
+          </figure>;
+        })}
+      </div>
+    </details>
+  )}
+</section>
+
+<style>
+  .shot-gallery { border-top: 1px solid #374039; padding-block-start: 30px; margin-block-start: clamp(28px,6vw,60px); }
+  .shot-gallery h2 { font-size: clamp(1.5rem,3vw,2.35rem); line-height: 1.23; margin: 0; }
+  .shot-gallery > p { margin: 8px 0 18px; }
+  details { border-top: 1px solid #354039; padding-block: 4px; }
+  details:last-child { border-bottom: 1px solid #354039; }
+  summary { display: flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 650; padding: 11px 5px; }
+  summary::after { position: static; inline-size: 1em; text-align: center; }
+  .shot-count { margin-inline-start: auto; font-size: .81rem; font-variant-numeric: tabular-nums; color: #d6c788; }
+  .shot-row { display: grid; grid-auto-flow: column; grid-auto-columns: min(62vw, 235px); min-width: 0; gap: 12px; padding: 6px 5px 14px; overflow: auto; scroll-snap-type: inline mandatory; }
+  .shot-row:has(img[width="980"]) { grid-auto-columns: min(83vw, 360px); }
+  .shot-row figure { margin: 0; scroll-snap-align: start; scroll-margin-inline: 5px; }
+  .shot-row a { display: block; }
+  .shot-row img { display: block; width: 100%; height: auto; border-radius: 11px; background: #1d221e; }
+  .km-interface { margin: 0 0 18px; }
+  .km-interface img { display: block; width: min(50vw,175px); height: auto; border-radius: 10px; }
+  figcaption { color: #ccd1c8; font-size: .85rem; margin-block-start: 7px; line-height: 1.4; }
+</style>

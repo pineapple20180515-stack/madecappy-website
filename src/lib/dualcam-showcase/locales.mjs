@@ -13,6 +13,8 @@ export const locales = {
   ms: {name:'Bahasa Melayu',legacy:'en',format:'ms-MY'},
   vi: {name:'Tiếng Việt',legacy:'en',format:'vi-VN'},
   ru: {name:'Русский',legacy:'en',format:'ru-RU'},
+  ko: {name:'한국어',legacy:'en',format:'ko-KR'},
+  km: {name:'ភាសាខ្មែរ',legacy:'en',format:'km-KH'},
   ar: {name:'العربية',legacy:'en',format:'ar-SA',dir:'rtl'}
 };
 

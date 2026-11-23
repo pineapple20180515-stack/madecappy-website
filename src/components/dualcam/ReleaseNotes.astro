@@ -1,0 +1,19 @@
+---
+interface Props {title: string; entries: Array<{title: string; text: string}>;}
+const {title,entries}=Astro.props;
+---
+<section class="release-notes" id="development" aria-labelledby="development-heading">
+  <h2 id="development-heading">{title}</h2>
+  <div class="notes-grid">
+    {entries.map(({title,text})=><section><h3>{title}</h3><p>{text}</p></section>)}
+  </div>
+</section>
+<style>
+  .release-notes { border-top: 1px solid #374039; padding-block: clamp(24px,4vw,44px) 0; margin-block-start: clamp(28px,6vw,60px); }
+  .release-notes h2 { font-size: clamp(1.5rem,3vw,2.35rem); line-height: 1.23; margin: 0 0 22px; }
+  .notes-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 0 clamp(22px,5vw,70px); }
+  .notes-grid section { padding-block: 16px; border-top: 1px solid #303932; }
+  .notes-grid h3 { margin: 0 0 7px; font-size: 1.18rem; line-height: 1.35; }
+  .notes-grid p { margin: 0; line-height: 1.65; }
+  @media(max-width: 650px) { .notes-grid { grid-template-columns: 1fr; } }
+</style>
