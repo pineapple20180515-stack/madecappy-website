@@ -1,10 +1,7 @@
 import * as THREE from 'three';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
-import { posterData } from './poster-data.js';
 
-const motion = matchMedia('(prefers-reduced-motion: reduce)');
 const dimensions = { width: 5.75, height: 2.756, radius: .34 };
-const fullTurn = Math.PI * 2;
 
 function roundedPath(path, width, height, radius) {
   const x = width / 2;
@@ -70,7 +67,8 @@ function makeStudio(target, framing = {}) {
     const {width,height} = target.getBoundingClientRect();
     if (width < 1 || height < 1) return;
     camera.aspect = width / height;
-    camera.position.z = Math.max(framing.distance ?? 9.05, (framing.fit ?? 11.75) / camera.aspect);
+    const fit = typeof framing.fit === 'function' ? framing.fit(camera.aspect) : framing.fit ?? 11.75;
+    camera.position.z = Math.max(framing.distance ?? 9.05, fit / camera.aspect);
     camera.updateProjectionMatrix();
     renderer.setSize(width,height,false);
     renderer.render(scene,camera);
@@ -127,10 +125,8 @@ function textureOfBoard() {
   return image;
 }
 
-function makePhone(target, label, hint, onChange) {
-  const {scene,camera,renderer,resize} = makeStudio(target,{distance:7.5,fit:10.1});
-  softShadow(scene,6.8,1.43,.14,-1.64);
-  const phone = new THREE.Group(); scene.add(phone);
+function buildPhone(screenTexture) {
+  const phone = new THREE.Group();
   const metal = paint(0xc7d5cd,.21,.88,{clearcoat:.25});
   const polished = paint(0xe5eae0,.18,.68,{clearcoat:.82});
   const dark = paint(0x0b1818,.30,.44);
@@ -175,22 +171,18 @@ function makePhone(target, label, hint, onChange) {
   const displayGeometry=new THREE.ShapeGeometry(displayShape,20);
   const attribute=displayGeometry.getAttribute('position');
   const uv=displayGeometry.getAttribute('uv');
-  for(let i=0;i<attribute.count;i++) uv.setXY(i,attribute.getX(i)/(w-.24)+.5,attribute.getY(i)/(h-.24)*.833+.5835);
-  const displayMaterial=new THREE.MeshBasicMaterial({color:0xcddad3,toneMapped:false});
+  for(let i=0;i<attribute.count;i++) uv.setXY(i,attribute.getY(i)/(h-.24)+.5,.5-attribute.getX(i)/(w-.24));
+  const displayMaterial=new THREE.MeshBasicMaterial({map:screenTexture,toneMapped:false});
   const screen=new THREE.Mesh(displayGeometry,displayMaterial); screen.position.z=.048;display.add(screen);
-  new THREE.TextureLoader().load(posterData,texture=>{
-    texture.colorSpace=THREE.SRGBColorSpace;texture.anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy());
-    displayMaterial.map=texture;displayMaterial.color.set(0xffffff);displayMaterial.needsUpdate=true;
-  });
   const frontNotch=plate(.193,.49,.095,.012,dark,.003);frontNotch.position.set(-2.55,0,.075);front.add(frontNotch);
-  const frontLens=addLens(front,-2.55,.104,'front',.050,.084);
+  addLens(front,-2.55,.104,'front',.050,.084);
 
   const rearFace=plate(w-.027,h-.027,r-.01,.081,shellMaterial,.031);rear.add(rearFace);
   const platformMetal=paint(0xbac8c5,.33,.71,{clearcoat:.42});
   const ringMetal=paint(0xa5b6b3,.17,.80,{clearcoat:.66});
   const plateau=plate(1.53,h-.15,.29,.119,platformMetal,.054);
   plateau.position.set(-2.02,0,-.098);rear.add(plateau);
-  const rearLens=addLens(rear,-2.40,.72,'rear',.332,-.193,ringMetal);
+  addLens(rear,-2.40,.72,'rear',.332,-.193,ringMetal);
   addLens(rear,-1.65,.72,'rear',.329,-.193,ringMetal);
   addLens(rear,-2.03,.020,'rear',.329,-.193,ringMetal);
   const sensor=new THREE.CylinderGeometry(.107,.107,.022,32);
@@ -219,77 +211,22 @@ function makePhone(target, label, hint, onChange) {
     [metal,polished,shellMaterial,platformMetal,ringMetal,backGlass.material].forEach((m,i)=>m.color.setHex(colors[i]));
     wordmarkMaterial.color.setHex(red?0xffc5bb:0x4e6660);
     wordmarkMaterial.opacity=red?.86:.82;
-    renderer.render(scene,camera);
   }
 
-  const stage=target.parentElement;
-  const views={front:{yaw:-.27,pitch:-.17},rear:{yaw:Math.PI+.27,pitch:-.21},explode:{yaw:-.70,pitch:-.28}};
-  let mode=motion.matches?'rear':'orbit';let yaw=Math.PI+.37;let pitch=-.25;
-  let wantedYaw=yaw;let wantedPitch=pitch;let spread=0;let last=performance.now();let engaged=false;
-  let drag=null;let visible=true;
-  new IntersectionObserver(([entry])=>{visible=entry.isIntersecting;},{rootMargin:'80px'}).observe(stage);
-  const localizedLabel=()=>label.dataset[mode]||'';
-  const select=(view)=>{
-    mode=view;engaged=true;
-    if(view!=='orbit'){
-      const targetAngle=views[view].yaw;
-      wantedYaw=targetAngle+Math.round((yaw-targetAngle)/fullTurn)*fullTurn;
-      wantedPitch=views[view].pitch;
-    }
-    if(view==='orbit') wantedPitch=-.24;
-    onChange(view);hint.hidden=view!=='orbit';
-  };
-  stage.addEventListener('pointerdown',event=>{
-    if(!event.isPrimary||event.button!==0) return;
-    drag={id:event.pointerId,x:event.clientX,y:event.clientY,yaw,pitch,moved:false};
-    stage.setPointerCapture(event.pointerId);
-  });
-  stage.addEventListener('pointermove',event=>{
-    if(!drag||event.pointerId!==drag.id)return;
-    const dx=event.clientX-drag.x,dy=event.clientY-drag.y;
-    if(!drag.moved&&Math.abs(dx)<5&&Math.abs(dy)<5)return;
-    if(!drag.moved){drag.moved=true;stage.dataset.dragging='true';mode='manual';engaged=true;onChange(mode);hint.hidden=false;}
-    wantedYaw=drag.yaw+dx*.010;
-    wantedPitch=THREE.MathUtils.clamp(drag.pitch+dy*.007,-1,1);
-  });
-  function finishDrag(event){if(!drag||event.pointerId!==drag.id)return;drag=null;delete stage.dataset.dragging;}
-  stage.addEventListener('pointerup',finishDrag);stage.addEventListener('pointercancel',finishDrag);
-  window.addEventListener('keydown',event=>{
-    if(document.activeElement!==stage||!['ArrowLeft','ArrowRight'].includes(event.key))return;
-    event.preventDefault();mode='manual';engaged=true;wantedYaw+=event.key==='ArrowRight'?.3:-.3;onChange(mode);
-  });
-  stage.tabIndex=0;
-  const origin=performance.now();
-  const projected=new THREE.Vector3();
-  const facing=new THREE.Vector3();
-  const quaternion=new THREE.Quaternion();
-  function animate(now){
-    requestAnimationFrame(animate);
-    const dt=Math.min(.05,(now-last)/1000);last=now;
-    if(!visible||document.hidden)return;
-    if(mode==='orbit'&&!drag&&(!motion.matches||engaged)) wantedYaw+=dt*.31;
-    const speed=motion.matches?1:1-Math.exp(-dt*6.4);
-    yaw=THREE.MathUtils.lerp(yaw,wantedYaw,speed);pitch=THREE.MathUtils.lerp(pitch,wantedPitch,speed);
-    const introSpread=mode==='orbit'&&!engaged&&!motion.matches? .37*Math.pow(Math.max(0,1-(now-origin)/2250),2):0;
-    spread=THREE.MathUtils.lerp(spread,mode==='explode'?1:introSpread,speed);
-    phone.rotation.set(pitch,yaw,-.17);
-    phone.position.y=mode==='orbit'&&!motion.matches?Math.sin(now*.0011)*.09:0;
-    front.position.set(-spread*.38,spread*.07,.178+spread*.7);
+  function setSpread(spread){
+    front.position.set(-spread*.38,spread*.07,.178+spread*.70);
     rear.position.set(spread*.38,-spread*.07,-.166-spread*.66);
     tint.opacity=.060+spread*.26;
     display.visible=spread<.62;
     boardGroup.visible=spread>.07;
-    renderer.render(scene,camera);
-    const activeLens=mode==='front'?frontLens:mode==='rear'?rearLens:null;
-    if(activeLens){
-      activeLens.getWorldQuaternion(quaternion);facing.set(0,0,1).applyQuaternion(quaternion);
-      label.hidden=facing.z<.29;
-      if(!label.hidden){activeLens.getWorldPosition(projected).project(camera);label.style.left=`${(projected.x*.5+.5)*100}%`;label.style.top=`${(-projected.y*.5+.5)*100}%`;label.textContent=localizedLabel();}
-    }else {label.hidden=true;}
   }
-  if(motion.matches){yaw=views.rear.yaw;wantedYaw=yaw;pitch=views.rear.pitch;wantedPitch=pitch;hint.hidden=true;}
-  setFinish('red');resize();onChange(mode);requestAnimationFrame(animate);
-  return { select, setFinish, snapshot:()=>renderer.domElement.toDataURL('image/png') };
+  const group = new THREE.Group();
+  phone.rotation.z=-Math.PI/2;
+  group.add(phone);
+  group.scale.setScalar(.55);
+  setSpread(0);
+  setFinish('red');
+  return {group, setSpread, setFinish};
 }
 
-export { makePhone, makeStudio, softShadow };
+export { addLens, addMesh, buildPhone, makeStudio, paint, plate, roundedPath, softShadow };

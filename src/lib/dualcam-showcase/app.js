@@ -1,4 +1,4 @@
-import { makePhone } from './model.js';
+import { getDeviceWords } from './device-words.js';
 import { renderRevenue } from './revenue.js';
 import { renderEditorial } from './editorial.js';
 import { actualUsdCents, denominations, goalUsdCents, reached } from './cash-values.js';
@@ -7,18 +7,21 @@ import { getCopy } from './copy.js';
 import { showcasePath } from './locales.mjs';
 
 let language = defaultLocale;
-let view = 'orbit';
+let view = 'front';
+let device = 'all';
+let folded = false;
 let supported = true;
 let finish = 'red';
 let pigMode = 'current';
 let pigSpins = false;
 const controls = document.querySelector('#view-controls');
 const hint = document.querySelector('#scene-hint');
-const label = document.querySelector('#lens-label');
 const stage = document.querySelector('#phone-stage');
 const state = document.querySelector('#view-state');
 const finishControls=document.querySelector('#finish-controls');
-const finishCaption=document.querySelector('#finish-caption');
+const devices=document.querySelector('#device-controls');
+const options=document.querySelector('#device-options');
+const fold=document.querySelector('#device-fold');
 const pigControls=document.querySelector('#pig-controls');
 const pigStage=document.querySelector('#pig-stage');
 const pigState=document.querySelector('#pig-state');
@@ -57,7 +60,6 @@ function setView(mode) {
 function updateFinish(value){
   finish=value;
   const strings=interfaceCopy();
-  finishCaption.textContent=strings[finish];
   stage.dataset.finish=finish;
   for(const button of finishControls.querySelectorAll('button')){
     button.setAttribute('aria-pressed',String(button.dataset.finish===finish));
@@ -95,9 +97,12 @@ function setLanguage(value) {
   document.title=translation.title;
   document.querySelector('meta[name="description"]').content=translation.description;
   for(const element of document.querySelectorAll('[data-text]')) element.textContent=translation[element.dataset.text];
-  label.dataset.front=translation.frontLabel;label.dataset.rear=translation.rearLabel;
   languageSelector.setAttribute('aria-label',translation.language);
   controls.setAttribute('aria-label',translation.controls);
+  const [all]=getDeviceWords(language);
+  devices.setAttribute('aria-label',all);
+  devices.querySelector('[data-device="all"]').textContent=all;
+  updateDeviceControls();
   document.querySelector('.site-nav').setAttribute('aria-label',translation.navigation);
   document.querySelector('#film-player').setAttribute('aria-label',translation.videoLabel);
   document.querySelector('.close-dialog').setAttribute('aria-label',translation.close);
@@ -117,27 +122,66 @@ function setLanguage(value) {
   if(!supported) hint.textContent=translation.fallback;
 }
 
-try {
-  const model=makePhone(document.querySelector('#phone-render'),label,hint,setView);
-  document.querySelector('#phone-render img')?.remove();
-  stage.dataset.renderer='webgl';
-  finishControls.hidden=false;
-  finishControls.addEventListener('click',event=>{
-    const button=event.target.closest('button[data-finish]');
-    if(button){model.setFinish(button.dataset.finish);updateFinish(button.dataset.finish);if(view==='orbit'||view==='front')model.select('rear');}
-  });
-  controls.addEventListener('click',event=>{
-    const button=event.target.closest('button[data-view]');
-    if(button) model.select(button.dataset.view);
-  });
-  window.dualcamPreview = { phoneSnapshot:model.snapshot };
-} catch (error) {
-  console.warn('3D preview is unavailable.',error);
-  const image = new Image();image.src='/dualcam/showcase/phone-still.webp';image.alt='';
-  document.querySelector('#phone-render').replaceChildren(image);
-  stage.dataset.renderer='fallback';
-  supported=false;controls.hidden=true;hint.hidden=false;stage.style.cursor='default';
+function updateDeviceControls(){
+  stage.dataset.device=device;
+  stage.dataset.folded=String(folded);
+  options.hidden=!supported||device==='all';
+  finishControls.hidden=device!=='iphone';
+  fold.hidden=device!=='duo';
+  controls.querySelector('[data-view="explode"]').hidden=device!=='iphone';
+  controls.querySelector('[data-view="rear"]').hidden=device==='duo'&&folded;
+  const words=getDeviceWords(language);
+  fold.textContent=words[folded?2:1];
+  fold.setAttribute('aria-pressed',String(folded));
+  for(const button of devices.querySelectorAll('button')){
+    button.setAttribute('aria-pressed',String(button.dataset.device===device));
+  }
 }
+
+function useLineupFallback(){
+  stage.dataset.renderer='fallback';
+  supported=false;options.hidden=true;hint.hidden=true;stage.removeAttribute('tabindex');
+  for(const button of devices.querySelectorAll('button')) button.disabled=true;
+}
+
+async function loadLineup(){
+  try {
+    const {makeDeviceLineup}=await import('./device-lineup.js');
+    const model=await makeDeviceLineup(stage,stage.dataset.media,setView);
+    stage.dataset.renderer='webgl';
+    stage.tabIndex=0;
+    hint.hidden=false;
+    for(const button of devices.querySelectorAll('button')) button.disabled=false;
+    devices.addEventListener('click',event=>{
+      const button=event.target.closest('button[data-device]');
+      if(!supported||!button) return;
+      device=button.dataset.device;folded=false;
+      model.selectDevice(device);
+      updateDeviceControls();
+    });
+    finishControls.addEventListener('click',event=>{
+      const button=event.target.closest('button[data-finish]');
+      if(supported&&button){model.setFinish(button.dataset.finish);updateFinish(button.dataset.finish);}
+    });
+    controls.addEventListener('click',event=>{
+      const button=event.target.closest('button[data-view]');
+      if(supported&&button) model.selectView(button.dataset.view);
+    });
+    fold.addEventListener('click',()=>{
+      if(!supported)return;
+      folded=!folded;
+      model.setFold(folded);
+      updateDeviceControls();
+    });
+    stage.addEventListener('lineupfallback',useLineupFallback);
+    window.dualcamPreview = {...window.dualcamPreview,phoneSnapshot:model.snapshot};
+  }catch(error){
+    console.warn('3D device lineup is unavailable.',error);
+    useLineupFallback();
+  }
+}
+
+loadLineup();
 
 const jarTarget=document.querySelector('#jar-render');
 const jarObserver=new IntersectionObserver(async(entries,observer)=>{

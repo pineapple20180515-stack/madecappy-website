@@ -15,6 +15,7 @@ const {locale} = Astro.props;
 const d = copy[locale];
 const e = release24Editorial[locale];
 const routes = release24Locales[locale];
+const titleLines=locale.startsWith('zh-') ? d.title.split(/(?<=，)/) : [d.title];
 const url = new URL(release24Path(locale), Astro.site).href;
 const title = `DualCam 2.4 | ${d.title}`;
 const image = new URL(`${release24Media}${locale}-share.jpg`, Astro.site).href;
@@ -73,13 +74,13 @@ const schema = {
         <header class="release-hero">
           <div>
             <p class="eyebrow">DUALCAM 2.4</p>
-            <h1>{d.title}</h1>
+            <h1>{titleLines.map(line=><span>{line}</span>)}</h1>
             <p class="lead">{d.intro}</p>
             <a class="button primary" href="https://apps.apple.com/app/id6774681432" data-store-link data-placement="release-24">{d.store}</a>
             <p class="availability">{d.availability}</p>
           </div>
           <section class="hero-demo" id="demo" aria-labelledby="demo-title">
-            <h2 id="demo-title">{e.demo}</h2>
+            <h2 id="demo-title" class="sr-only">{e.demo}</h2>
             <ReleaseDemo locale={locale}/>
           </section>
         </header>
@@ -113,8 +114,9 @@ const schema = {
   .eyebrow { color: #e8bf5b; }
   .lead { font-size: clamp(1.04rem, 1.7vw, 1.24rem); line-height: 1.65; margin: 0 0 22px; }
   .availability { color: #bcc5bf; font-size: .87rem; margin: 14px 0 0; }
-  .hero-demo { border: 1px solid #313a34; border-radius: 24px; background: #171c18; padding: clamp(12px, 2vw, 24px); min-width: 0; }
-  .hero-demo h2 { max-width: 440px; margin: 0 auto 12px; font-size: 1.08rem; color: #e6dcbb; }
+  .hero-demo { min-width: 0; }
+  .hero-demo .sr-only { position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap; }
+  .release h1 span { display:block;text-wrap:balance; }
   .chapter-links { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-block-start: 28px; padding-block: 10px; border-bottom: 1px solid #374039; }
   .chapter-links a { color: #e6dcbb; font-size: .92rem; text-underline-offset: 3px; }
   .features { padding-block-start: 22px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }

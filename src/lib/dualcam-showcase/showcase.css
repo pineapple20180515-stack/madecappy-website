@@ -52,9 +52,7 @@ main>section{scroll-margin-top:85px}
 .stage[data-dragging],.pig-stage[data-dragging]{cursor:grabbing}
 #phone-render,#jar-render{position:absolute;inset:0}
 #phone-render canvas,#jar-render canvas,#phone-render img,#jar-render img{display:block;width:100%;height:100%;object-fit:contain}
-.stage-title,.scene-hint,.lens-label{position:absolute;z-index:1;font-size:12px;color:#4e4e59}
-.stage-title{inset-inline-start:22px;bottom:20px;font-weight:630}.stage-title>span{color:var(--muted)}
-.scene-hint{inset-inline-end:22px;bottom:20px}.lens-label{left:50%;transform:translateX(-50%);top:15px;padding:4px 10px;border-radius:20px;background:#fff;color:var(--ink)}
+.scene-hint{position:absolute;z-index:1;font-size:12px;color:#4e4e59}
 .figure-controls{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px}
 .view-controls,.finish-controls,.pig-controls{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
 .view-controls button,.finish-controls button,.pig-controls button{
@@ -163,7 +161,6 @@ html[lang=vi] .hero h1{font-size:clamp(35px,5.55vw,76px)}
   .hero{padding-top:41px}.hero h1{font-size:clamp(34px,9vw,51px);margin-bottom:12px}.hero h1 span{display:block}
   .hero-description{font-size:16px}.hero-actions{margin-top:19px;gap:13px}.pill{font-size:13px;padding:10px 13px}
   .optics{margin-top:23px}.stage{height:clamp(230px,63vw,350px);border-radius:17px}
-  .stage-title,.scene-hint{font-size:10px;bottom:9px}.stage-title{inset-inline-start:10px}.scene-hint{inset-inline-end:10px}
   .figure-controls{margin-top:8px;gap:5px;flex-wrap:wrap}.view-controls button,.finish-controls button{font-size:11px;padding:5px 7px}
   .section-intro{flex-wrap:wrap;gap:8px;margin-bottom:15px}
   .section-intro>p{font-size:14px}.section-index{font-size:12px}
@@ -203,3 +200,37 @@ html[lang=vi] .hero h1{font-size:clamp(35px,5.55vw,76px)}
 
 .release-24-shortcut { display: inline-flex; gap: .55em; align-items: center; margin-top: 1.05rem; padding: .45rem .8rem; border: 1px solid currentColor; border-radius: 999px; font-size: .9rem; text-decoration: none; }
 .release-24-shortcut:hover { text-decoration: underline; }
+
+.hero { padding-top:clamp(35px,5vw,68px); }
+.hero h1 { font-size:clamp(41px,5.75vw,78px); }
+.lineup-stage {
+  height:clamp(348px,42vw,510px);
+  background:radial-gradient(ellipse 75% 76% at 46% 41%,#f2f2f4 0%,#e8e9ed 55%,#dbdde3 100%);
+  cursor:default;
+}
+#phone-render > :is(picture,canvas) { position:absolute;inset:0; }
+.lineup-stage[data-renderer="webgl"] { cursor:grab; }
+.hero-actions .release-24-shortcut { margin:0; }
+.optics .device-controls { width:max-content;max-width:100%;margin:0 auto 12px; }
+.lineup-stage[data-dragging] { cursor:grabbing; }
+.lineup-stage canvas,.lineup-stage[data-renderer="webgl"] #phone-render>picture { visibility:hidden; }
+.lineup-stage[data-renderer="webgl"] canvas { visibility:visible; }
+.lineup-illustration { position:absolute;bottom:16px;inset-inline-start:20px;color:#535662;font-size:11px; }
+.lineup-stage .scene-hint { bottom:16px;inset-inline-end:20px;font-size:11px; }
+.lineup-controls { flex-direction:column;gap:8px;justify-content:center;margin-top:9px; }
+.lineup-stage[data-device="all"] + .lineup-controls { margin-top:0; }
+.lineup-options,.device-controls { display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:5px; }
+.device-controls { padding:4px;background:#f0f0f4;border-radius:999px; }
+.device-controls button { padding:7px clamp(7px,1.5vw,18px);font-size:clamp(10px,2.85vw,13px); }
+.device-controls button[aria-pressed="true"] { background:#fff;color:#19191d;box-shadow:0 1px 6px #25253216; }
+.lineup-stage[data-renderer="fallback"] .scene-hint { display:none; }
+.lineup-stage:not([data-renderer="webgl"]) canvas { display:none!important; }
+.device-fold { border:0;border-radius:999px;background:#e8e8ed;color:var(--ink);font-size:12px;font-weight:600;padding:6px 11px; }
+.device-fold:hover { background:#ddddE6; }
+@media(max-width:650px){
+  .lineup-stage{height:clamp(236px,69vw,370px);}
+  .lineup-illustration,.lineup-stage .scene-hint{bottom:9px;font-size:10px;}
+  .lineup-illustration{inset-inline-start:10px;}
+  .lineup-stage .scene-hint{inset-inline-end:10px;}
+  .lineup-controls{margin-top:10px;}
+}
