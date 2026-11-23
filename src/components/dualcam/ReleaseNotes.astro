@@ -1,11 +1,15 @@
 ---
-interface Props {title: string; entries: Array<{title: string; text: string}>;}
-const {title,entries}=Astro.props;
+type Note = {title: string} & ({text: string} | {paragraphs: string[]});
+interface Props {title: string; entries: Note[]; longform?: boolean;}
+const {title,entries,longform=false}=Astro.props;
 ---
-<section class="release-notes" id="development" aria-labelledby="development-heading">
+<section class:list={['release-notes', {'release-notes--longform': longform}]} id="development" aria-labelledby="development-heading">
   <h2 id="development-heading">{title}</h2>
   <div class="notes-grid">
-    {entries.map(({title,text})=><section><h3>{title}</h3><p>{text}</p></section>)}
+    {entries.map(note=><section>
+      <h3>{note.title}</h3>
+      {('paragraphs' in note ? note.paragraphs : [note.text]).map(paragraph => <p>{paragraph}</p>)}
+    </section>)}
   </div>
 </section>
 <style>
@@ -15,5 +19,11 @@ const {title,entries}=Astro.props;
   .notes-grid section { padding-block: 16px; border-top: 1px solid #303932; }
   .notes-grid h3 { margin: 0 0 7px; font-size: 1.18rem; line-height: 1.35; }
   .notes-grid p { margin: 0; line-height: 1.65; }
+  .notes-grid p + p { margin-block-start: .9em; }
+  .release-notes--longform { max-inline-size: 47rem; margin-inline: auto; }
+  .release-notes--longform .notes-grid { display: block; }
+  .release-notes--longform .notes-grid section { padding-block: clamp(19px,3vw,30px); }
+  .release-notes--longform .notes-grid h3 { font-size: clamp(1.18rem,2.35vw,1.62rem); margin-block-end: .65em; }
+  .release-notes--longform .notes-grid p { line-height: 1.78; }
   @media(max-width: 650px) { .notes-grid { grid-template-columns: 1fr; } }
 </style>

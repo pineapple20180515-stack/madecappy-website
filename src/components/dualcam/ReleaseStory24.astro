@@ -1,5 +1,6 @@
 ---
 import copy from '../../data/dualcam-version-24.json';
+import developmentNotes from '../../data/dualcam-24-notes.json';
 import {release24Editorial} from '../../data/dualcam-24-editorial.mjs';
 import {release24Locales, release24Media, release24Path} from '../../lib/dualcam-release-24.mjs';
 import '../../styles/dualcam-marketing.css';
@@ -17,14 +18,13 @@ const routes = release24Locales[locale];
 const url = new URL(release24Path(locale), Astro.site).href;
 const title = `DualCam 2.4 | ${d.title}`;
 const image = new URL(`${release24Media}${locale}-share.jpg`, Astro.site).href;
-const headings=[e.why,e.issues,e.effort,e.challenge];
-const notes=headings.map((title,i)=>({title,text:e.paragraphs[i]}));
+const notes=developmentNotes[locale === 'en-GB' ? 'en-US' : locale];
 const relatedFaq=getCopy(locale).editorial;
 const schema = {
   '@context': 'https://schema.org',
   '@graph': [
     {'@type': 'Article', headline: title, description: d.description, datePublished: '2026-11-23',
-      inLanguage: locale, mainEntityOfPage: url, image, articleSection: [...headings, ...d.features.map(([heading])=>heading)],
+      inLanguage: locale, mainEntityOfPage: url, image, articleSection: [...notes.map(note => note.title), ...d.features.map(([heading])=>heading)],
       author: {'@type': 'Organization', name: 'DualCam', url: new URL('/dualcam/', Astro.site).href}},
     {'@type': 'BreadcrumbList', itemListElement: [
       {'@type':'ListItem',position:1,name:'DualCam',item:new URL(routes.home,Astro.site).href},
@@ -93,7 +93,7 @@ const schema = {
         </div>
         <p class="trial">{d.trial}</p>
         <ReleaseGallery locale={locale}/>
-        <ReleaseNotes title={e.notes} entries={notes}/>
+        <ReleaseNotes title={e.notes} entries={notes} longform/>
         <section class="devices" aria-labelledby="device-title">
           <h2 id="device-title">{d.devicesTitle}</h2>
           <p>{d.devices}</p>
