@@ -1,0 +1,12 @@
+---
+import ChristmasStory from '../../../../../components/dualcam/ChristmasStory.astro';
+import { defaultLocale, locales, showcasePath } from '../../../../../lib/dualcam-showcase/locales.mjs';
+
+export function getStaticPaths() {
+  return Object.keys(locales).filter(locale => locale !== defaultLocale).map(locale => ({
+    params: {lang: showcasePath(locale).split('/')[2]}, props: {locale}
+  }));
+}
+const { locale } = Astro.props;
+---
+<ChristmasStory locale={locale}/>

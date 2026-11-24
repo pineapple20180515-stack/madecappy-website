@@ -6,6 +6,8 @@ import { salesSnapshot } from '../../lib/dualcam-showcase/revenue-data.js';
 import '../../lib/dualcam-showcase/showcase.css';
 import Attribution from './Attribution.astro';
 import release24Copy from '../../data/dualcam-version-24.json';
+import christmasStories from '../../data/dualcam-christmas-story.json';
+import { christmasStoryPath } from '../../lib/dualcam-christmas-story.mjs';
 import { release24Media, release24Path } from '../../lib/dualcam-release-24.mjs';
 import { getDeviceWords } from '../../lib/dualcam-showcase/device-words.js';
 
@@ -106,6 +108,9 @@ const structured={
       </figcaption>
     </figure>
   </section>
+  <aside class="frame christmas-story-entry">
+    <a class="text-link" href={christmasStoryPath(locale)}>{christmasStories[locale].title} <span aria-hidden="true">↗</span></a>
+  </aside>
   <section class="film frame" id="film" aria-labelledby="film-heading">
     <div class="section-intro"><div><p class="section-index" data-text="chapterFilm">{copy.ui.chapterFilm}</p><h2 id="film-heading" data-text="filmHeading">{copy.ui.filmHeading}</h2></div><p data-text="filmDescription">{copy.ui.filmDescription}</p></div>
     <span id="quick-demo" class="sr-only"></span><span id="thai-demos" class="sr-only"></span><div class="film-grid">
@@ -194,3 +199,8 @@ const structured={
 </script>
 </body>
 </html>
+
+<style>
+  .christmas-story-entry { padding-block: 1rem; }
+  .christmas-story-entry a { text-underline-offset: .2em; }
+</style>

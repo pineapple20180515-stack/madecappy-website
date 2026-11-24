@@ -1,0 +1,135 @@
+---
+import stories from '../../data/dualcam-christmas-story.json';
+import { christmasStoryMedia, christmasStoryPath } from '../../lib/dualcam-christmas-story.mjs';
+import { release24Editorial } from '../../data/dualcam-24-editorial.mjs';
+import { release24Path } from '../../lib/dualcam-release-24.mjs';
+import { locales, showcasePath } from '../../lib/dualcam-showcase/locales.mjs';
+import Attribution from './Attribution.astro';
+import '../../styles/dualcam-marketing.css';
+
+interface Props { locale: keyof typeof stories; }
+const { locale } = Astro.props;
+const story = stories[locale];
+const language = locales[locale];
+const langLabel = release24Editorial[locale].language;
+const url = new URL(christmasStoryPath(locale), Astro.site).href;
+const media = (name: string) => christmasStoryMedia + name;
+const image = (name: string) => new URL(media(name), Astro.site).href;
+const poster = image('short-poster.jpg');
+const short = image('short.mp4');
+const date = '2026-11-24';
+const images = ['sequential.jpg', 'postcard.jpg'];
+const demonstrations = ['sequential-demo.mp4', 'postcard-demo.mp4'];
+const author = { '@type': 'Organization', name: 'DualCam', url: new URL('/dualcam/', Astro.site).href };
+const schema = { '@context': 'https://schema.org', '@graph': [
+  {
+    '@type': 'BlogPosting', headline: story.title, description: story.description, datePublished: date,
+    inLanguage: locale, mainEntityOfPage: url, author, image: images.map(image),
+  },
+  {
+    '@type': 'VideoObject', name: story.title, description: story.description, thumbnailUrl: poster,
+    uploadDate: date, duration: 'PT20S', inLanguage: 'zh-Hans', contentUrl: short,
+    isAccessibleForFree: true,
+  },
+] };
+---
+<!doctype html>
+<html lang={locale} dir={language.dir || 'ltr'}>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>{story.seoTitle}</title>
+  <meta name="description" content={story.description}/>
+  <link rel="canonical" href={url}/>
+  {Object.keys(locales).map(code => <link rel="alternate" hreflang={code} href={new URL(christmasStoryPath(code), Astro.site).href}/>)}
+  <link rel="alternate" hreflang="x-default" href={new URL(christmasStoryPath('en-US'), Astro.site).href}/>
+  <link rel="icon" href="/dualcam/icon.png"/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:title" content={story.title}/>
+  <meta property="og:description" content={story.description}/>
+  <meta property="og:url" content={url}/>
+  <meta property="og:image" content={poster}/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <script type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\\u003c')}/>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap nav-row">
+      <a class="brand" href={showcasePath(locale)}><img src="/dualcam/icon.png" width="32" height="32" alt=""/>DualCam</a>
+      <details class="language-menu">
+        <summary aria-label={langLabel}>{language.name}</summary>
+        <nav class="languages" aria-label={langLabel}>
+          {Object.entries(locales).map(([code, entry]) =>
+            <a href={christmasStoryPath(code)} lang={code} dir={entry.dir || 'ltr'} hreflang={code} aria-current={code === locale ? 'page' : undefined}>{entry.name}</a>
+          )}
+        </nav>
+      </details>
+    </div>
+  </header>
+  <main id="main" class="wrap story">
+    <article>
+      <header class="story-intro">
+        <div>
+          <a class="release-link" href={release24Path(locale)}>DualCam 2.4</a>
+          <h1>{story.title}</h1>
+          {story.intro.map(paragraph => <p>{paragraph}</p>)}
+        </div>
+        <figure class="short" id="short">
+          <video controls playsinline preload="none" poster={media('short-poster.jpg')} width="720" height="1280" aria-label={story.watch}>
+            <source src={media('short.mp4')} type="video/mp4"/>
+            <a href={media('short.mp4')}>{story.watch}</a>
+          </video>
+          <figcaption>{story.watch} · {story.subtitles} · AI</figcaption>
+        </figure>
+      </header>
+      <p class="story-note">{story.note}</p>
+      {story.sections.map((section, index) => (
+        <section class="story-section">
+          <h2>{section.heading}</h2>
+          {section.paragraphs.map(paragraph => <p>{paragraph}</p>)}
+          <img class="capture" src={media(images[index])} alt={section.alt} width="1086" height="1448" loading="lazy" decoding="async"/>
+          <details class="camera-demo">
+            <summary>{section.demo}</summary>
+            <video controls playsinline preload="none" width="640" height="932" aria-label={section.demo}>
+              <source src={media(demonstrations[index])} type="video/mp4"/>
+              <a href={media(demonstrations[index])}>{section.demo}</a>
+            </video>
+          </details>
+        </section>
+      ))}
+      <footer class="story-footer">
+        <a class="button primary" href="https://apps.apple.com/app/id6774681432" data-store-link data-placement="christmas-story">{story.store}</a>
+        <a href={release24Path(locale)}>{story.release}</a>
+      </footer>
+    </article>
+  </main>
+  <Attribution/>
+</body>
+</html>
+<style>
+  .story { max-width: 1000px; padding-block: clamp(30px, 6vw, 72px) 70px; color: #efeee3; }
+  .story-intro { display: grid; grid-template-columns: minmax(0, 1fr) minmax(230px, .53fr); gap: clamp(24px, 6vw, 64px); align-items: start; }
+  .story h1 { margin-block: 18px 26px; font-size: clamp(2rem, 4.9vw, 4rem); line-height: 1.18; text-wrap: balance; overflow-wrap: anywhere; }
+  .story h2 { margin-block: 0 16px; font-size: clamp(1.4rem, 2.75vw, 2.15rem); line-height: 1.38; }
+  .story p { margin-block: 0 1.05rem; font-size: 1.04rem; line-height: 1.85; }
+  .story-section, .story-note, .story-footer { max-width: 680px; margin-inline: auto; }
+  .story-note { margin-block: 34px 26px !important; color: #c2c9bc; padding-block: 13px; border-block: 1px solid #34463a; font-size: .9rem !important; }
+  .story-section { padding-block-start: 24px; padding-block-end: 30px; }
+  .story .short { margin: 0; }
+  .short video { display: block; width: 100%; max-width: 345px; height: auto; aspect-ratio: 9/16; border-radius: 14px; background: #0d1812; margin-inline: auto; }
+  .short figcaption { color: #bdc6bb; margin-block-start: 10px; text-align: center; font-size: .86rem; }
+  .capture { display: block; width: min(100%, 440px); height: auto; margin: 24px auto 18px; border-radius: 12px; }
+  .camera-demo { width: min(100%, 440px); margin-inline: auto; padding: 12px; border: 1px solid #3d4c41; border-radius: 12px; }
+  .camera-demo summary { cursor: pointer; line-height: 1.5; }
+  .camera-demo video { display: block; width: 100%; height: auto; margin-block-start: 12px; border-radius: 8px; background: #0d1812; }
+  .release-link { display: inline-block; color: #f0ce7b; font-size: .9rem; }
+  .story-footer { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; padding-block-start: 24px; border-block-start: 1px solid #3d4c41; }
+  .language-menu { position: relative; z-index: 10; }
+  .language-menu summary { cursor: pointer; padding: 8px 10px; min-height: 40px; }
+  .language-menu .languages { position: absolute; inset-inline-end: 0; inset-block-start: 100%; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); width: min(84vw,298px); gap: 4px; padding: 9px; background: #202622; border: 1px solid #424b45; border-radius: 12px; box-shadow: 0 12px 32px #0008; }
+  .language-menu .languages a { font-size: .85rem; padding: 6px; overflow-wrap: anywhere; }
+  @media (max-width: 700px) {
+    .story-intro { grid-template-columns: 1fr; }
+    .short video { width: min(100%, 310px); }
+  }
+</style>

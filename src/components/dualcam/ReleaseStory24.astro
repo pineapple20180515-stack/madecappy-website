@@ -2,6 +2,8 @@
 import copy from '../../data/dualcam-version-24.json';
 import developmentNotes from '../../data/dualcam-24-notes.json';
 import {release24Editorial} from '../../data/dualcam-24-editorial.mjs';
+import christmasStories from '../../data/dualcam-christmas-story.json';
+import { christmasStoryPath } from '../../lib/dualcam-christmas-story.mjs';
 import {release24Locales, release24Media, release24Path} from '../../lib/dualcam-release-24.mjs';
 import '../../styles/dualcam-marketing.css';
 import Attribution from './Attribution.astro';
@@ -88,6 +90,7 @@ const schema = {
           <a href="#demo">{e.demo}</a>
           <a href="#store-screenshots">{e.gallery}</a>
           <a href="#development">{e.notes}</a>
+          <a href={christmasStoryPath(locale)}>{christmasStories[locale].title}</a>
         </nav>
         <div class="features">
           {d.features.map(([heading, text]) => <section><h2>{heading}</h2><p>{text}</p></section>)}
