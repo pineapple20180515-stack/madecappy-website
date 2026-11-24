@@ -15,8 +15,18 @@ const langLabel = release24Editorial[locale].language;
 const url = new URL(christmasStoryPath(locale), Astro.site).href;
 const media = (name: string) => christmasStoryMedia + name;
 const image = (name: string) => new URL(media(name), Astro.site).href;
-const poster = image('short-poster.jpg');
-const short = image('short.mp4');
+const shortLocales = {
+  'en-US': {code: 'en', captions: 'English captions'},
+  'en-GB': {code: 'en', captions: 'English subtitles'},
+  th: {code: 'th', captions: 'คำบรรยายภาษาไทย'},
+  km: {code: 'km', captions: 'ចំណងជើងរងជាភាសាខ្មែរ'},
+};
+const localizedShort = shortLocales[locale as keyof typeof shortLocales];
+const shortSuffix = localizedShort ? '-' + localizedShort.code : '';
+const posterFile = 'short' + shortSuffix + '-poster.jpg';
+const shortFile = 'short' + shortSuffix + '.mp4';
+const poster = image(posterFile);
+const short = image(shortFile);
 const date = '2026-11-24';
 const images = ['sequential.jpg', 'postcard.jpg'];
 const demonstrations = ['sequential-demo.mp4', 'postcard-demo.mp4'];
@@ -28,7 +38,7 @@ const schema = { '@context': 'https://schema.org', '@graph': [
   },
   {
     '@type': 'VideoObject', name: story.title, description: story.description, thumbnailUrl: poster,
-    uploadDate: date, duration: 'PT20S', inLanguage: 'zh-Hans', contentUrl: short,
+    uploadDate: localizedShort ? '2026-11-25' : date, duration: 'PT20S', inLanguage: localizedShort?.code || 'zh-Hans', contentUrl: short,
     isAccessibleForFree: true,
   },
 ] };
@@ -75,11 +85,11 @@ const schema = { '@context': 'https://schema.org', '@graph': [
           {story.intro.map(paragraph => <p>{paragraph}</p>)}
         </div>
         <figure class="short" id="short">
-          <video controls playsinline preload="none" poster={media('short-poster.jpg')} width="720" height="1280" aria-label={story.watch}>
-            <source src={media('short.mp4')} type="video/mp4"/>
-            <a href={media('short.mp4')}>{story.watch}</a>
+          <video controls playsinline preload="none" poster={media(posterFile)} width="720" height="1280" aria-label={story.watch}>
+            <source src={media(shortFile)} type="video/mp4"/>
+            <a href={media(shortFile)}>{story.watch}</a>
           </video>
-          <figcaption>{story.watch} · {story.subtitles} · AI</figcaption>
+          <figcaption>{story.watch} · {localizedShort?.captions || story.subtitles} · AI</figcaption>
         </figure>
       </header>
       <p class="story-note">{story.note}</p>
