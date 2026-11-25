@@ -10,9 +10,18 @@ export function campaignDate(value, locale) {
 
 export function campaignTimeLeft(now, locale) {
   const minutes = Math.max(0, Math.ceil((campaignEndTime - now) / 60_000));
-  const units = [[Math.floor(minutes / 1440), 'day'], [Math.floor(minutes / 60) % 24, 'hour'], [minutes % 60, 'minute']];
-  return units
-    .filter(([amount, unit]) => amount > 0 || unit === 'minute')
-    .map(([amount, unit]) => new Intl.NumberFormat(locale, {style:'unit', unit, unitDisplay:'short'}).format(amount))
-    .join(' ');
+  const units = [
+    [Math.floor(minutes / 1440), 'day'],
+    [Math.floor(minutes / 60) % 24, 'hour'],
+    [minutes % 60, 'minute'],
+  ];
+  const digits = new Intl.NumberFormat(locale, {minimumIntegerDigits:2, useGrouping:false});
+  return units.map(([amount, unit]) => {
+    const localized = new Intl.NumberFormat(locale, {style:'unit', unit, unitDisplay:'short'});
+    return {
+      number: digits.format(amount),
+      label: localized.formatToParts(amount).find(part => part.type === 'unit')?.value ?? unit,
+      spoken: localized.format(amount),
+    };
+  });
 }

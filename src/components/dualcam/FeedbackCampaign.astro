@@ -7,22 +7,20 @@ import initial from '../../data/dualcam-campaign-availability.json';
 const { locale } = Astro.props;
 const copy = campaignCopy(locale);
 const format = locales[locale].format;
-const market = locale === 'zh-Hans' ? 'cn' : 'intl';
-const store = {
-  cn: 'https://apps.apple.com/cn/app/id6774681432',
-  intl: 'https://apps.apple.com/app/id6774681432',
-};
-const profiles = {
-  cn: {url: 'https://www.xiaohongshu.com/user/profile/692d5fe3000000003702eff9', name: '小红书'},
-  intl: {url: 'https://x.com/pineapple201805', name: 'DinoAI · X'},
-};
-const markets = [{id:'cn', anchor:'cn-feedback', label:copy.mainland}, {id:'intl', anchor:'international-feedback', label:copy.overseas}];
+const mainland = locale === 'zh-Hans';
+const market = mainland ? 'cn' : 'intl';
+const anchor = mainland ? 'cn-feedback' : 'international-feedback';
+const store = mainland ? 'https://apps.apple.com/cn/app/id6774681432' : 'https://apps.apple.com/app/id6774681432';
+const profile = mainland
+  ? 'https://www.xiaohongshu.com/user/profile/692d5fe3000000003702eff9'
+  : 'https://x.com/pineapple201805';
 const now = Date.now();
 const ended = now >= campaignEndTime;
 const soldOut = initial[market] === 0;
-const countText = (count) => copy.remaining.replace('{n}', new Intl.NumberFormat(format).format(count));
+const parts = campaignTimeLeft(now,format);
+const countText = copy.remaining.replace('{n}',new Intl.NumberFormat(format).format(initial[market]));
 ---
-<section class="membership" aria-labelledby="membership-title"
+<section class="membership" id={anchor} aria-labelledby="membership-title"
   data-membership
   data-format={format}
   data-market={market}
@@ -30,47 +28,61 @@ const countText = (count) => copy.remaining.replace('{n}', new Intl.NumberFormat
   data-remaining={copy.remaining}
   data-closed={copy.closed}
   data-sold-out={copy.soldOut}>
-  <div class="membership-head">
-    <h2 id="membership-title">{copy.title}</h2>
-    <div class="membership-counts">
-      <span class="time-label" data-countdown-group hidden={ended}>{copy.countdown} <strong data-countdown dir="auto">{ended ? copy.closed : campaignTimeLeft(now,format)}</strong></span>
-      <strong data-remaining-count>{ended ? copy.closed : soldOut ? copy.soldOut : countText(initial[market])}</strong>
+  <div class="membership-grid">
+    <header class="membership-heading">
+      <h2 id="membership-title">
+        {mainland ? <>100 份终身会员<span>免费领取</span></> : copy.title}
+      </h2>
+    </header>
+
+    <div class="membership-clock">
+      <div data-countdown-group hidden={ended}>
+        <p class="countdown-caption">{copy.countdown}</p>
+        <div class="clock-digits" role="timer" data-countdown dir="ltr"
+          aria-label={parts.map(part=>part.spoken).join(' ')}>
+          {parts.map((part,index)=>(
+            <>
+              {index > 0 && <span class="clock-colon" aria-hidden="true">:</span>}
+              <div class="clock-part" aria-hidden="true">
+                <strong data-clock-value>{part.number}</strong>
+                <span data-clock-unit dir="auto">{part.label}</span>
+              </div>
+            </>
+          ))}
+        </div>
+      </div>
+      <div class="clock-meta">
+        <p data-remaining-count>{ended ? copy.closed : soldOut ? copy.soldOut : countText}</p>
+        <p class="deadline">{copy.ends} <time datetime={campaignDeadline}>{campaignDate(campaignDeadline,format)}</time></p>
+      </div>
     </div>
-  </div>
-  <div class="membership-locations" aria-label={copy.claim}>
-    {markets.map(option => (
-      <a href={'#'+option.anchor} data-market-link={option.id} aria-current={option.id===market ? 'true' : undefined}>{option.label}</a>
-    ))}
+
+    <div class="membership-join">
+      <p class="claim-note" data-claim-note hidden={ended || soldOut}>
+        {mainland
+          ? <>先下载 DualCam。关注小红书并私信<strong>「双摄终身免费」</strong>，即可领取兑换码。</>
+          : copy.onX}
+      </p>
+      <div class="membership-actions">
+        <a class="pill membership-primary" href={profile} data-campaign-claim hidden={ended || soldOut} target="_blank" rel="noreferrer">
+          {mainland ? '去小红书领码' : copy.claim + ' · X'} <span aria-hidden="true">↗</span>
+        </a>
+        <a class="membership-download" href={store} data-store-link data-placement="giveaway" target="_blank" rel="noreferrer">
+          {copy.download} <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </div>
   </div>
 
-  {markets.map(option => (
-    <div class="membership-flow" id={option.anchor} data-campaign-market={option.id} hidden={option.id!==market}>
-      <ol>
-        <li>
-          <h3>{copy.download}</h3>
-          <a class="membership-action" href={store[option.id]} data-store-link data-placement="giveaway" target="_blank" rel="noreferrer">App Store <span aria-hidden="true">↗</span></a>
-        </li>
-        <li>
-          <h3>{copy.claim}</h3>
-          <div data-campaign-claim hidden={ended || initial[option.id]===0}>
-            {option.id === 'cn'
-              ? <p>{copy.onXiaohongshu} <strong lang="zh-Hans" dir="ltr">「双摄终身免费」</strong></p>
-              : <p>{copy.onX}</p>}
-            <a class="membership-action profile" href={profiles[option.id].url} target="_blank" rel="noreferrer" lang={option.id==='cn'?'zh-Hans':undefined}>{profiles[option.id].name} <span aria-hidden="true">↗</span></a>
-          </div>
-          <p data-campaign-inactive hidden={!ended && initial[option.id]!==0}>{ended ? copy.closed : copy.soldOut}</p>
-        </li>
-        <li>
-          <h3>{copy.redeem}</h3>
-          <p>{copy.redeemHelp}</p>
-          <a class="membership-action" href="/dualcam/media/redemption-guide-zh.webp" hreflang="zh-Hans" target="_blank" rel="noreferrer">{copy.guide} <span aria-hidden="true">↗</span></a>
-        </li>
-      </ol>
-    </div>
-  ))}
-  <div class="membership-foot">
-    <span>{copy.ends} <time datetime={campaignDeadline}>{campaignDate(campaignDeadline,format)}</time></span>
-    <span>{copy.updated} <time datetime={initial.updatedAt} data-stock-time>{campaignDate(initial.updatedAt,format)}</time></span>
+  <div class="membership-bottom">
+    <details class="redemption">
+      <summary>{copy.redeem}</summary>
+      <div class="redemption-copy">
+        <p>{copy.redeemHelp}</p>
+        <a href="/dualcam/media/redemption-guide-zh.webp" hreflang="zh-Hans" target="_blank" rel="noreferrer">{copy.guide} <span aria-hidden="true">↗</span></a>
+      </div>
+    </details>
+    <p class="stock-stamp">{copy.updated} <time datetime={initial.updatedAt} data-stock-time>{campaignDate(initial.updatedAt,format)}</time></p>
   </div>
 </section>
 
@@ -80,35 +92,35 @@ const countText = (count) => copy.remaining.replace('{n}', new Intl.NumberFormat
   const root = document.querySelector<HTMLElement>('[data-membership]');
   if (root) {
     const locale = root.dataset.format!;
-    const period = root.querySelector<HTMLElement>('[data-countdown]')!;
-    const countdownGroup = root.querySelector<HTMLElement>('[data-countdown-group]')!;
+    const market = root.dataset.market!;
+    const timer = root.querySelector<HTMLElement>('[data-countdown]')!;
+    const countdown = root.querySelector<HTMLElement>('[data-countdown-group]')!;
+    const clockNumbers = root.querySelectorAll<HTMLElement>('[data-clock-value]');
+    const clockUnits = root.querySelectorAll<HTMLElement>('[data-clock-unit]');
     const quantity = root.querySelector<HTMLElement>('[data-remaining-count]')!;
+    const claim = root.querySelector<HTMLElement>('[data-campaign-claim]')!;
+    const note = root.querySelector<HTMLElement>('[data-claim-note]')!;
     const timestamp = root.querySelector<HTMLTimeElement>('[data-stock-time]')!;
+    const { remaining, closed: closedText, soldOut: soldText } = root.dataset;
+    const formatCount = new Intl.NumberFormat(locale);
     let stock = JSON.parse(root.dataset.stock!);
-    let current = root.dataset.market!;
 
     function render() {
       const now = Date.now();
       const closed = now >= campaignEndTime;
-      const count = stock[current];
-      const status = closed ? root!.dataset.closed! : root!.dataset.soldOut!;
-      countdownGroup.hidden = closed;
-      period.textContent = closed ? status : campaignTimeLeft(now,locale);
-      quantity.textContent = closed || count === 0 ? status
-        : root!.dataset.remaining!.replace('{n}', new Intl.NumberFormat(locale).format(count));
-      root!.querySelectorAll<HTMLElement>('[data-campaign-market]').forEach(panel => {
-        const market = panel.dataset.campaignMarket!;
-        const open = !closed && stock[market] > 0;
-        panel.hidden = market !== current;
-        panel.querySelector<HTMLElement>('[data-campaign-claim]')!.hidden = !open;
-        const inactive = panel.querySelector<HTMLElement>('[data-campaign-inactive]')!;
-        inactive.hidden = open;
-        if (!open) inactive.textContent = closed ? root!.dataset.closed! : root!.dataset.soldOut!;
-      });
-      root!.querySelectorAll<HTMLAnchorElement>('[data-market-link]').forEach(link => {
-        if (link.dataset.marketLink === current) link.setAttribute('aria-current','true');
-        else link.removeAttribute('aria-current');
-      });
+      const count = stock[market];
+      countdown.hidden = closed;
+      claim.hidden = note.hidden = closed || count === 0;
+      if (!closed) {
+        const ticks = campaignTimeLeft(now,locale);
+        for (const [index, part] of ticks.entries()) {
+          clockNumbers[index].textContent = part.number;
+          clockUnits[index].textContent = part.label;
+        }
+        timer.setAttribute('aria-label',ticks.map(part=>part.spoken).join(' '));
+      }
+      quantity.textContent = closed ? closedText! : count === 0 ? soldText!
+        : remaining!.replace('{n}',formatCount.format(count));
       timestamp.dateTime = stock.updatedAt;
       timestamp.textContent = campaignDate(stock.updatedAt,locale);
     }
@@ -129,59 +141,120 @@ const countText = (count) => copy.remaining.replace('{n}', new Intl.NumberFormat
           render();
         }
       } catch {
-        // The last published stock remains visible with its original timestamp.
+        // Keep the displayed balance paired with its last successful publication time.
       }
     }
 
-    function selectFromHash() {
-      if (location.hash === '#international-feedback') current = 'intl';
-      if (location.hash === '#cn-feedback') current = 'cn';
-      render();
-    }
-    root.querySelectorAll<HTMLAnchorElement>('[data-market-link]').forEach(link => {
-      link.addEventListener('click', event => {
-        event.preventDefault();
-        current = link.dataset.marketLink!;
-        history.replaceState(null, '', link.hash);
-        render();
-      });
-    });
-    window.addEventListener('hashchange', selectFromHash);
-    selectFromHash();
-    if (location.hash === '#cn-feedback' || location.hash === '#international-feedback') {
-      requestAnimationFrame(() => root.scrollIntoView({block:'start'}));
-    }
+    render();
     void refreshStock();
-    setInterval(render, 15_000);
-    setInterval(() => void refreshStock(), 60_000);
+    setInterval(render,15_000);
+    setInterval(() => void refreshStock(),60_000);
+    const untilClose = campaignEndTime - Date.now();
+    if (untilClose > 0 && untilClose <= 2_147_483_647) setTimeout(render,untilClose);
   }
 </script>
 
 <style>
-  .membership{max-inline-size:1060px;margin:26px auto 0;padding:19px 23px 15px;background:#f7f9ff;border:1px solid #dde5fc;border-radius:19px;text-align:start;scroll-margin-top:82px}
-  .membership-head,.membership-counts,.membership-locations,.membership-foot{display:flex;align-items:center;flex-wrap:wrap;gap:8px 16px}
-  .membership-head,.membership-foot{justify-content:space-between}
-  .membership-head h2{margin:0;font-size:clamp(21px,3.05vw,33px);line-height:1.2;font-weight:720;letter-spacing:-.025em;text-wrap:balance}
-  .membership-counts,.membership-foot{font-size:13px;color:var(--muted)}
-  .membership-counts strong{color:var(--ink);font-variant-numeric:tabular-nums}
-  .membership-counts [data-remaining-count]{color:#2049ad;background:#e8efff;border-radius:999px;padding:3px 10px;white-space:nowrap}
-  .membership-locations{gap:4px;margin-block:12px 8px}
-  .membership-locations a{padding:5px 10px;border-radius:7px;color:var(--muted);font-size:13px;font-weight:620}
-  .membership-locations a:hover,.membership-locations a[aria-current=true]{color:#2049ad;background:#e8efff}
-  .membership-locations a:focus-visible,.membership-action:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-  .membership-flow[hidden],[data-campaign-claim][hidden],[data-campaign-inactive][hidden]{display:none}
-  .membership-flow ol{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr) minmax(0,1.65fr);gap:10px;margin:0;padding:0;list-style:none}
-  .membership-flow li{padding:12px 14px;background:white;border:1px solid #e3e8f4;border-radius:11px;min-inline-size:0}
-  .membership-flow h3{font-size:15px;line-height:1.3;margin:0 0 5px}
-  .membership-flow p{font-size:13px;line-height:1.5;color:#454a59;margin:0}
-  .membership-action{display:inline-block;margin-block-start:5px;color:#2049ad;text-decoration:underline;text-underline-offset:3px;font-size:13px;font-weight:650;max-inline-size:100%}
-  .membership-action.profile{background:#e9efff;border-radius:7px;text-decoration:none;padding:4px 9px}
-  .membership-foot{border-block-start:1px solid #dde5f7;margin-block-start:10px;padding-block-start:8px;font-size:11px}
-  @media (max-width:680px) {
-    .membership{margin-block-start:20px;padding:14px 12px 10px;border-radius:13px}
-    .membership-flow ol{grid-template-columns:minmax(0,1fr);gap:6px}
-    .membership-flow li{padding:8px 10px}
-    .membership-flow h3{margin-block-end:2px}
-    .membership-head{row-gap:7px}
+  .membership {
+    --offer-ink: #141d31;
+    --offer-quiet: #4e5b72;
+    --offer-accent: #164cae;
+    max-inline-size: 1120px;
+    margin: clamp(22px,4vw,38px) auto 0;
+    padding: clamp(24px,4.4vw,54px) clamp(26px,5vw,62px) clamp(19px,2.5vw,30px);
+    border: 1px solid #dce4f2;
+    border-radius: clamp(20px,3vw,32px);
+    background:
+      radial-gradient(ellipse at 92% 2%,#dce8fc 0%,#e7eefb66 42%,transparent 70%),
+      linear-gradient(135deg,#f5f8fd 20%,#edf2fb 100%);
+    color: var(--offer-ink);
+    text-align: start;
+    scroll-margin-block-start: 82px;
   }
+
+  .membership-grid {
+    display: grid;
+    grid-template-columns: minmax(0,1.28fr) minmax(0,1fr);
+    grid-template-areas: "heading clock" "join clock";
+    align-items: center;
+    gap: 17px clamp(26px,4vw,58px);
+  }
+
+  .membership-heading { grid-area: heading; }
+  .membership-heading h2 {
+    margin: 0;
+    font-size: clamp(37px,4.8vw,62px);
+    letter-spacing: -.055em;
+    line-height: 1.07;
+    font-weight: 730;
+    text-wrap: balance;
+    overflow-wrap: anywhere;
+  }
+  .membership-heading h2 span { display: block; color: var(--offer-accent); margin-block-start: .06em; }
+
+  .membership-clock {
+    grid-area: clock;
+    padding-inline-start: clamp(20px,3.55vw,45px);
+    padding-block: 5px 4px;
+    border-inline-start: 1px solid #1c3e771f;
+    min-inline-size: 0;
+  }
+  .countdown-caption { font-size: 14px; font-weight: 650; color: var(--offer-quiet); margin-block-end: 9px; }
+  .clock-digits {
+    display: grid;
+    grid-template-columns: minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr);
+    justify-items: center;
+    align-items: start;
+    max-inline-size: 294px;
+    gap: clamp(2px,1vw,10px);
+  }
+  .clock-part { min-inline-size: 0; display: grid; justify-items: center; }
+  .clock-part strong,.clock-colon {
+    font-size: clamp(36px,5vw,67px);
+    line-height: 1;
+    font-weight: 695;
+    letter-spacing: -.08em;
+    font-variant-numeric: tabular-nums;
+  }
+  .clock-colon { color: #7890b8; font-weight: 460; }
+  .clock-part span { margin-block-start: 6px; color: var(--offer-quiet); font-size: 13px; }
+  .clock-meta { margin-block-start: 19px; }
+  .clock-meta [data-remaining-count] { color: var(--offer-accent); font-size: 18px; font-weight: 670; }
+  .deadline { font-size: 13px; color: var(--offer-quiet); margin-block-start: 3px; }
+
+  .membership-join { grid-area: join; }
+  .claim-note { max-inline-size: 43ch; color: var(--offer-quiet); font-size: 15px; line-height: 1.56; }
+  .claim-note strong { color: var(--offer-ink); white-space: nowrap; }
+  .membership-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 20px; margin-block-start: 15px; }
+  .membership-primary { min-block-size: 44px; gap: 6px; padding: 10px 17px; }
+  .membership-download { color: var(--offer-accent); font-size: 14px; font-weight: 650; }
+  .membership-download:hover, .redemption a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  .membership-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 9px 24px;
+    margin-block-start: clamp(19px,3vw,27px);
+    padding-block-start: 13px;
+    border-block-start: 1px solid #1c3e771f;
+  }
+  .redemption[open] { inline-size: 100%; }
+  .redemption summary { color: var(--offer-accent); font-size: 14px; font-weight: 650; cursor: pointer; width: fit-content; padding-block: 3px; }
+  .redemption-copy { max-inline-size: 77ch; margin-block-start: 8px; color: var(--offer-quiet); font-size: 14px; }
+  .redemption a { display: inline-block; margin-block-start: 5px; color: var(--offer-accent); font-weight: 650; }
+  .stock-stamp { font-size: 12px; color: var(--offer-quiet); }
+
+  @media (max-width: 780px) {
+    .membership { padding: 24px 22px 17px; }
+    .membership-grid { grid-template-columns: minmax(0,1fr); grid-template-areas: "heading" "clock" "join"; row-gap: 20px; }
+    .membership-heading h2 { font-size: clamp(33px,7.8vw,47px); }
+    .membership-clock { padding: 0; border: 0; }
+    .clock-digits { max-inline-size: min(100%,234px); }
+    .clock-part strong,.clock-colon { font-size: clamp(37px,11vw,54px); }
+    .clock-meta { margin-block-start: 12px; }
+  }
+
+  :global([dir="rtl"]) .membership-heading h2 { letter-spacing: normal; }
 </style>
