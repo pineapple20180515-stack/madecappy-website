@@ -18,6 +18,7 @@ const media = (name: string) => christmasStoryMedia + name;
 const image = (name: string) => new URL(media(name), Astro.site).href;
 const shortLocale = christmasShortLocale(locale);
 const short = christmasShorts[shortLocale as keyof typeof christmasShorts];
+const shortUrl = christmasShortUrl(short.id);
 const poster = image(short.poster);
 const images = ['sequential.jpg', 'postcard.jpg'];
 const author = { '@type': 'Organization', name: 'DualCam', url: new URL('/dualcam/', Astro.site).href };
@@ -69,19 +70,17 @@ const schema = {
             <a class="release-link" href={release24Path(locale)}>DualCam 2.4</a>
           </nav>
           <h1>{story.title}</h1>
+          <a class="short-link" href={shortUrl} target="_blank" rel="noopener noreferrer">
+            <span aria-hidden="true">▶</span>
+            <span>YouTube Shorts</span>
+            <span aria-hidden="true">·</span>
+            <bdi lang={shortLocale}>{short.label}</bdi>
+            <span aria-hidden="true">↗</span>
+          </a>
           {story.intro.map(paragraph => <p>{paragraph}</p>)}
         </div>
         <figure class="short" id="short">
-          <a class="short-link" href={christmasShortUrl(short.id)} target="_blank" rel="noopener noreferrer" aria-label={`YouTube Shorts · ${short.label}`}>
-            <img src={media(short.poster)} width="720" height="1280" alt="" />
-            <span class="short-badge">YouTube Shorts <span aria-hidden="true">↗</span></span>
-          </a>
-          <figcaption>{story.watch} · <span lang={shortLocale}>{short.label}</span></figcaption>
-          <nav class="short-languages" aria-label="YouTube Shorts">
-            {Object.entries(christmasShorts).filter(([code]) => code !== shortLocale).map(([code, option]) => (
-              <a href={christmasShortUrl(option.id)} lang={code} target="_blank" rel="noopener noreferrer">{option.label}</a>
-            ))}
-          </nav>
+          <img src={media(short.poster)} width="720" height="1280" alt=""/>
         </figure>
       </header>
       <p class="story-note">{story.note}</p>
@@ -111,13 +110,15 @@ const schema = {
   .story-note { margin-block: 34px 26px !important; color: #c2c9bc; padding-block: 13px; border-block: 1px solid #34463a; font-size: .9rem !important; }
   .story-section { padding-block-start: 24px; padding-block-end: 30px; }
   .story .short { margin: 0; }
-  .short-link { display: block; position: relative; width: min(100%, 345px); overflow: hidden; border-radius: 14px; margin-inline: auto; background: #0d1812; }
-  .short-link img { display: block; width: 100%; height: auto; }
-  .short-badge { position: absolute; inset-inline: 12px auto; inset-block-end: 12px; background: #101612f0; color: white; padding: 8px 12px; border-radius: 8px; font-size: .9rem; }
-  .short-link:is(:hover, :focus-visible) .short-badge { background: #a52523; }
-  .short figcaption { color: #bdc6bb; margin-block-start: 10px; text-align: center; font-size: .86rem; }
-  .short-languages { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 13px; margin-block-start: 8px; }
-  .short-languages a { color: #ebce86; font-size: .85rem; text-decoration: underline; text-underline-offset: .18em; }
+  .short img { display: block; width: min(100%, 345px); height: auto; margin-inline: auto; border-radius: 14px; }
+  .short-link {
+    display: inline-flex; flex-wrap: wrap; align-items: center; gap: 8px;
+    min-height: 44px; margin-block-end: 24px; padding: 10px 14px;
+    border: 1px solid #e56a66; border-radius: 9px;
+    background: #ab2426; color: #fff; font-weight: 650; line-height: 1.35;
+  }
+  .short-link:hover { background: #8f191c; }
+  .short-link:focus-visible { outline: 2px solid #ffd58b; outline-offset: 3px; }
   .story-top-links { display: flex; flex-wrap: wrap; gap: 12px; }
   .capture { display: block; width: min(100%, 440px); height: auto; margin: 24px auto 18px; border-radius: 12px; }
   .release-link { display: inline-block; color: #f0ce7b; font-size: .9rem; }
@@ -128,6 +129,6 @@ const schema = {
   .language-menu .languages a { font-size: .85rem; padding: 6px; overflow-wrap: anywhere; }
   @media (max-width: 700px) {
     .story-intro { grid-template-columns: 1fr; }
-    .short-link { width: min(100%, 310px); }
+    .short img { width: min(100%, 310px); }
   }
 </style>
