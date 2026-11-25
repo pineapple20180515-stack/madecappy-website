@@ -19,6 +19,8 @@ const image = (name: string) => new URL(media(name), Astro.site).href;
 const shortLocale = christmasShortLocale(locale);
 const short = christmasShorts[shortLocale as keyof typeof christmasShorts];
 const shortUrl = christmasShortUrl(short.id);
+const playerUrl = `https://www.youtube-nocookie.com/embed/${short.id}?autoplay=1&playsinline=1&rel=0`;
+const playerTitle = `YouTube Shorts · ${story.watch} · ${short.label}`;
 const poster = image(short.poster);
 const images = ['sequential.jpg', 'postcard.jpg'];
 const author = { '@type': 'Organization', name: 'DualCam', url: new URL('/dualcam/', Astro.site).href };
@@ -64,24 +66,44 @@ const schema = {
   <main id="main" class="wrap story">
     <article>
       <header class="story-intro">
-        <div>
+        <div class="story-heading">
           <nav class="story-top-links" aria-label="DualCam">
             <a class="release-link" href={dualcamBlogPath(locale)}>{blogLabels[locale]}</a>
             <a class="release-link" href={release24Path(locale)}>DualCam 2.4</a>
           </nav>
           <h1>{story.title}</h1>
-          <a class="short-link" href={shortUrl} target="_blank" rel="noopener noreferrer">
-            <span aria-hidden="true">▶</span>
-            <span>YouTube Shorts</span>
-            <span aria-hidden="true">·</span>
-            <bdi lang={shortLocale}>{short.label}</bdi>
-            <span aria-hidden="true">↗</span>
-          </a>
-          {story.intro.map(paragraph => <p>{paragraph}</p>)}
         </div>
         <figure class="short" id="short">
-          <img src={media(short.poster)} width="720" height="1280" alt=""/>
+          <div class="short-player">
+            <button type="button" class="short-play" data-short-play aria-label={playerTitle}>
+              <img src={media(short.poster)} width="720" height="1280" alt=""/>
+              <span class="short-play-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="26" height="26" focusable="false">
+                  <path fill="currentColor" d="M8 4.8v14.4L19 12z"/>
+                </svg>
+              </span>
+            </button>
+            <template>
+              <iframe
+                src={playerUrl}
+                title={playerTitle}
+                width="360"
+                height="640"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </template>
+          </div>
+          <figcaption>
+            <a class="short-link" href={shortUrl} target="_blank" rel="noopener noreferrer">
+              YouTube Shorts · <bdi lang={shortLocale}>{short.label}</bdi> <span aria-hidden="true">↗</span>
+            </a>
+          </figcaption>
         </figure>
+        <div class="story-copy">
+          {story.intro.map(paragraph => <p>{paragraph}</p>)}
+        </div>
       </header>
       <p class="story-note">{story.note}</p>
       {story.sections.map((section, index) => (
@@ -98,27 +120,53 @@ const schema = {
     </article>
   </main>
   <Attribution/>
+  <script>
+    document.querySelectorAll<HTMLButtonElement>('[data-short-play]').forEach((button) => {
+      const template = button.nextElementSibling;
+      if (!(template instanceof HTMLTemplateElement)) return;
+
+      button.addEventListener('click', () => {
+        const player = template.content.querySelector('iframe');
+        if (!player) return;
+
+        button.replaceWith(player);
+        player.focus();
+      }, { once: true });
+    });
+  </script>
 </body>
 </html>
 <style>
   .story { max-width: 1000px; padding-block: clamp(30px, 6vw, 72px) 70px; color: #efeee3; }
-  .story-intro { display: grid; grid-template-columns: minmax(0, 1fr) minmax(230px, .53fr); gap: clamp(24px, 6vw, 64px); align-items: start; }
+  .story-intro {
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(230px, .53fr);
+    grid-template-areas: "heading player" "copy player"; grid-template-rows: auto 1fr;
+    column-gap: clamp(24px, 6vw, 64px); align-items: start;
+  }
+  .story-heading { grid-area: heading; }
+  .story-copy { grid-area: copy; }
   .story h1 { margin-block: 18px 26px; font-size: clamp(2rem, 4.9vw, 4rem); line-height: 1.18; text-wrap: balance; overflow-wrap: anywhere; }
   .story h2 { margin-block: 0 16px; font-size: clamp(1.4rem, 2.75vw, 2.15rem); line-height: 1.38; }
   .story p { margin-block: 0 1.05rem; font-size: 1.04rem; line-height: 1.85; }
   .story-section, .story-note, .story-footer { max-width: 680px; margin-inline: auto; }
   .story-note { margin-block: 34px 26px !important; color: #c2c9bc; padding-block: 13px; border-block: 1px solid #34463a; font-size: .9rem !important; }
   .story-section { padding-block-start: 24px; padding-block-end: 30px; }
-  .story .short { margin: 0; }
-  .short img { display: block; width: min(100%, 345px); height: auto; margin-inline: auto; border-radius: 14px; }
-  .short-link {
-    display: inline-flex; flex-wrap: wrap; align-items: center; gap: 8px;
-    min-height: 44px; margin-block-end: 24px; padding: 10px 14px;
-    border: 1px solid #e56a66; border-radius: 9px;
-    background: #ab2426; color: #fff; font-weight: 650; line-height: 1.35;
+  .story .short { grid-area: player; width: min(100%, 345px); margin: 0 auto; text-align: center; }
+  .short-player { aspect-ratio: 9 / 16; border-radius: 14px; background: #101612; }
+  .short-play, .short-player iframe {
+    display: block; width: 100%; height: 100%; border: 0; border-radius: inherit;
   }
-  .short-link:hover { background: #8f191c; }
-  .short-link:focus-visible { outline: 2px solid #ffd58b; outline-offset: 3px; }
+  .short-play { position: relative; padding: 0; overflow: hidden; cursor: pointer; background: #101612; }
+  .short-play img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .short-play-icon {
+    position: absolute; inset: 50% auto auto 50%; transform: translate(-50%, -50%);
+    display: grid; place-items: center; width: 68px; height: 48px;
+    border-radius: 14px; background: #c61e24; color: #fff; box-shadow: 0 2px 16px #0008;
+  }
+  .short-play:hover .short-play-icon { background: #a9171c; }
+  .short-play:focus-visible, .short-link:focus-visible { outline: 2px solid #ffd58b; outline-offset: 3px; }
+  .short figcaption { margin-block-start: 10px; }
+  .short-link { color: #ebce86; font-size: .85rem; text-decoration: underline; text-underline-offset: .2em; }
   .story-top-links { display: flex; flex-wrap: wrap; gap: 12px; }
   .capture { display: block; width: min(100%, 440px); height: auto; margin: 24px auto 18px; border-radius: 12px; }
   .release-link { display: inline-block; color: #f0ce7b; font-size: .9rem; }
@@ -128,7 +176,7 @@ const schema = {
   .language-menu .languages { position: absolute; inset-inline-end: 0; inset-block-start: 100%; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); width: min(84vw,298px); gap: 4px; padding: 9px; background: #202622; border: 1px solid #424b45; border-radius: 12px; box-shadow: 0 12px 32px #0008; }
   .language-menu .languages a { font-size: .85rem; padding: 6px; overflow-wrap: anywhere; }
   @media (max-width: 700px) {
-    .story-intro { grid-template-columns: 1fr; }
-    .short img { width: min(100%, 310px); }
+    .story-intro { grid-template-columns: minmax(0, 1fr); grid-template-areas: "heading" "player" "copy"; }
+    .story .short { width: min(100%, 310px); margin-block-end: 26px; }
   }
 </style>
