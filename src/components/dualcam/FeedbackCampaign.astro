@@ -1,0 +1,126 @@
+---
+const { locale } = Astro.props;
+const mainland = locale === 'zh-Hans';
+const status = mainland
+  ? import.meta.env.DUALCAM_CN_FEEDBACK_STATUS ?? 'upcoming'
+  : import.meta.env.DUALCAM_INTL_FEEDBACK_STATUS ?? 'upcoming';
+const isOpen = status === 'open';
+const isClosed = status === 'closed';
+const sectionId = mainland ? 'cn-feedback' : 'international-feedback';
+const storeUrl = mainland
+  ? 'https://apps.apple.com/cn/app/id6774681432'
+  : 'https://apps.apple.com/app/id6774681432';
+
+const email = 'metrocpp@outlook.com';
+const subject = mainland ? 'DualCam 国区体验官反馈' : 'DualCam international feedback campaign';
+const template = mainland
+  ? ['1. 我想拍什么？', '2. 我试了哪一步，发生了什么？', '3. 我希望它怎么改？', '', 'iPhone 型号和 iOS 版本（选填）：']
+  : ['1. What did I try to film or take a photo of?', '2. What did I try, and what happened?', '3. What would I change first?', '', 'iPhone model, iOS version, App Store country or region (optional):'];
+const feedbackLink = 'mailto:' + email + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(template.join('\r\n'));
+
+const text = mainland ? {
+  upcoming: '国区体验官 · 接收试拍反馈',
+  open: '国区体验官 · 体验官招募',
+  closed: '国区体验官 · 招募已结束',
+  title: ['送 ', ' 个终身会员'],
+  intro: '用前后双摄试拍一次，告诉我哪一步最想改。本次为中国大陆用户开放 100 个 DualCam Pro 终身会员名额，符合条件可免费兑换。',
+  send: '发送体验反馈',
+  how: '怎么参加',
+  store: '下载 DualCam',
+  tryIt: '，用 iPhone 试一次拍照或录制。遇到无法完成的步骤也可以反馈。',
+  write: '写下想拍什么、实际卡在哪一步、希望怎么改。具体的建议和问题都欢迎。',
+  eligible: '按收到符合条件反馈的顺序确认。未持有终身会员的用户每人限领一份，100 份发完为止。',
+  redeem: '收到兑换码后怎么用',
+  redeemHelp: '打开 DualCam，点取景画面右下角的六个点，再点齿轮进入「设置」。打开「意见反馈 → 兑换优惠码」，输入收到的兑换码后点「继续」，按系统提示确认。兑换成功后回到 App 查看 Pro 权益。',
+  contact: '也可通过 App 的「设置 → 意见反馈」提交，或手动发送至 ',
+  note: '。邮件请注明「国区体验官」。邮箱用于联系和发码，反馈用于优化产品。无需提供照片、视频或 Apple 账户资料。',
+  notice: isClosed ? '已收到兑换码的用户，仍可在通知注明的有效期内兑换。' : '现在可以先提交试拍反馈，兑换码准备好后会通知符合条件的用户。',
+  privacy: '隐私政策',
+} : {
+  upcoming: 'International creator feedback · Send us your feedback',
+  open: 'International creator feedback · Applications open',
+  closed: 'International creator feedback · Closed',
+  title: ['', ' free lifetime memberships'],
+  intro: 'Try one shoot with DualCam and tell me what to fix. The first 100 eligible responses receive a free DualCam Pro lifetime membership. Redeem once, with no recurring charge.',
+  send: 'Send feedback',
+  how: 'How to take part',
+  store: 'Download DualCam',
+  tryIt: ' and try a photo or video on an iPhone. If something stops you, that feedback counts too.',
+  write: 'Tell me what you tried to shoot, what happened, and what you would change first.',
+  eligible: 'Open to supported App Store storefronts outside mainland China. No purchase required. One per person, while supplies last, for users who do not already have lifetime Pro. Social activity and app ratings do not affect eligibility.',
+  redeem: 'How to redeem your code',
+  redeemHelp: 'On your iPhone, open the Apple link in the email or go to the App Store, tap your profile picture, and choose Redeem Gift Card or Code. Confirm the free offer. Then open DualCam. If Pro does not appear, use Restore Purchases on the membership screen.',
+  contact: 'You can also use Settings → Feedback in the app or email ',
+  note: '. Put “International feedback campaign” in your message. Your feedback helps us improve DualCam. We use your email to respond and send a code.',
+  notice: isClosed ? 'Existing codes can still be redeemed before the deadline stated in your email.' : 'You can send feedback now. We’ll contact eligible users once the codes are ready.',
+  privacy: 'Privacy policy',
+};
+---
+<section class="frame feedback-campaign" id={sectionId} aria-labelledby={sectionId + '-title'}>
+  <div class="campaign-intro">
+    <p class="kicker">{isOpen ? text.open : isClosed ? text.closed : text.upcoming}</p>
+    <h2 id={sectionId + '-title'}>{text.title[0]}<strong>100</strong>{text.title[1]}</h2>
+    <p>{text.intro}</p>
+    {!isClosed && <a class="pill" href={feedbackLink}>{text.send} <span aria-hidden="true">↗</span></a>}
+  </div>
+  <div class="campaign-details">
+    <h3>{text.how}</h3>
+    <ol>
+      <li><a href={storeUrl}>{text.store}</a>{text.tryIt}</li>
+      <li>{text.write}</li>
+      <li>{text.eligible}</li>
+    </ol>
+    <details open={mainland}>
+      <summary>{text.redeem}</summary>
+      <p>{text.redeemHelp}</p>
+      {mainland && <p><a href="/dualcam/media/redemption-guide-zh.webp">查看七步兑换图</a></p>}
+    </details>
+    {!isOpen && <p class="campaign-note">{text.notice}</p>}
+    {!isClosed && (
+      <p class="campaign-note">{text.contact}<a href={feedbackLink}>{email}</a>{text.note} <a href="/dualcam/privacy/">{text.privacy}</a></p>
+    )}
+    {!mainland && (
+      <details class="campaign-rules">
+        <summary>Official rules</summary>
+        <p>DualCam runs the campaign. Apple, X, and YouTube do not sponsor it. One entry per person. Entries using multiple accounts or contrary to the <a href="https://www.youtube.com/howyoutubeworks/policies/community-guidelines/">YouTube Community Guidelines</a> are ineligible. By participating, you release YouTube from liability related to this campaign to the extent permitted by law. <a href="/dualcam/privacy/">Privacy policy</a></p>
+      </details>
+    )}
+  </div>
+</section>
+
+<style>
+  .feedback-campaign {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(20px, 4vw, 52px);
+    margin-block: 12px 26px;
+    padding: clamp(22px, 4vw, 44px);
+    border: 1px solid var(--rule);
+    border-radius: 24px;
+    background: var(--panel);
+    scroll-margin-top: 112px;
+  }
+  h2, h3, p { margin: 0; }
+  h2 {
+    font-size: clamp(30px, 4.3vw, 60px);
+    line-height: 1.1;
+    font-weight: 730;
+    letter-spacing: -.035em;
+    margin-block: 8px 13px;
+  }
+  h2 strong { color: var(--accent); font-weight: inherit; }
+  h3 { font-size: 18px; }
+  .campaign-intro > p:not(.kicker) { color: var(--muted); max-width: 34em; }
+  .campaign-intro .pill { margin-top: 18px; gap: 5px; }
+  .campaign-details ol { margin: 6px 0 14px; padding-inline-start: 1.35em; font-size: 14px; }
+  .campaign-details li + li { margin-top: 5px; }
+  .campaign-details a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  details { border-block-start: 1px solid var(--rule); padding-block-start: 8px; }
+  summary { font-size: 14px; font-weight: 650; cursor: pointer; }
+  .campaign-rules { margin-top: 10px; }
+  details p { padding-top: 6px; font-size: 14px; }
+  .campaign-note { font-size: 13px; color: var(--muted); margin-top: 10px; overflow-wrap: anywhere; }
+  @media (max-width: 720px) {
+    .feedback-campaign { grid-template-columns: 1fr; gap: 20px; border-radius: 17px; }
+  }
+</style>
