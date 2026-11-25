@@ -1,7 +1,7 @@
 ---
 import stories from '../../data/dualcam-christmas-story.json';
 import { blogLabels, dualcamBlogPath } from '../../lib/dualcam-blog.mjs';
-import { christmasStoryDate, christmasStoryMedia, christmasStoryPath } from '../../lib/dualcam-christmas-story.mjs';
+import { christmasStoryDate, christmasStoryCover, christmasStoryPath } from '../../lib/dualcam-christmas-story.mjs';
 import { defaultLocale, locales, showcasePath } from '../../lib/dualcam-showcase/locales.mjs';
 import { release24Editorial } from '../../data/dualcam-24-editorial.mjs';
 import '../../styles/dualcam-marketing.css';
@@ -45,7 +45,7 @@ const date = new Intl.DateTimeFormat(language.format, { dateStyle: 'medium', tim
     <h1>{heading}</h1>
     <article>
       <a class="story-card" href={christmasStoryPath(locale)}>
-        <img src={christmasStoryMedia + 'sequential.jpg'} width="1086" height="1448" alt="" />
+        <img src={christmasStoryCover} width="1200" height="900" alt="" />
         <div>
           <time datetime={christmasStoryDate}>{date}</time>
           <h2>{story.title}</h2>
@@ -61,7 +61,7 @@ const date = new Intl.DateTimeFormat(language.format, { dateStyle: 'medium', tim
   h1 { font-size: clamp(2.1rem, 6vw, 3.5rem); margin: 0 0 30px; }
   .story-card { display: grid; grid-template-columns: minmax(180px, .7fr) minmax(0, 1fr); align-items: center; border: 1px solid #39443b; border-radius: 14px; overflow: hidden; color: inherit; background: #171d19; }
   .story-card:hover h2 { text-decoration: underline; text-underline-offset: .18em; }
-  .story-card img { width: 100%; height: 100%; min-height: 220px; aspect-ratio: 4 / 3; object-fit: cover; object-position: center 32%; }
+  .story-card img { display: block; width: 100%; height: auto; }
   .story-card div { padding: clamp(18px, 4vw, 30px); }
   time { color: #c0cbbb; font-size: .88rem; }
   h2 { font-size: clamp(1.25rem, 2.8vw, 1.9rem); line-height: 1.36; margin-block: 9px; text-wrap: balance; }
@@ -72,6 +72,5 @@ const date = new Intl.DateTimeFormat(language.format, { dateStyle: 'medium', tim
   .language-menu .languages a { font-size: .85rem; padding: 6px; overflow-wrap: anywhere; }
   @media (max-width: 580px) {
     .story-card { grid-template-columns: 1fr; }
-    .story-card img { height: auto; min-height: unset; }
   }
 </style>
