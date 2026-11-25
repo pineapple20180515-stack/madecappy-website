@@ -1,0 +1,9 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    {
+      "source": "/dualcam/campaign-availability.json",
+      "destination": "https://gist.githubusercontent.com/pineapple20180515-stack/8cf469755344163003d9dd31f0f69d52/raw/dualcam-availability.json"
+    }
+  ]
+}

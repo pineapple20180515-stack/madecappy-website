@@ -41,7 +41,6 @@ main>section{scroll-margin-top:85px}
 .hero h1 span{display:inline-block}
 .hero h1 span+span{color:#51515c}
 .hero-description{color:var(--muted);font-size:clamp(16px,1.55vw,22px);max-width:41ch;margin-inline:auto;text-wrap:balance}
-.hero-actions{display:flex;align-items:center;justify-content:center;gap:22px;margin-top:26px;flex-wrap:wrap}
 .pill{display:inline-flex;align-items:center;justify-content:center;background:var(--accent);color:#fff;border-radius:999px;font-weight:640;font-size:14px;padding:11px 19px}
 .pill:hover{background:#1a4bb7}
 .text-link{width:max-content;max-width:100%;display:inline-flex;align-items:center;gap:7px;color:var(--accent);font-size:14px;font-weight:620;background:none;border:0;padding:0;text-align:start}
@@ -159,7 +158,7 @@ html[lang=vi] .hero h1{font-size:clamp(35px,5.55vw,76px)}
   .site-header{width:100%}
   .wordmark{font-size:19px}.app-icon{width:29px;height:29px}
   .hero{padding-top:41px}.hero h1{font-size:clamp(34px,9vw,51px);margin-bottom:12px}.hero h1 span{display:block}
-  .hero-description{font-size:16px}.hero-actions{margin-top:19px;gap:13px}.pill{font-size:13px;padding:10px 13px}
+  .hero-description{font-size:16px}.pill{font-size:13px;padding:10px 13px}
   .optics{margin-top:23px}.stage{height:clamp(230px,63vw,350px);border-radius:17px}
   .figure-controls{margin-top:8px;gap:5px;flex-wrap:wrap}.view-controls button,.finish-controls button{font-size:11px;padding:5px 7px}
   .section-intro{flex-wrap:wrap;gap:8px;margin-bottom:15px}
@@ -210,7 +209,6 @@ html[lang=vi] .hero h1{font-size:clamp(35px,5.55vw,76px)}
 }
 #phone-render > :is(picture,canvas) { position:absolute;inset:0; }
 .lineup-stage[data-renderer="webgl"] { cursor:grab; }
-.hero-actions .release-24-shortcut { margin:0; }
 .optics .device-controls { width:max-content;max-width:100%;margin:0 auto 12px; }
 .lineup-stage[data-dragging] { cursor:grabbing; }
 .lineup-stage canvas,.lineup-stage[data-renderer="webgl"] #phone-render>picture { visibility:hidden; }
