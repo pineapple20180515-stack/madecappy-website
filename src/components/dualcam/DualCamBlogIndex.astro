@@ -1,0 +1,77 @@
+---
+import stories from '../../data/dualcam-christmas-story.json';
+import { blogLabels, dualcamBlogPath } from '../../lib/dualcam-blog.mjs';
+import { christmasStoryDate, christmasStoryMedia, christmasStoryPath } from '../../lib/dualcam-christmas-story.mjs';
+import { defaultLocale, locales, showcasePath } from '../../lib/dualcam-showcase/locales.mjs';
+import { release24Editorial } from '../../data/dualcam-24-editorial.mjs';
+import '../../styles/dualcam-marketing.css';
+
+interface Props { locale: keyof typeof stories; }
+const { locale } = Astro.props;
+const language = locales[locale];
+const heading = 'DualCam · ' + blogLabels[locale];
+const story = stories[locale];
+const languageLabel = release24Editorial[locale].language;
+const absoluteBlogPath = (code: string) => new URL(dualcamBlogPath(code), Astro.site).href;
+const date = new Intl.DateTimeFormat(language.format, { dateStyle: 'medium', timeZone: 'UTC' }).format(new Date(christmasStoryDate));
+---
+<!doctype html>
+<html lang={locale} dir={language.dir || 'ltr'}>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{heading}</title>
+  <meta name="description" content={story.description} />
+  <link rel="canonical" href={absoluteBlogPath(locale)} />
+  {Object.keys(locales).map(code => <link rel="alternate" hreflang={code} href={absoluteBlogPath(code)}/>)}
+  <link rel="alternate" hreflang="x-default" href={absoluteBlogPath(defaultLocale)} />
+  <link rel="icon" href="/dualcam/icon.png" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap nav-row">
+      <a class="brand" href={showcasePath(locale)}><img src="/dualcam/icon.png" width="32" height="32" alt="" />DualCam</a>
+      <details class="language-menu">
+        <summary aria-label={languageLabel}>{language.name}</summary>
+        <nav class="languages" aria-label={languageLabel}>
+          {Object.entries(locales).map(([code, entry]) => (
+            <a href={dualcamBlogPath(code)} lang={code} dir={entry.dir || 'ltr'} hreflang={code} aria-current={code === locale ? 'page' : undefined}>{entry.name}</a>
+          ))}
+        </nav>
+      </details>
+    </div>
+  </header>
+  <main class="wrap index">
+    <h1>{heading}</h1>
+    <article>
+      <a class="story-card" href={christmasStoryPath(locale)}>
+        <img src={christmasStoryMedia + 'sequential.jpg'} width="1086" height="1448" alt="" />
+        <div>
+          <time datetime={christmasStoryDate}>{date}</time>
+          <h2>{story.title}</h2>
+          <p>{story.description}</p>
+        </div>
+      </a>
+    </article>
+  </main>
+</body>
+</html>
+<style>
+  .index { max-width: 930px; padding-block: clamp(35px, 8vw, 76px); }
+  h1 { font-size: clamp(2.1rem, 6vw, 3.5rem); margin: 0 0 30px; }
+  .story-card { display: grid; grid-template-columns: minmax(180px, .7fr) minmax(0, 1fr); align-items: center; border: 1px solid #39443b; border-radius: 14px; overflow: hidden; color: inherit; background: #171d19; }
+  .story-card:hover h2 { text-decoration: underline; text-underline-offset: .18em; }
+  .story-card img { width: 100%; height: 100%; min-height: 220px; aspect-ratio: 4 / 3; object-fit: cover; object-position: center 32%; }
+  .story-card div { padding: clamp(18px, 4vw, 30px); }
+  time { color: #c0cbbb; font-size: .88rem; }
+  h2 { font-size: clamp(1.25rem, 2.8vw, 1.9rem); line-height: 1.36; margin-block: 9px; text-wrap: balance; }
+  p { color: #c8cec4; line-height: 1.65; margin: 0; }
+  .language-menu { position: relative; z-index: 10; }
+  .language-menu summary { cursor: pointer; padding: 8px 10px; min-height: 40px; }
+  .language-menu .languages { position: absolute; inset-inline-end: 0; inset-block-start: 100%; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); width: min(84vw,298px); gap: 4px; padding: 9px; background: #202622; border: 1px solid #424b45; border-radius: 12px; }
+  .language-menu .languages a { font-size: .85rem; padding: 6px; overflow-wrap: anywhere; }
+  @media (max-width: 580px) {
+    .story-card { grid-template-columns: 1fr; }
+    .story-card img { height: auto; min-height: unset; }
+  }
+</style>

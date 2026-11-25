@@ -1,6 +1,7 @@
 ---
 import stories from '../../data/dualcam-christmas-story.json';
-import { christmasStoryMedia, christmasStoryPath } from '../../lib/dualcam-christmas-story.mjs';
+import { christmasStoryDate, christmasStoryMedia, christmasStoryPath, christmasShortLocale, christmasShorts, christmasShortUrl } from '../../lib/dualcam-christmas-story.mjs';
+import { blogLabels, dualcamBlogPath } from '../../lib/dualcam-blog.mjs';
 import { release24Editorial } from '../../data/dualcam-24-editorial.mjs';
 import { release24Path } from '../../lib/dualcam-release-24.mjs';
 import { locales, showcasePath } from '../../lib/dualcam-showcase/locales.mjs';
@@ -15,33 +16,16 @@ const langLabel = release24Editorial[locale].language;
 const url = new URL(christmasStoryPath(locale), Astro.site).href;
 const media = (name: string) => christmasStoryMedia + name;
 const image = (name: string) => new URL(media(name), Astro.site).href;
-const shortLocales = {
-  'en-US': {code: 'en', captions: 'English captions'},
-  'en-GB': {code: 'en', captions: 'English subtitles'},
-  th: {code: 'th', captions: 'คำบรรยายภาษาไทย'},
-  km: {code: 'km', captions: 'ចំណងជើងរងជាភាសាខ្មែរ'},
-};
-const localizedShort = shortLocales[locale as keyof typeof shortLocales];
-const shortSuffix = localizedShort ? '-' + localizedShort.code : '';
-const posterFile = 'short' + shortSuffix + '-poster.jpg';
-const shortFile = 'short' + shortSuffix + '.mp4';
-const poster = image(posterFile);
-const short = image(shortFile);
-const date = '2026-11-24';
+const shortLocale = christmasShortLocale(locale);
+const short = christmasShorts[shortLocale as keyof typeof christmasShorts];
+const poster = image(short.poster);
 const images = ['sequential.jpg', 'postcard.jpg'];
-const demonstrations = ['sequential-demo.mp4', 'postcard-demo.mp4'];
 const author = { '@type': 'Organization', name: 'DualCam', url: new URL('/dualcam/', Astro.site).href };
-const schema = { '@context': 'https://schema.org', '@graph': [
-  {
-    '@type': 'BlogPosting', headline: story.title, description: story.description, datePublished: date,
-    inLanguage: locale, mainEntityOfPage: url, author, image: images.map(image),
-  },
-  {
-    '@type': 'VideoObject', name: story.title, description: story.description, thumbnailUrl: poster,
-    uploadDate: localizedShort ? '2026-11-25' : date, duration: 'PT20S', inLanguage: localizedShort?.code || 'zh-Hans', contentUrl: short,
-    isAccessibleForFree: true,
-  },
-] };
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting', headline: story.title, description: story.description, datePublished: christmasStoryDate,
+  inLanguage: locale, mainEntityOfPage: url, author, image: images.map(image),
+};
 ---
 <!doctype html>
 <html lang={locale} dir={language.dir || 'ltr'}>
@@ -80,16 +64,24 @@ const schema = { '@context': 'https://schema.org', '@graph': [
     <article>
       <header class="story-intro">
         <div>
-          <a class="release-link" href={release24Path(locale)}>DualCam 2.4</a>
+          <nav class="story-top-links" aria-label="DualCam">
+            <a class="release-link" href={dualcamBlogPath(locale)}>{blogLabels[locale]}</a>
+            <a class="release-link" href={release24Path(locale)}>DualCam 2.4</a>
+          </nav>
           <h1>{story.title}</h1>
           {story.intro.map(paragraph => <p>{paragraph}</p>)}
         </div>
         <figure class="short" id="short">
-          <video controls playsinline preload="none" poster={media(posterFile)} width="720" height="1280" aria-label={story.watch}>
-            <source src={media(shortFile)} type="video/mp4"/>
-            <a href={media(shortFile)}>{story.watch}</a>
-          </video>
-          <figcaption>{story.watch} · {localizedShort?.captions || story.subtitles} · AI</figcaption>
+          <a class="short-link" href={christmasShortUrl(short.id)} target="_blank" rel="noopener noreferrer" aria-label={`YouTube Shorts · ${short.label}`}>
+            <img src={media(short.poster)} width="720" height="1280" alt="" />
+            <span class="short-badge">YouTube Shorts <span aria-hidden="true">↗</span></span>
+          </a>
+          <figcaption>{story.watch} · <span lang={shortLocale}>{short.label}</span></figcaption>
+          <nav class="short-languages" aria-label="YouTube Shorts">
+            {Object.entries(christmasShorts).filter(([code]) => code !== shortLocale).map(([code, option]) => (
+              <a href={christmasShortUrl(option.id)} lang={code} target="_blank" rel="noopener noreferrer">{option.label}</a>
+            ))}
+          </nav>
         </figure>
       </header>
       <p class="story-note">{story.note}</p>
@@ -98,13 +90,6 @@ const schema = { '@context': 'https://schema.org', '@graph': [
           <h2>{section.heading}</h2>
           {section.paragraphs.map(paragraph => <p>{paragraph}</p>)}
           <img class="capture" src={media(images[index])} alt={section.alt} width="1086" height="1448" loading="lazy" decoding="async"/>
-          <details class="camera-demo">
-            <summary>{section.demo}</summary>
-            <video controls playsinline preload="none" width="640" height="932" aria-label={section.demo}>
-              <source src={media(demonstrations[index])} type="video/mp4"/>
-              <a href={media(demonstrations[index])}>{section.demo}</a>
-            </video>
-          </details>
         </section>
       ))}
       <footer class="story-footer">
@@ -126,12 +111,15 @@ const schema = { '@context': 'https://schema.org', '@graph': [
   .story-note { margin-block: 34px 26px !important; color: #c2c9bc; padding-block: 13px; border-block: 1px solid #34463a; font-size: .9rem !important; }
   .story-section { padding-block-start: 24px; padding-block-end: 30px; }
   .story .short { margin: 0; }
-  .short video { display: block; width: 100%; max-width: 345px; height: auto; aspect-ratio: 9/16; border-radius: 14px; background: #0d1812; margin-inline: auto; }
+  .short-link { display: block; position: relative; width: min(100%, 345px); overflow: hidden; border-radius: 14px; margin-inline: auto; background: #0d1812; }
+  .short-link img { display: block; width: 100%; height: auto; }
+  .short-badge { position: absolute; inset-inline: 12px auto; inset-block-end: 12px; background: #101612f0; color: white; padding: 8px 12px; border-radius: 8px; font-size: .9rem; }
+  .short-link:is(:hover, :focus-visible) .short-badge { background: #a52523; }
   .short figcaption { color: #bdc6bb; margin-block-start: 10px; text-align: center; font-size: .86rem; }
+  .short-languages { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 13px; margin-block-start: 8px; }
+  .short-languages a { color: #ebce86; font-size: .85rem; text-decoration: underline; text-underline-offset: .18em; }
+  .story-top-links { display: flex; flex-wrap: wrap; gap: 12px; }
   .capture { display: block; width: min(100%, 440px); height: auto; margin: 24px auto 18px; border-radius: 12px; }
-  .camera-demo { width: min(100%, 440px); margin-inline: auto; padding: 12px; border: 1px solid #3d4c41; border-radius: 12px; }
-  .camera-demo summary { cursor: pointer; line-height: 1.5; }
-  .camera-demo video { display: block; width: 100%; height: auto; margin-block-start: 12px; border-radius: 8px; background: #0d1812; }
   .release-link { display: inline-block; color: #f0ce7b; font-size: .9rem; }
   .story-footer { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; padding-block-start: 24px; border-block-start: 1px solid #3d4c41; }
   .language-menu { position: relative; z-index: 10; }
@@ -140,6 +128,6 @@ const schema = { '@context': 'https://schema.org', '@graph': [
   .language-menu .languages a { font-size: .85rem; padding: 6px; overflow-wrap: anywhere; }
   @media (max-width: 700px) {
     .story-intro { grid-template-columns: 1fr; }
-    .short video { width: min(100%, 310px); }
+    .short-link { width: min(100%, 310px); }
   }
 </style>

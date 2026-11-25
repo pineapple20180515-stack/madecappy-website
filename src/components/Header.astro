@@ -8,22 +8,24 @@ const navItem = (href: string, label: string) => ({
 const items = [
   navItem('/projects', 'AI 实践'),
   navItem('/timeline', '建造日记'),
+  navItem('/blog/', '博客'),
   navItem('/resources', '资源'),
   navItem('/about', '关于'),
 ];
 const communityActive = path.startsWith('/community');
 ---
 <header class="sticky top-0 z-50 backdrop-blur-md bg-paper/80 border-b border-ink-100">
-  <nav class="max-w-[var(--width-wide)] mx-auto px-6 py-4 flex items-center justify-between">
+  <nav class="max-w-[var(--width-wide)] mx-auto px-6 py-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
     <a href="/" class="flex items-center gap-2 font-bold text-lg">
       <span class="text-2xl">🎩</span>
       <span>Cappy</span>
     </a>
-    <div class="flex items-center gap-4 md:gap-6 text-sm font-medium">
+    <div class="flex flex-wrap items-center gap-x-4 gap-y-2 md:gap-x-6 text-sm font-medium">
       {items.map(item => (
         <a
           href={item.href}
-          class={`transition hover:text-ios-blue ${item.active ? 'text-ios-blue' : 'text-ink-900'}`}
+          aria-current={item.active ? 'page' : undefined}
+          class={`whitespace-nowrap transition hover:text-ios-blue ${item.active ? 'text-ios-blue' : 'text-ink-900'}`}
         >
           {item.label}
         </a>

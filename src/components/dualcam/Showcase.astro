@@ -8,6 +8,7 @@ import Attribution from './Attribution.astro';
 import release24Copy from '../../data/dualcam-version-24.json';
 import christmasStories from '../../data/dualcam-christmas-story.json';
 import { christmasStoryPath } from '../../lib/dualcam-christmas-story.mjs';
+import { blogLabels, dualcamBlogPath } from '../../lib/dualcam-blog.mjs';
 import { release24Media, release24Path } from '../../lib/dualcam-release-24.mjs';
 import { getDeviceWords } from '../../lib/dualcam-showcase/device-words.js';
 
@@ -60,6 +61,7 @@ const structured={
     <a href="#features" data-editorial="navFeatures">{copy.editorial.navFeatures}</a>
     <a href="#build" data-text="navBuild">{copy.ui.navBuild}</a>
     <a href="#jar" data-text="navJar">{copy.ui.navJar}</a>
+    <a href={dualcamBlogPath(locale)}>{blogLabels[locale]}</a>
   </nav>
   <div class="header-actions">
     <label class="language"><span class="sr-only" data-text="language">{copy.ui.language}</span><select id="language" aria-label={copy.ui.language}>{Object.entries(locales).map(([code,entry])=><option value={code} selected={code===locale} lang={code} dir={entry.dir||'ltr'}>{entry.name}</option>)}</select></label>
