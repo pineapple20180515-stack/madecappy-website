@@ -1,7 +1,7 @@
 import { dualcamBlogPath } from './dualcam-blog.mjs';
 
 export const christmasStoryMedia = '/dualcam/media/christmas-photo-card/';
-export const christmasStoryCover = christmasStoryMedia + 'blog-cover.jpg';
+export const christmasStoryCover = christmasStoryMedia + 'blog-cover-dual-camera.jpg';
 export const christmasStoryPath = locale => dualcamBlogPath(locale) + 'christmas-photo-card/';
 export const christmasStoryDate = '2026-11-24';
 
