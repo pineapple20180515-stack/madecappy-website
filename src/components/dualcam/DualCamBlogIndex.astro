@@ -50,7 +50,7 @@ const date = formatDate.format(new Date(christmasStoryDate));
       const content = entry.translations[code];
       return <article class="latest">
         <a class="story-card" href={scenePath(code, entry.slug)} hreflang={code}>
-          <img src={entry.cover} width="1200" height="900" alt="" />
+          <img class:list={{ portrait: Boolean(entry.mp4 || entry.samples), "sample-cover": Boolean(entry.samples) }} src={entry.cover} width="1200" height="900" alt="" />
           <div lang={code} dir={locales[code].dir || 'ltr'}>
             <time datetime={entry.date}>{formatDate.format(new Date(entry.date))}</time>
             <h2>{content.title}</h2>
@@ -79,6 +79,8 @@ const date = formatDate.format(new Date(christmasStoryDate));
   .story-card { display: grid; grid-template-columns: minmax(180px, .7fr) minmax(0, 1fr); align-items: center; border: 1px solid #39443b; border-radius: 14px; overflow: hidden; color: inherit; background: #171d19; }
   .story-card:hover h2 { text-decoration: underline; text-underline-offset: .18em; }
   .story-card img { display: block; width: 100%; height: auto; }
+  .story-card img.portrait { aspect-ratio: 4/3; object-fit: contain; background: #202428; }
+  .story-card img.sample-cover { object-fit: cover; object-position: 50% 28%; }
   .story-card div { padding: clamp(18px, 4vw, 30px); }
   time { color: #c0cbbb; font-size: .88rem; }
   h2 { font-size: clamp(1.25rem, 2.8vw, 1.9rem); line-height: 1.36; margin-block: 9px; text-wrap: balance; }
