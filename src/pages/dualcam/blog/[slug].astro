@@ -1,0 +1,12 @@
+---
+import SceneStory from '../../../components/dualcam/SceneStory.astro';
+import { sceneArticles } from '../../../lib/dualcam-scenes.mjs';
+
+export function getStaticPaths() {
+  return sceneArticles.filter(article => article.translations['zh-Hans']).map(article => ({
+    params: { slug: article.slug }, props: { article },
+  }));
+}
+const { article } = Astro.props;
+---
+<SceneStory locale="zh-Hans" article={article} />

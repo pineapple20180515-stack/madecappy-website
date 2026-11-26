@@ -1,0 +1,134 @@
+---
+import { blogLabels, dualcamBlogPath } from '../../lib/dualcam-blog.mjs';
+import { scenePath } from '../../lib/dualcam-scenes.mjs';
+import { locales, showcasePath } from '../../lib/dualcam-showcase/locales.mjs';
+import Attribution from './Attribution.astro';
+import '../../styles/dualcam-marketing.css';
+
+const { article, locale } = Astro.props;
+const copy = article.translations[locale];
+const variants = Object.keys(article.translations);
+const canonical = new URL(scenePath(locale, article.slug), Astro.site).href;
+const videoLocale = article.shorts[locale] ? locale : 'en-US';
+const short = article.shorts[videoLocale];
+const shortUrl = short ? 'https://www.youtube.com/shorts/' + short : undefined;
+const embedUrl = short ? 'https://www.youtube-nocookie.com/embed/' + short + '?autoplay=1&playsinline=1&rel=0' : undefined;
+const playLabel = copy.video;
+const title = copy.searchTitle;
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: copy.title,
+  description: copy.description,
+  datePublished: article.date,
+  inLanguage: locale,
+  mainEntityOfPage: canonical,
+  image: new URL(article.cover, Astro.site).href,
+  author: { '@type': 'Organization', name: 'DualCam', url: new URL('/dualcam/', Astro.site).href },
+};
+---
+<!doctype html>
+<html lang={locale} dir={locales[locale].dir || 'ltr'}>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={copy.description} />
+  <link rel="canonical" href={canonical} />
+  {variants.map(code => <link rel="alternate" hreflang={code} href={new URL(scenePath(code, article.slug), Astro.site).href} />)}
+  <link rel="alternate" hreflang="x-default" href={new URL(scenePath('en-US', article.slug), Astro.site).href} />
+  <link rel="icon" href="/dualcam/icon.png" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content={copy.title} />
+  <meta property="og:description" content={copy.description} />
+  <meta property="og:image" content={new URL(article.cover, Astro.site).href} />
+  <meta property="og:url" content={canonical} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <script type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\u003c')} />
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap nav-row">
+      <a class="brand" href={showcasePath(locale)}><img src="/dualcam/icon.png" width="32" height="32" alt="" />DualCam</a>
+      <details class="language-menu">
+        <summary aria-label={locales[locale].name}>{locales[locale].name}</summary>
+        <nav class="languages" aria-label={locales[locale].name}>
+          {variants.map(code => <a href={scenePath(code, article.slug)} lang={code} hreflang={code} aria-current={code === locale ? 'page' : undefined}>{locales[code].name}</a>)}
+        </nav>
+      </details>
+    </div>
+  </header>
+  <main class="wrap scene">
+    <article class:list={{'has-short': Boolean(short)}}>
+      <header class="story-heading">
+        <a class="back" href={dualcamBlogPath(locale)}>{blogLabels[locale]}</a>
+        <h1>{copy.title}</h1>
+      </header>
+      {short && <figure class="short">
+        <div class="short-player">
+          <button type="button" class="short-play" data-scene-play aria-label={playLabel}>
+            <img src={article.poster} width="480" height="854" alt="" />
+            <span class="play-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" focusable="false"><path fill="currentColor" d="M8 4.8v14.4L19 12z" /></svg></span>
+          </button>
+          <template>
+            <iframe src={embedUrl} title={playLabel} width="360" height="640" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+          </template>
+        </div>
+        <figcaption><a href={shortUrl} target="_blank" rel="noopener noreferrer">YouTube Shorts · <bdi lang={videoLocale}>{locales[videoLocale].name}</bdi> <span aria-hidden="true">↗</span></a></figcaption>
+      </figure>}
+      <div class="story-copy">
+        {copy.paragraphs.map(paragraph => <p>{paragraph}</p>)}
+        <figure class="result">
+          <img src={article.output} width="720" height="960" alt={copy.result} loading="lazy" decoding="async" />
+          <figcaption>{copy.result}</figcaption>
+        </figure>
+        <p class="note">{copy.note}</p>
+        <a class="button primary" href="https://apps.apple.com/app/id6774681432" data-store-link data-placement={article.slug}>{copy.cta}</a>
+      </div>
+    </article>
+  </main>
+  <Attribution />
+  <script>
+    for (const button of document.querySelectorAll<HTMLButtonElement>('[data-scene-play]')) {
+      const template = button.nextElementSibling;
+      if (!(template instanceof HTMLTemplateElement)) continue;
+      button.addEventListener('click', () => {
+        const player = template.content.querySelector('iframe');
+        if (player) {
+          button.replaceWith(player);
+          player.focus();
+        }
+      }, { once: true });
+    }
+  </script>
+</body>
+</html>
+<style>
+  .scene { max-width: 1000px; padding-block: clamp(30px, 6vw, 72px) 70px; color: #efeee3; }
+  article { max-width: 680px; margin-inline: auto; }
+  article.has-short { max-width: none; display: grid; grid-template-columns: minmax(0,1fr) minmax(230px,.53fr); grid-template-areas: "title player" "copy player"; grid-template-rows: auto 1fr; align-items: start; column-gap: clamp(24px,6vw,64px); }
+  .story-heading { grid-area: title; }
+  .story-copy { grid-area: copy; }
+  h1 { margin-block: 18px 26px; font-size: clamp(2rem, 4.9vw, 3.8rem); line-height: 1.14; text-wrap: balance; overflow-wrap: anywhere; }
+  p { margin-block: 0 1.05rem; font-size: 1.04rem; line-height: 1.85; }
+  .back, .short a { color: #ebce86; text-decoration: underline; text-underline-offset: .2em; }
+  .result { width: min(100%, 410px); margin: 28px auto; }
+  .result img { display: block; width: 100%; height: auto; border-radius: 12px; }
+  figcaption { text-align: center; margin-block-start: 8px; font-size: .85rem; color: #bcc8bb; }
+  .note { color: #bcc8bb; font-size: .9rem; margin-block: 25px; padding-block: 10px; border-block: 1px solid #34463a; }
+  .short { grid-area: player; width: min(100%,345px); margin: 0 auto; }
+  .short-player { aspect-ratio: 9/16; border-radius: 14px; background: #101612; }
+  .short-player iframe, .short-play { display: block; width: 100%; height: 100%; border: 0; border-radius: inherit; }
+  .short-play { position: relative; padding: 0; overflow: hidden; cursor: pointer; background: #101612; }
+  .short-play img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .play-icon { display: grid; place-items: center; position: absolute; inset: 50% auto auto 50%; transform: translate(-50%,-50%); border-radius: 14px; width: 68px; height: 48px; background: #c61e24; color: white; box-shadow: 0 2px 16px #0008; }
+  .short-play:hover .play-icon { background: #a9171c; }
+  .short-play:focus-visible { outline: 2px solid #ffd58b; outline-offset: 3px; }
+  .language-menu { position: relative; z-index: 10; }
+  .language-menu summary { cursor: pointer; padding: 8px 10px; }
+  .language-menu .languages { position: absolute; inset-inline-end: 0; inset-block-start: 100%; display: grid; width: max-content; gap: 4px; padding: 9px; background: #202622; border: 1px solid #424b45; border-radius: 12px; }
+  @media (max-width: 700px) {
+    article.has-short { grid-template-columns: minmax(0,1fr); grid-template-areas: "title" "player" "copy"; }
+    .short { width: min(100%,310px); margin-block-end: 24px; }
+  }
+</style>

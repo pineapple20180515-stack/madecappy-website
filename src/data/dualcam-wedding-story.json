@@ -1,0 +1,60 @@
+{
+  "slug": "wedding-aisle-reaction",
+  "date": "2026-11-26",
+  "cover": "/dualcam/media/wedding-aisle-reaction/cover.jpg",
+  "poster": "/dualcam/media/wedding-aisle-reaction/video-poster.jpg",
+  "output": "/dualcam/media/wedding-aisle-reaction/wedding-sequence.jpg",
+  "shorts": {
+    "en-US": "C22mCJWZ-Lk"
+  },
+  "translations": {
+    "zh-Hans": {
+      "title": "从我和朋友的表情，到新娘走进来的那一刻",
+      "cta": "在 App Store 下载 DualCam",
+      "result": "先后拍合成的婚礼照片",
+      "video": "婚礼短片 · English",
+      "description": "我先用前摄拍下身边朋友忍着眼泪的笑，再转身用后摄拍新娘入场。两次按快门，最后留在同一张婚礼照片里。",
+      "paragraphs": [
+        "她没说话，只是攥紧了我的胳膊。",
+        "刚才花园里还听得见杯子碰在一起的声音。这会儿从前排到我们这一排，大家都安静了下来。我侧过脸，发现她盯着花门，嘴角在往上扬，眼睛却已经红了。我们认识新娘这么久，我知道她一看到新娘走进来就会哭。结果她连人都还没看见，就先把我逗笑了。",
+        "我想拍下新娘挽着爸爸进来的样子，也舍不得放过身边这个表情。我打开 DualCam 的「先后拍」，把手机举起来一点，她就靠了过来。我先用前摄拍我们俩。第一拍按下去的时候，她还抓着我。我也没来得及把笑收回去。",
+        "接着我把手机转向花道。后摄画面里，新娘刚穿过花门，白色裙摆从两排浅色玫瑰之间扫过去。刚才那张自拍还留在角落的小窗里，我就盯着大画面，等她和爸爸都走进取景框，按下第二次快门。",
+        "后来发给新娘的是一张照片。她和爸爸在大画面里，角落里是我和朋友。当时我们都坐在她看不见的地方。现在她也能看见了。"
+      ],
+      "note": "照片中的婚礼和人物为 AI 情境演绎。相机画面和合成作品使用 DualCam 原生模拟器演示验证。",
+      "searchTitle": "婚礼入场怎么拍？用 DualCam 留下新娘和朋友的表情"
+    },
+    "th": {
+      "title": "ฉันอยากเก็บทั้งตอนเจ้าสาวเดินเข้ามาและสีหน้าของเราไว้ในรูปเดียว",
+      "cta": "ดาวน์โหลด DualCam บน App Store",
+      "result": "ภาพงานแต่งงานหลังรวมทั้งสองช็อต",
+      "video": "คลิปงานแต่งงาน · English",
+      "description": "ฉันใช้กล้องหน้าถ่ายรอยยิ้มทั้งน้ำตาของเราก่อน แล้วหันกล้องหลังไปถ่ายเจ้าสาวที่กำลังเดินเข้ามา สองจังหวะอยู่ในภาพเดียว",
+      "paragraphs": [
+        "เพื่อนไม่ได้พูดอะไร เธอแค่จับแขนฉันแน่นขึ้น",
+        "เมื่อกี้ฉันยังได้ยินเสียงแก้วกระทบกันจากด้านหลัง แต่ตอนนี้ทั้งสวนเงียบลงแล้ว พอหันไปมอง ฉันเห็นเพื่อนจ้องซุ้มประตูอยู่ เธอยิ้มทั้งที่ตาเริ่มแดง เจ้าสาวยังไม่ทันเดินออกมาเลย แต่เพื่อนที่บอกว่าจะไม่ร้องไห้ก็ทำเอาฉันหลุดขำแล้ว",
+        "ฉันอยากถ่ายตอนเจ้าสาวเดินมากับคุณพ่อ แต่ก็เสียดายสีหน้าของคนข้าง ๆ ฉันเปิด DualCam เลือกโหมดถ่ายทีละช็อต แล้วยกโทรศัพท์ขึ้นนิดเดียว เพื่อนก็ขยับเข้ามาใกล้ ฉันใช้กล้องหน้าถ่ายเราสองคนก่อน ตอนกดชัตเตอร์เธอยังจับแขนฉันอยู่ และฉันก็ยังยิ้มไม่หยุด",
+        "จากนั้นฉันหันโทรศัพท์ไปทางเดิน เจ้าสาวเพิ่งก้าวผ่านซุ้มเข้ามา ชายกระโปรงสีขาวเคลื่อนผ่านแถวกุหลาบสีอ่อน รูปเซลฟีเมื่อกี้ยังอยู่ในหน้าต่างเล็กตรงมุมของภาพจากกล้องหลัง ฉันรอให้เจ้าสาวกับคุณพ่อเข้ามาอยู่ในเฟรมทั้งคู่ แล้วกดชัตเตอร์อีกครั้ง",
+        "คืนนั้นฉันส่งรูปเดียวให้เจ้าสาว ในภาพใหญ่มีเธอกับคุณพ่อ ส่วนตรงมุมคือเราสองคนที่นั่งอยู่ในจุดที่เธอมองไม่เห็น ตอนนี้เธอเห็นแล้ว"
+      ],
+      "note": "ฉากงานแต่งงานและบุคคลเป็นการจำลองด้วย AI หน้าจอกล้องและภาพที่รวมแล้วผ่านการตรวจสอบจากการสาธิตในโปรแกรมจำลองของแอป DualCam",
+      "searchTitle": "ถ่ายภาพตอนเจ้าสาวเดินเข้างานและสีหน้าของเพื่อนด้วย DualCam"
+    },
+    "en-US": {
+      "title": "I wanted the bride’s entrance and our reaction in one photo",
+      "cta": "Download on the App Store",
+      "result": "The resulting wedding photo",
+      "video": "Wedding short · English",
+      "description": "I used the front camera for our tearful smiles, then turned the phone toward the aisle. DualCam kept both moments in one wedding photo.",
+      "paragraphs": [
+        "She didn’t say a word. She just tightened her grip on my arm.",
+        "A minute earlier I could still hear glasses clinking somewhere behind us. Now even the people at the back of the garden had gone quiet. When I looked sideways, my friend was staring at the gate, smiling with the distinctly wet eyes of a person who insists she isn’t going to cry. The bride hadn’t even come out yet.",
+        "I wanted the photo of the bride walking in with her dad. And I wanted this face, right beside me, before it changed. I opened DualCam, switched to Sequential capture and lifted my phone a little. My friend leaned in. I used the front camera for the first shot, while she was still holding my arm and I was still laughing.",
+        "Then I turned the phone toward the aisle. The bride had just stepped through the gate. Her dress brushed past the pale roses, and our selfie was still in the small window in the corner of the rear-camera preview. I waited until both she and her dad were in frame and tapped the shutter again.",
+        "I sent the bride one picture later that night. She and her dad are in the big frame. In the corner are the two of us, sitting where she couldn’t see us. Now she can."
+      ],
+      "note": "The wedding and people are an AI-generated reenactment. The camera interface and combined photo were verified using a native DualCam simulator demonstration.",
+      "searchTitle": "How I photographed a wedding entrance and our reaction with DualCam"
+    }
+  }
+}

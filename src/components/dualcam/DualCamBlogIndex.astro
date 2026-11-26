@@ -1,5 +1,6 @@
 ---
 import stories from '../../data/dualcam-christmas-story.json';
+import { sceneArticles, sceneLocale, scenePath } from '../../lib/dualcam-scenes.mjs';
 import { blogLabels, dualcamBlogPath } from '../../lib/dualcam-blog.mjs';
 import { christmasStoryDate, christmasStoryCover, christmasStoryPath } from '../../lib/dualcam-christmas-story.mjs';
 import { defaultLocale, locales, showcasePath } from '../../lib/dualcam-showcase/locales.mjs';
@@ -13,7 +14,8 @@ const heading = 'DualCam · ' + blogLabels[locale];
 const story = stories[locale];
 const languageLabel = release24Editorial[locale].language;
 const absoluteBlogPath = (code: string) => new URL(dualcamBlogPath(code), Astro.site).href;
-const date = new Intl.DateTimeFormat(language.format, { dateStyle: 'medium', timeZone: 'UTC' }).format(new Date(christmasStoryDate));
+const formatDate = new Intl.DateTimeFormat(language.format, { dateStyle: 'medium', timeZone: 'UTC' });
+const date = formatDate.format(new Date(christmasStoryDate));
 ---
 <!doctype html>
 <html lang={locale} dir={language.dir || 'ltr'}>
@@ -43,6 +45,20 @@ const date = new Intl.DateTimeFormat(language.format, { dateStyle: 'medium', tim
   </header>
   <main class="wrap index">
     <h1>{heading}</h1>
+    {sceneArticles.map(entry => {
+      const code = sceneLocale(entry, locale);
+      const content = entry.translations[code];
+      return <article class="latest">
+        <a class="story-card" href={scenePath(code, entry.slug)} hreflang={code}>
+          <img src={entry.cover} width="1200" height="900" alt="" />
+          <div lang={code} dir={locales[code].dir || 'ltr'}>
+            <time datetime={entry.date}>{formatDate.format(new Date(entry.date))}</time>
+            <h2>{content.title}</h2>
+            <p>{content.description}</p>
+          </div>
+        </a>
+      </article>;
+    })}
     <article>
       <a class="story-card" href={christmasStoryPath(locale)}>
         <img src={christmasStoryCover} width="1200" height="900" alt="" />
@@ -59,6 +75,7 @@ const date = new Intl.DateTimeFormat(language.format, { dateStyle: 'medium', tim
 <style>
   .index { max-width: 930px; padding-block: clamp(35px, 8vw, 76px); }
   h1 { font-size: clamp(2.1rem, 6vw, 3.5rem); margin: 0 0 30px; }
+  .latest { margin-block-end: 24px; }
   .story-card { display: grid; grid-template-columns: minmax(180px, .7fr) minmax(0, 1fr); align-items: center; border: 1px solid #39443b; border-radius: 14px; overflow: hidden; color: inherit; background: #171d19; }
   .story-card:hover h2 { text-decoration: underline; text-underline-offset: .18em; }
   .story-card img { display: block; width: 100%; height: auto; }
