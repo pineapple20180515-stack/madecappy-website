@@ -1,0 +1,56 @@
+{
+  "slug": "marathon-finish-line-reaction",
+  "date": "2026-11-27",
+  "cover": "/dualcam/media/marathon-finish-line/blog-cover.jpg",
+  "poster": "/dualcam/media/marathon-finish-line/short-poster.jpg",
+  "output": "/dualcam/media/marathon-finish-line/native-result.jpg",
+  "outputWidth": 720,
+  "outputHeight": 1280,
+  "translations": {
+    "zh-Hans": {
+      "title": "她冲过终点时，我也被拍进去了",
+      "searchTitle": "马拉松冲线怎么拍？用 iPhone 前后双摄录下选手和自己的反应",
+      "description": "我在终点护栏边等朋友，用 DualCam 的前后摄像头把她冲线和我喊出她名字的那一刻留在同一条录像里。",
+      "paragraphs": [
+        "终点线就在我前面几步。隔着护栏，我已经听见有人在喊选手的名字，就是还没找到她。然后我看见那件珊瑚红的背心从队伍里冒了出来。她跑得比我想的还快。我举起手机的时候，手心一下子攥紧了。",
+        "我想拍到她踩过白线，也想知道自己那时候是什么表情。我在 DualCam 里选了「同时拍」的录像，把后摄主画面对准终点，让前摄小窗里能看见我。她还差几步时我就开始录。她一过线，我下意识往前探了半步，在护栏后大声喊她的名字。",
+        "后来我们一起看那几秒。她看的是自己越过那条白线的脚步，我看的是画面角落里那个快笑出眼泪的我。那天等了那么久，最后我们最想再看一次的，原来就是这几秒。"
+      ],
+      "result": "拍摄实况与反应，后摄主画面和前摄小窗同录。",
+      "video": "看英文短片",
+      "note": "现场为 AI 情境演绎。DualCam 界面和双摄构图来自使用场景素材的原生模拟器演示。前后同拍需使用支持双摄的 iPhone。",
+      "cta": "在 App Store 下载 DualCam"
+    },
+    "en-US": {
+      "title": "My friend crossed the marathon finish line. I caught my reaction too.",
+      "searchTitle": "How to Film a Marathon Finish and Your Reaction on iPhone | DualCam",
+      "description": "I used DualCam to film my friend crossing the finish line while the front camera caught me cheering, all in one video.",
+      "paragraphs": [
+        "The finish line was a few steps in front of me. From behind the barrier, I heard people shouting runners’ names, but I still hadn’t spotted my friend. Then I saw her coral singlet emerge from the pack. She was moving faster than I’d imagined. I could feel my grip tighten as I lifted my phone.",
+        "I wanted to see the moment she crossed the white line and whatever face I was making when she got there. I switched to simultaneous video in DualCam, framed the finish with the rear camera, and kept myself in the front-camera inset. I started recording a few strides early. When she crossed, I leaned toward the barrier and shouted her name.",
+        "We watched it back together later. She watched the stride that carried her across the line. I saw myself in the corner, laughing so hard I nearly cried. After all that waiting, those were the few seconds we both wanted to watch again."
+      ],
+      "result": "DualCam video with the rear-camera view and front-camera inset together.",
+      "video": "Play the DualCam Short",
+      "note": "The race scene is AI-generated. The DualCam interface and dual-camera composition were recorded in a native simulator demo using scene footage. Simultaneous capture requires a compatible iPhone.",
+      "cta": "Download DualCam on the App Store"
+    },
+    "th": {
+      "title": "ตอนเพื่อนวิ่งเข้าเส้นชัย ฉันก็อยู่ในคลิปด้วย",
+      "searchTitle": "ถ่ายคลิปมาราธอนด้วยกล้องหน้าและกล้องหลังพร้อมกันบน iPhone | DualCam",
+      "description": "ฉันใช้ DualCam ถ่ายเพื่อนตอนเข้าเส้นชัย และเก็บสีหน้าตัวเองตอนส่งเสียงเชียร์ไว้ในคลิปเดียวกัน",
+      "paragraphs": [
+        "เส้นชัยอยู่ตรงหน้า ห่างไปแค่ไม่กี่ก้าว ฉันยืนอยู่หลังรั้ว ได้ยินคนรอบตัวตะโกนเรียกชื่อนักวิ่ง แต่ยังมองไม่เห็นเพื่อนเลย จนกระทั่งเสื้อวิ่งสีแดงอมส้มของเธอโผล่มาจากกลุ่มนักวิ่ง เธอมาเร็วกว่าที่ฉันคิด มือฉันเผลอกำโทรศัพท์แน่นทันทีที่ยกขึ้น",
+        "ฉันอยากเก็บจังหวะที่เธอวิ่งข้ามเส้นสีขาว และอยากเห็นหน้าตัวเองตอนนั้นด้วย ฉันเปิดโหมดวิดีโอที่ใช้กล้องหน้าและกล้องหลังพร้อมกันใน DualCam ให้กล้องหลังจับภาพเส้นชัย ส่วนหน้าฉันอยู่ในช่องเล็กของกล้องหน้า ฉันเริ่มอัดก่อนเธอถึงเส้นชัยไม่กี่ก้าว พอเธอวิ่งข้ามเส้น ฉันก็เผลอโน้มตัวไปทางรั้วแล้วตะโกนเรียกชื่อเธอ",
+        "ทีหลังเรานั่งดูคลิปด้วยกัน เธอดูจังหวะที่ตัวเองก้าวข้ามเส้นชัย ส่วนฉันเห็นตัวเองตรงมุมจอ หัวเราะจนเกือบน้ำตาไหล รอกันมาตั้งนาน แต่สุดท้ายเราก็อยากย้อนดูไม่กี่วินาทีนั้นอีกครั้ง"
+      ],
+      "result": "วิดีโอจากกล้องหลังและภาพจากกล้องหน้าซ้อนในเฟรมเดียวกัน",
+      "video": "เล่นวิดีโอภาษาอังกฤษ",
+      "note": "ฉากการแข่งขันสร้างด้วย AI ส่วนหน้าจอ DualCam และการจัดภาพจากสองกล้องมาจากการสาธิตแอปจริงบนเครื่องจำลองโดยใช้ภาพประกอบฉาก การถ่ายพร้อมกันต้องใช้ iPhone รุ่นที่รองรับ",
+      "cta": "ดาวน์โหลด DualCam บน App Store"
+    }
+  },
+  "shorts": {
+    "en-US": "1zNtLz5Ey9I"
+  }
+}

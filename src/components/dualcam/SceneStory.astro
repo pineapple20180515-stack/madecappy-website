@@ -89,7 +89,7 @@ const schema = {
       <div class="story-copy">
         {copy.paragraphs.map(paragraph => <p>{paragraph}</p>)}
         {article.output && <figure class="result">
-          <img src={article.output} width="720" height="960" alt={copy.result} loading="lazy" decoding="async" />
+          <img src={article.output} width={article.outputWidth ?? 720} height={article.outputHeight ?? 960} alt={copy.result} loading="lazy" decoding="async" />
           <figcaption>{copy.result}</figcaption>
         </figure>}
         {article.samples && <div class="sample-grid">
