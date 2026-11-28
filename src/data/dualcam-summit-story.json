@@ -1,0 +1,60 @@
+{
+  "slug": "summit-clouds-and-selfie",
+  "date": "2026-11-28",
+  "cover": "/dualcam/media/summit-clouds-and-selfie/blog-cover.jpg",
+  "poster": "/dualcam/media/summit-clouds-and-selfie/short-poster.jpg",
+  "output": "/dualcam/media/summit-clouds-and-selfie/native-result.jpg",
+  "translations": {
+    "zh-Hans": {
+      "title": "我在山顶先拍了云海，再和朋友留了一张合照",
+      "searchTitle": "登顶合照怎么拍？用 iPhone 先后拍，把云海和自拍放进一张照片",
+      "description": "山顶的光只亮了一小会儿。我用 DualCam 的「先后拍」先拍云海，再拍我们俩，把两次快门合成一张照片。",
+      "paragraphs": [
+        "走上观景台时，风把外套吹得沙沙响。山脊上方的云裂开了一道口子，光落在下面那层云海上。朋友正抬头看，我说了声「等一下」，就先把手机举起来。那道光沿着云边在往前走，我怕再等几秒，它就过去了。",
+        "我打开 DualCam 的「先后拍」，用后置摄像头对准两座挨在一起的山峰，先按了一次快门。接着我转过身，第一张云海还留在小窗里，前置摄像头里已经能看到我和朋友。她往我肩边靠了靠，我们看着手机又按了一次。",
+        "最后那张照片里，大画面是我们，小窗是刚才的云海。下山以后朋友问我，光最亮的时候是什么样。我把照片发给她，她一眼就认出了那两座山。"
+      ],
+      "video": "播放英文短片",
+      "result": "完成的合照。大画面是自拍，小窗是先拍的云海。",
+      "cta": "在 App Store 下载 DualCam",
+      "note": "登山现场为 AI 情境演绎。取景、保留第一张和合成成片来自 DualCam 原生模拟器演示，输入为场景素材。",
+      "videoLanguage": "播放英文短片",
+      "videoNote": ""
+    },
+    "en-US": {
+      "title": "I photographed the clouds first, then took our summit selfie",
+      "searchTitle": "How to Capture a Mountain View and a Selfie in One iPhone Photo | DualCam",
+      "description": "I used DualCam’s sequential capture to photograph the clouds while the light lasted, then fit my friend and me into the same finished photo.",
+      "paragraphs": [
+        "I could hear my jacket flapping as we stepped onto the lookout. A gap opened in the clouds above the ridge, and a strip of sunlight landed on the cloud bank below us. My friend was still looking up. I said “Hang on,” and raised my phone. The bright patch was already moving.",
+        "I opened sequential capture in DualCam, pointed the rear camera at two rounded peaks, and took the first photo. Then I turned back to my friend. The photo of the clouds stayed in the small window while the front camera framed us. She leaned against my shoulder. I pressed the shutter again.",
+        "In the finished photo, we filled the main frame, with the cloud view in the corner. On the way down she asked what the mountains looked like when the light was strongest. I sent her the picture. She recognized the two peaks right away."
+      ],
+      "video": "Play the English Short",
+      "result": "The saved photo, with the selfie as the main frame and the earlier cloud view in the inset.",
+      "cta": "Download DualCam on the App Store",
+      "note": "The hike is an AI-generated reenactment. The camera interface, first-photo preview and saved result come from a native DualCam simulator demo using scene images.",
+      "videoLanguage": "Play the English Short",
+      "videoNote": ""
+    },
+    "th": {
+      "title": "ขึ้นถึงยอดเขา ฉันถ่ายทะเลหมอกก่อน แล้วค่อยเซลฟี่กับเพื่อน",
+      "searchTitle": "ถ่ายทะเลหมอกกับเซลฟี่ให้อยู่ในรูปเดียวบน iPhone | DualCam",
+      "description": "แดดส่องทะเลหมอกอยู่แค่ครู่เดียว ฉันใช้โหมดถ่ายทีละช็อตของ DualCam เก็บวิวไว้ก่อน แล้วเซลฟี่กับเพื่อนให้มาอยู่ในรูปเดียวกัน",
+      "paragraphs": [
+        "พอเดินถึงจุดชมวิว ลมก็พัดเสื้อแจ็กเก็ตจนดังกรอบแกรบ เมฆเหนือสันเขาแยกออกนิดหนึ่ง แสงแดดส่องลงไปบนทะเลหมอกด้านล่าง เพื่อนยังเงยหน้ามองอยู่ ฉันบอกว่า “เดี๋ยวก่อน” แล้วรีบยกโทรศัพท์ขึ้น แสงตรงนั้นเริ่มเลื่อนไปตามขอบเมฆแล้ว",
+        "ฉันเปิดโหมดถ่ายทีละช็อตใน DualCam หันกล้องหลังไปที่ยอดเขาสองลูกที่อยู่ติดกัน แล้วกดถ่ายรูปแรก พอหันกลับมาหาเพื่อน รูปทะเลหมอกยังอยู่ในช่องเล็ก ส่วนกล้องหน้าเห็นเราสองคนแล้ว เพื่อนขยับมาแนบไหล่ฉัน ฉันก็กดถ่ายอีกครั้ง",
+        "ในรูปที่ได้ เราสองคนอยู่ในกรอบใหญ่ ส่วนทะเลหมอกอยู่ตรงมุม ตอนเดินลง เพื่อนถามว่าตอนแสงสว่างที่สุดวิวเป็นยังไง ฉันส่งรูปให้ดู เธอจำยอดเขาสองลูกนั้นได้ทันที"
+      ],
+      "video": "เล่นวิดีโอภาษาอังกฤษ",
+      "result": "รูปที่บันทึกไว้ โดยเซลฟี่อยู่ในกรอบใหญ่และทะเลหมอกอยู่ในช่องเล็ก",
+      "cta": "ดาวน์โหลด DualCam บน App Store",
+      "note": "ฉากเดินเขาสร้างด้วย AI ส่วนหน้าจอกล้อง ภาพแรกที่ค้างในช่องเล็ก และรูปที่บันทึก มาจากการสาธิต DualCam บนเครื่องจำลองโดยใช้ภาพประกอบฉาก",
+      "videoLanguage": "เล่นวิดีโอภาษาอังกฤษ",
+      "videoNote": ""
+    }
+  },
+  "shorts": {
+    "en-US": "hA0x01FV7E0"
+  }
+}
